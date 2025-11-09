@@ -2,38 +2,31 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>OXeall Studios | CLNEWS 999V</title>
+  <title>OXeall Studios — Games Changelog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="OXeall Studios CLNEWS 999V — официальный центр обновлений и патч-ноутов." />
+  <meta name="description" content="OXeall Studios — официальный портал обновлений и патч-ноутов по играм студии." />
   <style>
     :root {
       --bg: #02040a;
-      --bg-gradient: radial-gradient(circle at top, rgba(0,180,255,0.16), transparent 60%);
-      --bg-card: #070a12;
-      --bg-card-soft: #0c111b;
-      --bg-panel: #050710;
+      --bg-gradient: radial-gradient(circle at top, rgba(0,180,255,0.12), transparent 65%);
+      --bg-card: #070b13;
+      --bg-card-soft: #0b101a;
       --accent: #00aaff;
-      --accent-soft: rgba(0,170,255,0.14);
+      --accent-soft: rgba(0,170,255,0.16);
       --accent-strong: #35c3ff;
       --accent-alt: #00ffc6;
       --text: #f5f7ff;
-      --muted: #a0acc5;
-      --border: #222a38;
-      --danger: #ff4a6a;
+      --muted: #9aa7c5;
+      --border: #202838;
       --radius-xl: 22px;
       --radius-lg: 18px;
-      --radius-md: 12px;
-      --shadow-strong: 0 26px 80px rgba(0,0,0,0.95);
-      --shadow-soft: 0 18px 48px rgba(0,0,0,0.9);
+      --shadow-soft: 0 18px 52px rgba(0,0,0,0.9);
+      --shadow-strong: 0 26px 90px rgba(0,0,0,0.98);
       --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       --tr-fast: 0.18s ease-out;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: var(--font-main);
@@ -42,20 +35,17 @@
       min-height: 100vh;
     }
 
-    a {
-      color: var(--accent-strong);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
     .page {
       max-width: 1240px;
       margin: 0 auto;
       padding: 22px 18px 40px;
     }
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
 
     /* HEADER */
 
@@ -66,8 +56,7 @@
       gap: 18px;
       padding: 14px 18px;
       border-radius: var(--radius-xl);
-      background:
-        linear-gradient(135deg, rgba(0,170,255,0.18), rgba(3,5,10,0.98));
+      background: linear-gradient(135deg, rgba(0,170,255,0.16), rgba(2,4,10,0.98));
       border: 1px solid rgba(255,255,255,0.06);
       box-shadow: var(--shadow-soft);
       position: sticky;
@@ -83,18 +72,17 @@
     }
 
     .brand-logo {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 12px;
-      background:
-        radial-gradient(circle at 20% 0, #ffffff, #00aaff);
+      background: radial-gradient(circle at 18% 0, #ffffff, #00aaff);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       font-size: 20px;
       color: #020308;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.98);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.98);
     }
 
     .brand-text {
@@ -127,8 +115,8 @@
     .nav-pill {
       padding: 6px 11px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.7);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.78);
+      border: 1px solid rgba(255,255,255,0.09);
       display: inline-flex;
       gap: 6px;
       align-items: center;
@@ -178,7 +166,7 @@
       gap: 8px;
       padding: 7px 11px;
       border-radius: 999px;
-      background: var(--bg-card);
+      background: var(--bg-card-soft);
       border: 1px solid var(--border);
       box-shadow: 0 12px 30px rgba(0,0,0,0.9);
       font-size: 11px;
@@ -212,7 +200,7 @@
     .tag {
       padding: 6px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(0,170,255,0.4);
+      border: 1px solid rgba(0,170,255,0.35);
       background: var(--accent-soft);
       color: var(--accent-strong);
       font-size: 9px;
@@ -242,13 +230,14 @@
       border-style: dashed;
       opacity: 0.86;
       color: var(--muted);
+      background: rgba(4,7,14,0.98);
     }
 
     .featured-label {
       font-size: 9px;
       color: var(--accent-strong);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      letter-spacing: 0.16em;
     }
 
     .featured-title {
@@ -285,7 +274,7 @@
       font-weight: 500;
     }
 
-    /* CARDS */
+    /* FEED / CARDS */
 
     .announcements {
       display: flex;
@@ -298,8 +287,8 @@
       color: var(--muted);
       padding: 12px 13px;
       border-radius: var(--radius-lg);
-      border: 1px dashed rgba(255,255,255,0.2);
-      background: #050811;
+      border: 1px dashed rgba(255,255,255,0.22);
+      background: rgba(5,8,16,0.98);
       margin-top: 4px;
     }
 
@@ -307,22 +296,45 @@
       padding: 14px 16px 10px;
       border-radius: var(--radius-xl);
       background: var(--bg-card);
-      border: 1px solid var(--border);
+      border: 1px solid rgba(0,170,255,0.13);
       box-shadow: var(--shadow-soft);
       display: grid;
-      grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.4fr) auto;
+      grid-template-columns: minmax(0, 2.6fr) minmax(0, 1.4fr) auto;
       column-gap: 14px;
       row-gap: 6px;
       align-items: flex-start;
-      cursor: pointer;
       position: relative;
+      cursor: pointer;
       transition: all var(--tr-fast);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(4px);
+      animation: fadeInUp 0.22s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at top left, rgba(0,255,198,0.08), transparent 55%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--tr-fast);
     }
 
     .card:hover {
-      box-shadow: var(--shadow-strong);
       transform: translateY(-2px);
-      border-color: var(--accent);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(0,170,255,0.45);
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card-header {
@@ -335,14 +347,38 @@
     }
 
     .badge-type {
-      padding: 3px 8px;
+      padding: 4px 12px 3px;
       border-radius: 999px;
-      font-size: 9px;
-      background: var(--accent-soft);
-      color: var(--accent-strong);
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      border: 1px solid rgba(0,170,255,0.55);
+      border: 1px solid rgba(255,255,255,0.12);
+      text-shadow: 0 0 6px rgba(0,0,0,0.9);
+      box-shadow: 0 0 12px rgba(0,0,0,0.9) inset;
+      color: #fff;
+    }
+
+    .badge-type.major {
+      background: linear-gradient(to right, #1dd6ff, #0064ff);
+      box-shadow: 0 0 14px rgba(0,132,255,0.7);
+    }
+
+    .badge-type.minor {
+      background: linear-gradient(to right, #ffe07a, #c4a100);
+      color: #111;
+      box-shadow: 0 0 14px rgba(255,224,122,0.5);
+    }
+
+    .badge-type.patch {
+      background: linear-gradient(to right, #6dffb5, #00a85a);
+      color: #021008;
+      box-shadow: 0 0 14px rgba(0,200,130,0.5);
+    }
+
+    .badge-type.hotfix {
+      background: linear-gradient(to right, #ff8fa3, #ff0033);
+      box-shadow: 0 0 16px rgba(255,0,51,0.8);
     }
 
     .badge-game {
@@ -372,8 +408,8 @@
     .card-short {
       grid-column: 1 / 3;
       font-size: 13px;
+      line-height: 1.7;
       color: var(--text);
-      line-height: 1.6;
     }
 
     .card-tags {
@@ -387,46 +423,10 @@
     .card-tag {
       padding: 3px 7px;
       border-radius: 999px;
-      background: rgba(2,4,9,0.98);
+      background: rgba(4,7,14,1);
       color: var(--muted);
       font-size: 9px;
-      border: 1px solid rgba(255,255,255,0.16);
-    }
-
-    .card-admin-actions {
-      position: absolute;
-      top: 10px;
-      right: 12px;
-      display: none;
-      gap: 4px;
-    }
-
-    .card.open .card-admin-actions {
-      top: 8px;
-    }
-
-    .card-edit-btn,
-    .card-del-btn {
-      padding: 3px 7px;
-      border-radius: 999px;
-      font-size: 8px;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(0,0,0,0.8);
-      color: var(--muted);
-      cursor: pointer;
-      transition: all var(--tr-fast);
-    }
-
-    .card-edit-btn:hover {
-      color: var(--accent-strong);
-      border-color: var(--accent-strong);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.9);
-    }
-
-    .card-del-btn:hover {
-      color: var(--danger);
-      border-color: var(--danger);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.9);
+      border: 1px solid rgba(255,255,255,0.12);
     }
 
     .card-arrow {
@@ -445,396 +445,29 @@
       border-top: 1px solid rgba(255,255,255,0.1);
       font-size: 12px;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.8;
+      white-space: pre-line;
     }
 
-    .card-changelog h1,
-    .card-changelog h2,
-    .card-changelog h3 {
-      margin: 6px 0 2px;
-      font-weight: 500;
-      color: var(--accent-strong);
-    }
-
-    .card-changelog ul {
-      margin-left: 18px;
-      margin-top: 4px;
-    }
-
-    .card.open .card-changelog {
-      display: block;
-    }
-
+    .card.open .card-changelog { display: block; }
     .card.open .card-arrow {
       transform: rotate(180deg);
       color: var(--accent-strong);
     }
 
-    /* ADMIN BUTTON */
-
-    .admin-btn {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      padding: 9px 15px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 0 0, rgba(0,255,198,0.8), rgba(0,0,0,1));
-      border: 1px solid rgba(0,255,198,0.7);
-      color: var(--text);
-      font-size: 10px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      cursor: pointer;
-      box-shadow: 0 26px 80px rgba(0,0,0,1);
-      z-index: 80;
-      transition: all var(--tr-fast);
-    }
-
-    .admin-btn span.icon {
-      font-size: 14px;
-    }
-
-    .admin-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 34px 96px rgba(0,0,0,1);
-    }
-
-    /* BACKDROPS */
-
-    .backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.82);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 90;
-    }
-
-    /* LOGIN MODAL */
-
-    .modal-login {
-      background: var(--bg-panel);
-      padding: 16px 16px 12px;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: var(--shadow-strong);
-      max-width: 360px;
-      width: 100%;
-      font-size: 11px;
-    }
-
-    .modal-login h2 {
-      font-size: 16px;
-      margin-bottom: 4px;
-      font-weight: 500;
-    }
-
-    .modal-login p {
-      font-size: 10px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .modal-login label {
-      display: block;
-      font-size: 9px;
-      color: var(--muted);
-      margin-bottom: 3px;
-    }
-
-    .modal-login input {
-      width: 100%;
-      padding: 7px 8px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: #02040a;
-      color: var(--text);
-      font-size: 11px;
-      outline: none;
-      margin-bottom: 6px;
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
-    .btn {
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: none;
-      font-size: 9px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-      transition: all var(--tr-fast);
-    }
-
-    .btn-primary {
-      background: linear-gradient(to right, var(--accent), var(--accent-alt));
-      color: #020308;
-      font-weight: 600;
-      box-shadow: 0 14px 32px rgba(0,0,0,1);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-
-    .btn-danger {
-      background: transparent;
-      color: var(--danger);
-      border: 1px solid rgba(255,74,106,0.7);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 18px 44px rgba(0,0,0,1);
-    }
-
-    /* ADMIN PANEL 999V */
-
-    .modal-admin {
-      background: radial-gradient(circle at top left, rgba(0,170,255,0.18), transparent),
-                  var(--bg-panel);
-      padding: 16px;
-      border-radius: 26px;
-      border: 1px solid rgba(0,170,255,0.32);
-      box-shadow: var(--shadow-strong);
-      max-width: 1180px;
-      width: 96%;
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.4fr);
-      gap: 16px;
-      font-size: 10px;
-    }
-
-    .admin-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-
-    .admin-header h2 {
-      font-size: 15px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 500;
-      color: var(--accent-alt);
-    }
-
-    .admin-header span {
-      font-size: 9px;
-      color: var(--muted);
-    }
-
-    .field-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 6px;
-      margin-bottom: 6px;
-    }
-
-    .field-block {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      margin-bottom: 6px;
-    }
-
-    .field-label {
-      font-size: 8px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .field-input,
-    .field-select {
-      padding: 7px 8px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: #02040a;
-      color: var(--text);
-      font-size: 10px;
-      outline: none;
-    }
-
-    .editor-wrap {
-      background: #02040a;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      padding: 6px 6px 4px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .editor-toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
-
-    .tool-btn {
-      padding: 3px 7px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 8px;
-      background: rgba(3,6,12,0.98);
-      color: var(--muted);
-      cursor: pointer;
-      transition: all var(--tr-fast);
-    }
-
-    .tool-btn.active,
-    .tool-btn:hover {
-      background: var(--accent-soft);
-      color: var(--accent-strong);
-      box-shadow: 0 8px 18px rgba(0,0,0,1);
-    }
-
-    .editor-area {
-      margin-top: 2px;
-      padding: 6px;
-      min-height: 56px;
-      max-height: 220px;
-      overflow-y: auto;
-      font-size: 10px;
-      line-height: 1.6;
-      color: var(--text);
-      outline: none;
-      border-radius: 8px;
-    }
-
-    #editorChangelog {
-      min-height: 120px;
-    }
-
-    .toggle-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 4px;
-      font-size: 9px;
-      color: var(--muted);
-    }
-
-    .toggle-row label {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .toggle-row input {
-      margin: 0;
-      cursor: pointer;
-    }
-
-    .admin-actions {
-      margin-top: 6px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    /* PREVIEW */
-
-    .preview-box {
-      background: var(--bg-card);
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      padding: 10px 10px 8px;
-      box-shadow: var(--shadow-soft);
-      display: grid;
-      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.2fr) auto;
-      column-gap: 10px;
-      row-gap: 4px;
-      font-size: 9px;
-    }
-
-    .preview-label {
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent-strong);
-      font-size: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      grid-column: 1 / 2;
-    }
-
-    .preview-title {
-      grid-column: 1 / 3;
-      font-size: 12px;
-      font-weight: 500;
-    }
-
-    .preview-short {
-      grid-column: 1 / 3;
-      font-size: 10px;
-      color: var(--text);
-    }
-
-    .preview-date {
-      font-size: 8px;
-      color: var(--muted);
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      align-items: flex-end;
-    }
-
-    .preview-date span {
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,170,255,0.42);
-      color: var(--accent-strong);
-      font-size: 7px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .preview-changelog {
-      grid-column: 1 / 4;
-      font-size: 9px;
-      color: var(--muted);
-      padding-top: 4px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .admin-note {
-      margin-top: 6px;
-      font-size: 8px;
-      color: var(--muted);
-      line-height: 1.5;
+    footer {
+      margin-top:22px;
+      font-size:9px;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      padding-top:8px;
     }
 
     @media (max-width: 900px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .modal-admin {
-        grid-template-columns: 1fr;
-        width: 94%;
-        max-height: 94vh;
-        overflow-y: auto;
-      }
-      .preview-box,
+      header { flex-direction: column; align-items: flex-start; }
       .card {
         grid-template-columns: minmax(0, 1.7fr) auto;
       }
@@ -842,11 +475,7 @@
       .card-title,
       .card-short,
       .card-tags,
-      .card-changelog,
-      .preview-label,
-      .preview-title,
-      .preview-short,
-      .preview-changelog {
+      .card-changelog {
         grid-column: 1 / 3;
       }
     }
@@ -858,21 +487,21 @@
     <div class="brand">
       <div class="brand-logo">OX</div>
       <div class="brand-text">
-        <span>OXEALL STUDIOS CLNEWS 999V</span>
-        <span>Официальный центр обновлений и патч-ноутов</span>
+        <span>OXEall Studios — Games Changelog</span>
+        <span>Официальная лента обновлений OXeall Studios</span>
       </div>
     </div>
     <nav>
-      <div class="nav-pill"><span class="dot"></span>Updates Feed</div>
-      <div class="nav-pill">Steam-inspired • Own Design</div>
+      <div class="nav-pill"><span class="dot"></span>Official Updates Feed</div>
+      <div class="nav-pill">Steam-inspired • OXeall Design</div>
     </nav>
   </header>
 
   <section class="top">
-    <h1>Лента обновлений OXeall Studios</h1>
+    <h1>Лента обновлений по играм OXeall Studios</h1>
     <p>
-      Все ключевые обновления, багфиксы, хотфиксы, крупные релизы и технические объявления по проектам OXeall
-      собраны в одном месте. Структура понятная, без лишнего шума.
+      Все Major, Minor, Patch и Hotfix обновления студии — в одном месте. Чтобы добавить новое обновление,
+      отредактируй HTML-блоки ниже (см. комментарий в коде).
     </p>
     <div class="filters">
       <div class="select">
@@ -882,7 +511,7 @@
         </select>
       </div>
       <div class="search">
-        <input type="text" id="searchInput" placeholder="Поиск по заголовкам и изменениям..." />
+        <input type="text" id="searchInput" placeholder="Поиск по названию, игре, изменениям..." />
       </div>
       <div class="tag">Developer Verified • OXeall</div>
     </div>
@@ -892,608 +521,198 @@
     <div class="featured-box empty" id="featuredBox">
       <div class="featured-label">Featured обновление не выбрано</div>
       <div class="featured-sub">
-        Отметь любое обновление как <b>Featured</b> в панели разработчика — оно закрепится здесь
-        как главный официальный анонс.
+        Чтобы отметить ключевое обновление — добавь атрибут
+        <b>data-featured="true"</b> к нужной карточке в HTML.
       </div>
     </div>
   </section>
 
   <div class="list-header">
     <div><strong>Все обновления</strong></div>
-    <div>Клик по карточке — открыть подробный changelog. Админ может редактировать в один клик.</div>
+    <div>Нажми на карточку, чтобы раскрыть подробный changelog.</div>
   </div>
 
   <div id="emptyState" class="empty-state">
-    Ещё нет опубликованных обновлений. Открой <b>Admin Update Panel</b> снизу справа, создай первое объявление —
-    оно сразу появится здесь.
+    Обновления пока не добавлены. Открой код файла <b>index.html</b> и добавь первую карточку по шаблону.
   </div>
 
-  <section id="announcementList" class="announcements"></section>
+  <section id="announcementList" class="announcements">
 
-  <footer style="margin-top:22px;font-size:9px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;border-top:1px solid rgba(255,255,255,0.06);padding-top:8px;">
-    <div>© <span id="year"></span> OXeall Studios. CLNEWS 999V.</div>
-    <div>Управление контентом — локальная Admin Update Panel. Публикуй только то, что считаешь официальным.</div>
+    <!--
+      ШАБЛОН ДЛЯ НОВОГО ОБНОВЛЕНИЯ
+      ---------------------------------
+      1. Скопируй блок <article class="card"> ... </article>
+      2. Поставь свои:
+         - data-game="НазваниеИгры"
+         - data-type="Major|Minor|Patch|Hotfix"
+         - Нужные тексты внутри (заголовок, версия, дата, описание, changelog)
+      3. Если хочешь сделать его главным — добавь data-featured="true"
+         к article. Только у одного обновления должен быть этот атрибут.
+
+      ПРИМЕР НИЖЕ — просто отредактируй под свои данные.
+    -->
+
+    <article class="card"
+             data-game="Example Game"
+             data-type="Major"
+             data-featured="true">
+      <div class="card-header">
+        <div class="badge-type major">MAJOR UPDATE</div>
+        <div class="badge-game">Example Game</div>
+        <div class="badge-version">v1.0.0</div>
+        <div class="badge-date">09 ноя 2025</div>
+      </div>
+      <div class="card-title">Стартовый пример обновления для OXeall Studios</div>
+      <div class="card-short">
+        Замените этот текст на краткое описание вашего настоящего обновления. 1–3 строки, самое важное.
+      </div>
+      <div class="card-tags">
+        <div class="card-tag">Release</div>
+        <div class="card-tag">PC</div>
+        <div class="card-tag">OXeall</div>
+      </div>
+      <div class="card-arrow">▼</div>
+      <div class="card-changelog">
+Полный список изменений:
+- Добавьте сюда реальные изменения.
+- Например: новый режим, новая карта, оптимизация FPS.
+- Удалите этот пример, когда добавите свои данные.
+      </div>
+    </article>
+
+    <!--
+    СКОПИРУЙ ЭТОТ БЛОК НИЖЕ ДЛЯ НОВОГО ОБНОВЛЕНИЯ:
+
+    <article class="card"
+             data-game="Название Игры"
+             data-type="Patch">
+      <div class="card-header">
+        <div class="badge-type patch">PATCH UPDATE</div>
+        <div class="badge-game">Название Игры</div>
+        <div class="badge-version">v1.0.1</div>
+        <div class="badge-date">10 ноя 2025</div>
+      </div>
+      <div class="card-title">Краткий заголовок обновления</div>
+      <div class="card-short">
+        Краткое описание: что пофиксили или добавили.
+      </div>
+      <div class="card-tags">
+        <div class="card-tag">Patch</div>
+        <div class="card-tag">Balance</div>
+      </div>
+      <div class="card-arrow">▼</div>
+      <div class="card-changelog">
+- Список изменённых параметров
+- Исправление вылетов
+- Улучшение производительности
+      </div>
+    </article>
+
+    -->
+
+  </section>
+
+  <footer>
+    <div>© <span id="year"></span> OXeall Studios. Games Changelog.</div>
+    <div>Все обновления добавляются вручную через HTML этого файла.</div>
   </footer>
 </div>
 
-<!-- Admin floating button -->
-<button class="admin-btn" id="adminBtn">
-  <span class="icon">⚙️</span>
-  <span>Admin Update Panel</span>
-</button>
-
-<!-- Login modal -->
-<div class="backdrop" id="loginBackdrop">
-  <div class="modal-login">
-    <h2>Вход в панель разработчика</h2>
-    <p>Пароль только для OXeall Studios. Используется для локального управления лентой.</p>
-    <label for="adminPassword">Пароль</label>
-    <input type="password" id="adminPassword" placeholder="Введите пароль" />
-    <div id="loginError" style="display:none;color:var(--danger);font-size:8px;margin-bottom:4px;">Неверный пароль.</div>
-    <div class="modal-actions">
-      <button class="btn btn-outline" id="loginCancel">Отмена</button>
-      <button class="btn btn-primary" id="loginSubmit">Войти</button>
-    </div>
-  </div>
-</div>
-
-<!-- Admin panel -->
-<div class="backdrop" id="adminBackdrop">
-  <div class="modal-admin">
-    <!-- LEFT: FORM + EDITORS -->
-    <div>
-      <div class="admin-header">
-        <h2>Admin Update Panel</h2>
-        <span>Создание и редактирование обновлений в стиле 999V.</span>
-      </div>
-
-      <div class="field-block">
-        <div class="field-label">Игра / Проект</div>
-        <input id="fieldGame" class="field-input" type="text" placeholder="Например: CityPort, Neon Arena..." />
-      </div>
-
-      <div class="field-row">
-        <div class="field-block">
-          <div class="field-label">Тип обновления</div>
-          <select id="fieldType" class="field-select">
-            <option value="Major">Major Update</option>
-            <option value="Minor">Minor Update</option>
-            <option value="Patch">Patch</option>
-            <option value="Hotfix">Hotfix</option>
-            <option value="Announcement">Announcement</option>
-            <option value="DevLog">DevLog</option>
-          </select>
-        </div>
-        <div class="field-block">
-          <div class="field-label">Версия</div>
-          <input id="fieldVersion" class="field-input" type="text" placeholder="1.2.1.0 / 1.3.6f1..." />
-        </div>
-        <div class="field-block">
-          <div class="field-label">Дата</div>
-          <input id="fieldDate" class="field-input" type="date" />
-        </div>
-      </div>
-
-      <div class="field-block">
-        <div class="field-label">Заголовок обновления</div>
-        <input id="fieldTitle" class="field-input" type="text" placeholder="Крупный официальный заголовок, как в Steam News" />
-      </div>
-
-      <!-- Overview editor -->
-      <div class="field-block">
-        <div class="field-label">Краткое описание (overview)</div>
-        <div class="editor-wrap" data-editor="overview">
-          <div class="editor-toolbar">
-            <button type="button" class="tool-btn" data-cmd="bold">B</button>
-            <button type="button" class="tool-btn" data-cmd="italic">I</button>
-            <button type="button" class="tool-btn" data-cmd="formatBlock" data-value="h3">H3</button>
-            <button type="button" class="tool-btn" data-cmd="insertUnorderedList">• List</button>
-          </div>
-          <div id="editorOverview" class="editor-area" contenteditable="true">
-Кратко опиши ключевые изменения, чтобы игрок за 1–2 строки понял суть.</div>
-        </div>
-      </div>
-
-      <!-- Changelog editor -->
-      <div class="field-block">
-        <div class="field-label">Полный changelog</div>
-        <div class="editor-wrap" data-editor="changelog">
-          <div class="editor-toolbar">
-            <button type="button" class="tool-btn" data-cmd="bold">B</button>
-            <button type="button" class="tool-btn" data-cmd="italic">I</button>
-            <button type="button" class="tool-btn" data-cmd="formatBlock" data-value="h3">H3</button>
-            <button type="button" class="tool-btn" data-cmd="insertUnorderedList">• List</button>
-            <button type="button" class="tool-btn" data-cmd="insertOrderedList">1. List</button>
-          </div>
-          <div id="editorChangelog" class="editor-area" contenteditable="true">
-- Добавь пункты изменений
-- Используй списки, заголовки и форматирование
-- Стиль как у официальных патч-ноутов</div>
-        </div>
-      </div>
-
-      <div class="field-row">
-        <div class="field-block">
-          <div class="field-label">Фон (URL, опционально)</div>
-          <input id="fieldBg" class="field-input" type="text" placeholder="Картинка баннера / карточки" />
-        </div>
-        <div class="field-block">
-          <div class="field-label">Теги (через запятую)</div>
-          <input id="fieldTags" class="field-input" type="text" placeholder="CityPort, Patch, Balance..." />
-        </div>
-        <div class="field-block">
-          <div class="field-label">ID (для редактирования)</div>
-          <input id="fieldId" class="field-input" type="text" placeholder="Генерируется автоматически" disabled />
-        </div>
-      </div>
-
-      <div class="toggle-row">
-        <label><input type="checkbox" id="fieldFeatured" /> Сделать Featured (главный баннер)</label>
-        <label><input type="checkbox" id="fieldPin" /> Закрепить вверху ленты</label>
-      </div>
-
-      <div class="admin-actions">
-        <button class="btn btn-primary" id="btnSaveUpdate">Сохранить / Обновить</button>
-        <button class="btn btn-outline" id="btnNew">Новый пост</button>
-        <button class="btn btn-danger" id="btnClearLocal">Сбросить локальные посты</button>
-        <button class="btn btn-outline" id="btnClosePanel">Закрыть панель</button>
-      </div>
-
-      <div class="admin-note">
-        Все изменения сохраняются в <b>localStorage</b> этого браузера. Редактируй посты в панели или по кнопке
-        «Edit» на карточке. Если захочешь сделать глобально для всех — перенеси сгенерированные данные в статический код.
-      </div>
-    </div>
-
-    <!-- RIGHT: PREVIEW -->
-    <div>
-      <div class="admin-header">
-        <h2>Live Preview</h2>
-        <span>Карточка как в реальной ленте CLNEWS 999V.</span>
-      </div>
-      <div class="preview-box">
-        <div class="preview-label" id="previewType">MAJOR UPDATE</div>
-        <div class="preview-title" id="previewTitle">Заголовок обновления</div>
-        <div class="preview-short" id="previewShort">
-          Краткое официальное описание обновления будет отображаться здесь более крупным текстом.
-        </div>
-        <div class="preview-date">
-          <div id="previewGame">OXeall Project</div>
-          <span id="previewVersion">vX.X.X</span>
-        </div>
-        <div class="preview-changelog" id="previewChangelog">
-          Полный changelog в формате списков и заголовков появится здесь.
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
-  const ADMIN_PASSWORD = "OXS11993384756281";
-  const STORAGE_KEY = "oxeall_clnews_999v_updates";
+  // Подставляем год
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+  const featuredBox = document.getElementById('featuredBox');
+  const emptyState = document.getElementById('emptyState');
+  const list = document.getElementById('announcementList');
+  const cards = Array.from(list.querySelectorAll('.card'));
 
-  let isAdmin = false;
-  let updates = [];
-  let editingId = null; // если редактируем существующий пост
-
-  /* ---------- Utils ---------- */
-
-  function formatDate(str) {
-    if (!str) return "";
-    const d = new Date(str);
-    if (isNaN(d)) return str;
-    const m = ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
-    return String(d.getDate()).padStart(2,"0") + " " + m[d.getMonth()] + " " + d.getFullYear();
+  // Если есть хотя бы одна карточка — убираем "пусто"
+  if (cards.length > 0) {
+    emptyState.style.display = 'none';
   }
 
-  function typeLabel(t) {
-    switch (t) {
-      case "Major": return "MAJOR UPDATE";
-      case "Minor": return "MINOR UPDATE";
-      case "Patch": return "PATCH";
-      case "Hotfix": return "HOTFIX";
-      case "Announcement": return "ANNOUNCEMENT";
-      case "DevLog": return "DEVLOG";
-      default: return "UPDATE";
-    }
-  }
+  // Featured: берём первую карточку с data-featured="true"
+  function setupFeatured() {
+    const featured = cards.find(c => c.dataset.featured === 'true');
+    if (!featured) return;
 
-  function genId() {
-    return "upd-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,8);
-  }
+    featuredBox.classList.remove('empty');
+    const title = featured.querySelector('.card-title')?.textContent || '';
+    const short = featured.querySelector('.card-short')?.textContent || '';
+    const game = featured.dataset.game || featured.querySelector('.badge-game')?.textContent || 'OXeall Project';
+    const type = featured.dataset.type || 'Major';
+    const date = featured.querySelector('.badge-date')?.textContent || '';
+    const version = featured.querySelector('.badge-version')?.textContent || '';
+    const tags = Array.from(featured.querySelectorAll('.card-tag')).map(t => t.textContent);
 
-  function saveLocal() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updates)); } catch(e){}
-  }
-
-  function loadLocal() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const data = JSON.parse(raw);
-      if (Array.isArray(data)) updates = data;
-    } catch(e){}
-  }
-
-  /* ---------- Render ---------- */
-
-  function renderFeatured() {
-    const box = document.getElementById("featuredBox");
-    const feat = updates.find(u => u.featured);
-    if (!feat) {
-      box.classList.add("empty");
-      box.style.backgroundImage = "none";
-      box.innerHTML = `
-        <div class="featured-label">Featured обновление не выбрано</div>
-        <div class="featured-sub">
-          Отметь любое обновление как <b>Featured</b> в панели — оно закрепится здесь как главный анонс.
-        </div>`;
-      return;
-    }
-    box.classList.remove("empty");
-    if (feat.background) {
-      box.style.backgroundImage =
-        `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.98)), url('${feat.background}')`;
-      box.style.backgroundSize = "cover";
-      box.style.backgroundPosition = "center";
-    } else {
-      box.style.backgroundImage = "none";
-    }
-    box.innerHTML = `
-      <div class="featured-label">${typeLabel(feat.type)} • ${feat.game}</div>
-      <div class="featured-title">${feat.title}</div>
-      <div class="featured-sub">${feat.overview || ""}</div>
+    featuredBox.innerHTML = `
+      <div class="featured-label">${type.toUpperCase()} UPDATE • ${game}</div>
+      <div class="featured-title">${title}</div>
+      <div class="featured-sub">${short}</div>
       <div class="featured-meta">
-        ${formatDate(feat.date)} · Версия: ${feat.version || "—"}
-        ${feat.tags && feat.tags.length ? " · " + feat.tags.join(", ") : ""}
-      </div>`;
+        ${date}
+        ${version ? ' · ' + version : ''}
+        ${tags.length ? ' · ' + tags.join(', ') : ''}
+      </div>
+    `;
   }
 
-  function renderUpdates() {
-    const list = document.getElementById("announcementList");
-    const empty = document.getElementById("emptyState");
-    list.innerHTML = "";
-
-    if (!updates.length) {
-      empty.style.display = "block";
-      renderFeatured();
-      return;
-    }
-    empty.style.display = "none";
-
-    // sort: pinned first, then by date desc
-    updates.sort((a,b) => {
-      if (a.pin && !b.pin) return -1;
-      if (!a.pin && b.pin) return 1;
-      return (new Date(b.date||0)) - (new Date(a.date||0));
-    });
-
-    updates.forEach(u => {
-      const card = document.createElement("article");
-      card.className = "card";
-      card.dataset.id = u.id;
-      card.dataset.game = u.game || "";
-      card.dataset.search = (
-        (u.title||"") + " " +
-        (u.overview||"") + " " +
-        (u.changelog||"") + " " +
-        (u.tags||[]).join(" ")
-      ).toLowerCase();
-
-      if (u.background) {
-        card.style.backgroundImage =
-          `linear-gradient(to bottom, rgba(0,0,0,0.70), rgba(0,0,0,0.98)), url('${u.background}')`;
-        card.style.backgroundSize = "cover";
-        card.style.backgroundPosition = "center";
-      }
-
-      const header = document.createElement("div");
-      header.className = "card-header";
-      header.innerHTML = `
-        <div class="badge-type">${typeLabel(u.type)}</div>
-        <div class="badge-game">${u.game || "OXeall Project"}</div>
-        <div class="badge-version">${u.version ? "v"+u.version : "Без версии"}</div>
-        <div class="badge-date">${formatDate(u.date)}</div>
-      `;
-
-      const title = document.createElement("div");
-      title.className = "card-title";
-      title.textContent = u.title || "Без названия";
-
-      const short = document.createElement("div");
-      short.className = "card-short";
-      short.innerHTML = u.overview || "";
-
-      const tagsDiv = document.createElement("div");
-      tagsDiv.className = "card-tags";
-      (u.tags || []).forEach(t => {
-        const span = document.createElement("div");
-        span.className = "card-tag";
-        span.textContent = t;
-        tagsDiv.appendChild(span);
-      });
-
-      const arrow = document.createElement("div");
-      arrow.className = "card-arrow";
-      arrow.textContent = "▼";
-
-      const changelog = document.createElement("div");
-      changelog.className = "card-changelog";
-      changelog.innerHTML = u.changelog || "";
-
-      const adminActions = document.createElement("div");
-      adminActions.className = "card-admin-actions";
-      adminActions.innerHTML = `
-        <button class="card-edit-btn">Edit</button>
-        <button class="card-del-btn">Del</button>
-      `;
-      card.appendChild(adminActions);
-
-      if (u.overview) card.appendChild(header); else card.appendChild(header);
-      card.appendChild(title);
-      if (u.overview) card.appendChild(short);
-      if (u.tags && u.tags.length) card.appendChild(tagsDiv);
-      card.appendChild(arrow);
-      if (u.changelog) card.appendChild(changelog);
-
-      card.addEventListener("click", e => {
-        if (e.target.closest(".card-edit-btn") || e.target.closest(".card-del-btn")) return;
-        if (e.target.tagName === "A" || e.target.closest("a")) return;
-        card.classList.toggle("open");
-      });
-
-      if (isAdmin) {
-        adminActions.style.display = "flex";
-        adminActions.querySelector(".card-edit-btn").addEventListener("click", (e) => {
-          e.stopPropagation();
-          loadUpdateToForm(u.id);
-        });
-        adminActions.querySelector(".card-del-btn").addEventListener("click", (e) => {
-          e.stopPropagation();
-          if (!confirm("Удалить это обновление из локального списка?")) return;
-          updates = updates.filter(x => x.id !== u.id);
-          saveLocal();
-          renderUpdates();
-        });
-      }
-
-      list.appendChild(card);
-    });
-
-    renderFeatured();
-    attachFilters();
-  }
-
-  function attachFilters() {
-    const select = document.getElementById("gameFilter");
-    const search = document.getElementById("searchInput");
-    const cards = Array.from(document.querySelectorAll(".card"));
-
-    const games = Array.from(new Set(updates.map(u => u.game).filter(Boolean)));
-    select.innerHTML = '<option value="all">Все проекты</option>' +
-      games.map(g => `<option value="${g}">${g}</option>`).join("");
-
-    function apply() {
-      const g = select.value;
-      const q = (search.value || "").toLowerCase().trim();
-      cards.forEach(c => {
-        const mg = (g === "all") || (c.dataset.game === g);
-        const ms = !q || c.dataset.search.includes(q);
-        c.style.display = (mg && ms) ? "" : "none";
-      });
-    }
-
-    select.onchange = apply;
-    search.oninput = apply;
-    apply();
-  }
-
-  /* ---------- Admin: login ---------- */
-
-  const adminBtn = document.getElementById("adminBtn");
-  const loginBackdrop = document.getElementById("loginBackdrop");
-  const adminBackdrop = document.getElementById("adminBackdrop");
-  const loginInput = document.getElementById("adminPassword");
-  const loginError = document.getElementById("loginError");
-
-  adminBtn.addEventListener("click", () => {
-    if (isAdmin) {
-      adminBackdrop.style.display = "flex";
-      return;
-    }
-    loginError.style.display = "none";
-    loginInput.value = "";
-    loginBackdrop.style.display = "flex";
-    loginInput.focus();
-  });
-
-  document.getElementById("loginCancel").addEventListener("click", () => {
-    loginBackdrop.style.display = "none";
-  });
-
-  document.getElementById("loginSubmit").addEventListener("click", () => {
-    if (loginInput.value === ADMIN_PASSWORD) {
-      isAdmin = true;
-      loginBackdrop.style.display = "none";
-      adminBackdrop.style.display = "flex";
-      renderUpdates(); // чтобы показать edit-кнопки
-    } else {
-      loginError.style.display = "block";
-    }
-  });
-
-  loginInput.addEventListener("keydown", e => {
-    if (e.key === "Enter") document.getElementById("loginSubmit").click();
-  });
-
-  loginBackdrop.addEventListener("click", e => {
-    if (e.target === loginBackdrop) loginBackdrop.style.display = "none";
-  });
-
-  adminBackdrop.addEventListener("click", e => {
-    if (e.target === adminBackdrop) adminBackdrop.style.display = "none";
-  });
-
-  document.getElementById("btnClosePanel").addEventListener("click", () => {
-    adminBackdrop.style.display = "none";
-  });
-
-  /* ---------- Admin: editors ---------- */
-
-  let activeEditor = null;
-
-  function bindEditorToolbar(wrapper) {
-    const area = wrapper.querySelector(".editor-area");
-    const buttons = wrapper.querySelectorAll(".tool-btn");
-    area.addEventListener("focus", () => { activeEditor = area; });
-    area.addEventListener("click", () => { activeEditor = area; });
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (!activeEditor) activeEditor = area;
-        activeEditor.focus();
-        const cmd = btn.dataset.cmd;
-        const val = btn.dataset.value || null;
-        document.execCommand(cmd, false, val);
+  // Клик по карточке — раскрытие changelog
+  function setupCardToggles() {
+    cards.forEach(card => {
+      const arrow = card.querySelector('.card-arrow');
+      const changelog = card.querySelector('.card-changelog');
+      if (!arrow || !changelog) return;
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A' || e.target.closest('a')) return;
+        card.classList.toggle('open');
       });
     });
   }
 
-  document.querySelectorAll(".editor-wrap").forEach(bindEditorToolbar);
+  // Фильтр по игре + поиск
+  function setupFilters() {
+    const gameSelect = document.getElementById('gameFilter');
+    const searchInput = document.getElementById('searchInput');
 
-  /* ---------- Admin: form & preview ---------- */
+    const games = Array.from(new Set(cards.map(c => c.dataset.game).filter(Boolean)));
+    games.forEach(g => {
+      const opt = document.createElement('option');
+      opt.value = g;
+      opt.textContent = g;
+      gameSelect.appendChild(opt);
+    });
 
-  const fieldGame = document.getElementById("fieldGame");
-  const fieldType = document.getElementById("fieldType");
-  const fieldVersion = document.getElementById("fieldVersion");
-  const fieldDate = document.getElementById("fieldDate");
-  const fieldTitle = document.getElementById("fieldTitle");
-  const fieldBg = document.getElementById("fieldBg");
-  const fieldTags = document.getElementById("fieldTags");
-  const fieldId = document.getElementById("fieldId");
-  const fieldFeatured = document.getElementById("fieldFeatured");
-  const fieldPin = document.getElementById("fieldPin");
-  const editorOverview = document.getElementById("editorOverview");
-  const editorChangelog = document.getElementById("editorChangelog");
+    function applyFilters() {
+      const g = gameSelect.value;
+      const q = (searchInput.value || '').toLowerCase().trim();
 
-  const previewType = document.getElementById("previewType");
-  const previewTitle = document.getElementById("previewTitle");
-  const previewShort = document.getElementById("previewShort");
-  const previewGame = document.getElementById("previewGame");
-  const previewVersion = document.getElementById("previewVersion");
-  const previewChangelog = document.getElementById("previewChangelog");
+      cards.forEach(card => {
+        const cardGame = card.dataset.game || '';
+        const text = (
+          card.textContent +
+          ' ' +
+          (card.dataset.game || '') +
+          ' ' +
+          (card.dataset.type || '')
+        ).toLowerCase();
 
-  function updatePreview() {
-    previewType.textContent = typeLabel(fieldType.value);
-    previewTitle.textContent = fieldTitle.value || "Заголовок обновления";
-    previewShort.innerHTML = editorOverview.innerHTML || "Краткое официальное описание обновления.";
-    previewGame.textContent = fieldGame.value || "OXeall Project";
-    previewVersion.textContent = fieldVersion.value ? "v"+fieldVersion.value : "vX.X.X";
-    previewChangelog.innerHTML = editorChangelog.innerHTML || "Changelog будет отображён здесь.";
-  }
+        const matchGame = (g === 'all') || (cardGame === g);
+        const matchSearch = !q || text.includes(q);
 
-  [
-    fieldGame, fieldType, fieldVersion, fieldDate, fieldTitle,
-    fieldBg, fieldTags, fieldFeatured, fieldPin
-  ].forEach(el => el.addEventListener("input", updatePreview));
-
-  editorOverview.addEventListener("input", updatePreview);
-  editorChangelog.addEventListener("input", updatePreview);
-
-  updatePreview();
-
-  function resetForm() {
-    editingId = null;
-    fieldGame.value = "";
-    fieldType.value = "Major";
-    fieldVersion.value = "";
-    fieldDate.value = "";
-    fieldTitle.value = "";
-    fieldBg.value = "";
-    fieldTags.value = "";
-    fieldFeatured.checked = false;
-    fieldPin.checked = false;
-    fieldId.value = "";
-    editorOverview.innerHTML = "Кратко опиши ключевые изменения, чтобы игрок за 1–2 строки понял суть.";
-    editorChangelog.innerHTML = "- Добавь пункты изменений<br>- Используй списки, заголовки и форматирование<br>- Стиль как у официальных патч-ноутов";
-    updatePreview();
-  }
-
-  document.getElementById("btnNew").addEventListener("click", () => {
-    resetForm();
-  });
-
-  document.getElementById("btnClearLocal").addEventListener("click", () => {
-    if (!confirm("Удалить все локально сохранённые обновления?")) return;
-    updates = [];
-    saveLocal();
-    renderUpdates();
-    resetForm();
-  });
-
-  document.getElementById("btnSaveUpdate").addEventListener("click", () => {
-    const id = editingId || genId();
-    const nowISO = new Date().toISOString().slice(0,10);
-    const upd = {
-      id,
-      game: fieldGame.value.trim() || "OXeall Project",
-      type: fieldType.value,
-      version: fieldVersion.value.trim(),
-      date: fieldDate.value || nowISO,
-      title: fieldTitle.value.trim() || "Без названия",
-      overview: editorOverview.innerHTML.trim(),
-      changelog: editorChangelog.innerHTML.trim(),
-      background: fieldBg.value.trim(),
-      tags: (fieldTags.value || "").split(",").map(t => t.trim()).filter(Boolean),
-      featured: fieldFeatured.checked,
-      pin: fieldPin.checked
-    };
-
-    if (upd.featured) {
-      updates.forEach(u => u.featured = false);
+        card.style.display = (matchGame && matchSearch) ? '' : 'none';
+      });
     }
 
-    const idx = updates.findIndex(u => u.id === id);
-    if (idx >= 0) {
-      updates[idx] = upd;
-    } else {
-      updates.unshift(upd);
-    }
-
-    editingId = id;
-    fieldId.value = id;
-
-    saveLocal();
-    renderUpdates();
-    alert("Обновление сохранено локально и отображено в ленте.");
-  });
-
-  function loadUpdateToForm(id) {
-    const upd = updates.find(u => u.id === id);
-    if (!upd) return;
-    editingId = upd.id;
-    fieldId.value = upd.id;
-    fieldGame.value = upd.game || "";
-    fieldType.value = upd.type || "Major";
-    fieldVersion.value = upd.version || "";
-    fieldDate.value = upd.date || "";
-    fieldTitle.value = upd.title || "";
-    editorOverview.innerHTML = upd.overview || "";
-    editorChangelog.innerHTML = upd.changelog || "";
-    fieldBg.value = upd.background || "";
-    fieldTags.value = (upd.tags || []).join(", ");
-    fieldFeatured.checked = !!upd.featured;
-    fieldPin.checked = !!upd.pin;
-    updatePreview();
-    adminBackdrop.style.display = "flex";
+    gameSelect.addEventListener('change', applyFilters);
+    searchInput.addEventListener('input', applyFilters);
+    applyFilters();
   }
 
-  /* ---------- Init ---------- */
-
-  loadLocal();
-  renderUpdates();
+  setupFeatured();
+  setupCardToggles();
+  setupFilters();
 </script>
 </body>
 </html>
