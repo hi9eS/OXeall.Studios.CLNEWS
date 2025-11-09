@@ -2,42 +2,48 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>OXeall | Game Updates & Patch Notes</title>
+  <title>OXeall Studios | CLNEWS 999V</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Официальные новости, обновления и патч-ноуты игр OXeall." />
+  <meta name="description" content="OXeall Studios CLNEWS 999V — официальный центр обновлений и патч-ноутов." />
   <style>
     :root {
-      --bg: #050814;
-      --bg-soft: #0d111c;
-      --bg-soft-2: #151b28;
-      --accent: #2ea3ff;
-      --accent-soft: rgba(46,163,255,0.15);
-      --accent-alt: #00d8ff;
-      --text: #f5f5f5;
-      --muted: #9aa4b2;
+      --bg: #02040a;
+      --bg-gradient: radial-gradient(circle at top, rgba(0,180,255,0.16), transparent 60%);
+      --bg-card: #070a12;
+      --bg-card-soft: #0c111b;
+      --bg-panel: #050710;
+      --accent: #00aaff;
+      --accent-soft: rgba(0,170,255,0.14);
+      --accent-strong: #35c3ff;
+      --accent-alt: #00ffc6;
+      --text: #f5f7ff;
+      --muted: #a0acc5;
       --border: #222a38;
+      --danger: #ff4a6a;
       --radius-xl: 22px;
+      --radius-lg: 18px;
       --radius-md: 12px;
-      --shadow-soft: 0 18px 40px rgba(0,0,0,0.55);
-      --transition-fast: 0.18s ease-out;
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", -system-ui, sans-serif;
+      --shadow-strong: 0 26px 80px rgba(0,0,0,0.95);
+      --shadow-soft: 0 18px 48px rgba(0,0,0,0.9);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --tr-fast: 0.18s ease-out;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
       font-family: var(--font-main);
-      background: radial-gradient(circle at top, #10182a 0, var(--bg) 40%);
+      background: var(--bg-gradient), var(--bg);
       color: var(--text);
       min-height: 100vh;
     }
 
     a {
-      color: var(--accent);
+      color: var(--accent-strong);
       text-decoration: none;
     }
 
@@ -45,32 +51,29 @@
       text-decoration: underline;
     }
 
-    /* Layout */
-
     .page {
       max-width: 1240px;
       margin: 0 auto;
-      padding: 24px 16px 40px;
+      padding: 22px 18px 40px;
     }
+
+    /* HEADER */
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 16px 18px;
+      padding: 14px 18px;
       border-radius: var(--radius-xl);
-      background: linear-gradient(
-        135deg,
-        rgba(46,163,255,0.12),
-        rgba(0,0,0,0.9)
-      );
+      background:
+        linear-gradient(135deg, rgba(0,170,255,0.18), rgba(3,5,10,0.98));
+      border: 1px solid rgba(255,255,255,0.06);
       box-shadow: var(--shadow-soft);
       position: sticky;
-      top: 12px;
+      top: 10px;
       z-index: 40;
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(255,255,255,0.04);
+      backdrop-filter: blur(16px);
     }
 
     .brand {
@@ -80,92 +83,88 @@
     }
 
     .brand-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: radial-gradient(circle at 30% 0, #ffffff, #2ea3ff);
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 20% 0, #ffffff, #00aaff);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      color: #02030a;
-      font-size: 18px;
+      font-weight: 800;
+      font-size: 20px;
+      color: #020308;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.98);
     }
 
-    .brand-title {
+    .brand-text {
       display: flex;
       flex-direction: column;
       gap: 2px;
     }
 
-    .brand-title span:first-child {
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      font-size: 13px;
-      color: var(--accent-alt);
+    .brand-text span:first-child {
+      font-size: 11px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--accent-alt);
     }
 
-    .brand-title span:last-child {
-      font-weight: 500;
-      font-size: 14px;
+    .brand-text span:last-child {
+      font-size: 12px;
       color: var(--muted);
     }
 
     nav {
       display: flex;
-      gap: 14px;
-      font-size: 13px;
-      color: var(--muted);
+      gap: 8px;
       flex-wrap: wrap;
-      align-items: center;
       justify-content: flex-end;
+      font-size: 10px;
+      color: var(--muted);
     }
 
-    .nav-link {
-      padding: 6px 10px;
+    .nav-pill {
+      padding: 6px 11px;
       border-radius: 999px;
-      transition: background var(--transition-fast), color var(--transition-fast),
-                  transform var(--transition-fast);
-      cursor: pointer;
-    }
-
-    .nav-link.active,
-    .nav-link:hover {
-      background: var(--accent-soft);
-      color: var(--accent-alt);
-      transform: translateY(-1px);
-    }
-
-    /* Top controls */
-
-    .top-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin: 24px 2px 18px;
+      background: rgba(0,0,0,0.7);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: inline-flex;
+      gap: 6px;
       align-items: center;
-      justify-content: space-between;
     }
 
-    .top-title {
+    .nav-pill span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    /* TOP */
+
+    .top {
+      margin: 24px 2px 12px;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 8px;
     }
 
-    .top-title h1 {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 0.01em;
+    .top h1 {
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
     }
 
-    .top-title p {
+    .top p {
       font-size: 13px;
       color: var(--muted);
+      max-width: 640px;
+      line-height: 1.6;
     }
 
-    .controls {
+    .filters {
+      margin-top: 6px;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -174,310 +173,211 @@
 
     .select,
     .search {
-      background: var(--bg-soft);
-      border-radius: 999px;
-      padding: 7px 12px;
       display: flex;
       align-items: center;
       gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.55);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.9);
+      font-size: 11px;
     }
 
     .select label {
-      font-size: 10px;
+      font-size: 9px;
       text-transform: uppercase;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.14em;
       color: var(--muted);
     }
 
     .select select {
-      background: transparent;
       border: none;
-      outline: none;
+      background: transparent;
       color: var(--text);
-      font-size: 12px;
+      font-size: 11px;
+      outline: none;
       cursor: pointer;
     }
 
     .search input {
-      background: none;
       border: none;
       outline: none;
+      background: transparent;
       color: var(--text);
-      font-size: 12px;
-      width: 150px;
+      font-size: 11px;
+      min-width: 180px;
     }
 
-    .tag-label {
-      font-size: 10px;
-      padding: 6px 10px;
+    .tag {
+      padding: 6px 12px;
       border-radius: 999px;
+      border: 1px solid rgba(0,170,255,0.4);
       background: var(--accent-soft);
-      color: var(--accent);
-      text-transform: uppercase;
-      border: 1px solid rgba(46,163,255,0.28);
+      color: var(--accent-strong);
+      font-size: 9px;
       letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    /* Featured */
+    /* FEATURED */
 
     .featured {
-      display: grid;
-      grid-template-columns: minmax(0, 2.3fr) minmax(260px, 1.4fr);
-      gap: 16px;
-      margin-bottom: 22px;
+      margin-top: 16px;
+      margin-bottom: 12px;
     }
 
-    .featured-banner {
-      position: relative;
-      padding: 18px 18px 16px;
+    .featured-box {
+      padding: 14px 16px 12px;
       border-radius: var(--radius-xl);
-      background:
-        linear-gradient(to bottom, rgba(4,8,18,0), rgba(0,0,0,0.9)),
-        url("https://images.pexels.com/photos/4610776/pexels-photo-4610776.jpeg?auto=compress&cs=tinysrgb&w=1200")
-        center/cover no-repeat;
+      background: var(--bg-card-soft);
+      border: 1px solid var(--border);
       box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255,255,255,0.06);
-      overflow: hidden;
-    }
-
-    .featured-kicker {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--accent-alt);
-      margin-bottom: 4px;
       display: flex;
-      gap: 8px;
-      align-items: center;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    .featured-kicker span.date {
+    .featured-box.empty {
+      border-style: dashed;
+      opacity: 0.86;
       color: var(--muted);
-      font-weight: 400;
+    }
+
+    .featured-label {
+      font-size: 9px;
+      color: var(--accent-strong);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
     }
 
     .featured-title {
-      font-size: 19px;
-      font-weight: 600;
-      margin-bottom: 4px;
-      text-shadow: 0 4px 16px #000;
+      font-size: 18px;
+      font-weight: 500;
     }
 
     .featured-sub {
       font-size: 12px;
       color: var(--muted);
-      max-width: 430px;
-      margin-bottom: 10px;
-    }
-
-    .featured-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-    }
-
-    .pill {
-      font-size: 9px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(2,5,12,0.8);
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .featured-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .btn {
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: none;
-      background: var(--accent);
-      color: #02030a;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.8);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all var(--transition-fast);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .btn span.arrow {
-      font-size: 13px;
-    }
-
-    .btn.outline {
-      background: transparent;
-      color: var(--accent-alt);
-      border: 1px solid var(--accent-alt);
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 36px rgba(0,0,0,0.9);
+      line-height: 1.6;
     }
 
     .featured-meta {
       font-size: 9px;
       color: var(--muted);
-      margin-top: 4px;
     }
 
-    .side-card {
-      padding: 14px 14px 13px;
-      border-radius: var(--radius-xl);
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .side-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--accent-alt);
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    .side-item {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 7px 8px;
-      border-radius: var(--radius-md);
-      background: var(--bg-soft-2);
-      border: 1px solid rgba(255,255,255,0.03);
-      cursor: pointer;
-      transition: all var(--transition-fast);
-    }
-
-    .side-item:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
-      box-shadow: 0 14px 32px rgba(0,0,0,0.85);
-    }
-
-    .side-item div {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .side-game {
-      font-size: 10px;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .side-label {
-      font-size: 11px;
-      color: var(--text);
-    }
-
-    .side-sub {
-      font-size: 10px;
-      color: var(--muted);
-    }
-
-    .side-date {
-      font-size: 9px;
-      color: var(--muted);
-      opacity: 0.85;
-      white-space: nowrap;
-      margin-top: 4px;
-    }
-
-    /* Announcements list */
+    /* LIST HEADER */
 
     .list-header {
+      margin: 16px 2px 8px;
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin: 10px 2px 6px;
       gap: 10px;
-    }
-
-    .list-header span {
-      font-size: 11px;
+      align-items: baseline;
+      font-size: 10px;
       color: var(--muted);
     }
 
-    .list-header span strong {
-      color: var(--accent-alt);
+    .list-header strong {
+      color: var(--accent-strong);
+      font-size: 11px;
+      font-weight: 500;
     }
+
+    /* CARDS */
 
     .announcements {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
+    }
+
+    .empty-state {
+      font-size: 11px;
+      color: var(--muted);
+      padding: 12px 13px;
+      border-radius: var(--radius-lg);
+      border: 1px dashed rgba(255,255,255,0.2);
+      background: #050811;
+      margin-top: 4px;
     }
 
     .card {
-      background: var(--bg-soft);
+      padding: 14px 16px 10px;
       border-radius: var(--radius-xl);
-      padding: 12px 14px 10px;
+      background: var(--bg-card);
       border: 1px solid var(--border);
-      box-shadow: 0 14px 34px rgba(0,0,0,0.8);
+      box-shadow: var(--shadow-soft);
       display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 10px;
+      grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.4fr) auto;
+      column-gap: 14px;
+      row-gap: 6px;
       align-items: flex-start;
       cursor: pointer;
-      transition: all var(--transition-fast);
       position: relative;
+      transition: all var(--tr-fast);
     }
 
     .card:hover {
+      box-shadow: var(--shadow-strong);
+      transform: translateY(-2px);
       border-color: var(--accent);
-      transform: translateY(-3px);
-      box-shadow: 0 20px 48px rgba(0,0,0,0.95);
     }
 
-    .card-label {
-      font-size: 9px;
-      padding: 4px 8px;
+    .card-header {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 10px;
+      color: var(--muted);
+      grid-column: 1 / 3;
+    }
+
+    .badge-type {
+      padding: 3px 8px;
       border-radius: 999px;
+      font-size: 9px;
       background: var(--accent-soft);
-      color: var(--accent);
+      color: var(--accent-strong);
       text-transform: uppercase;
       letter-spacing: 0.14em;
+      border: 1px solid rgba(0,170,255,0.55);
     }
 
-    .card-main {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
+    .badge-game {
+      color: var(--accent-strong);
+      font-size: 10px;
+    }
+
+    .badge-version {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .badge-date {
+      font-size: 9px;
+      color: var(--muted);
     }
 
     .card-title {
-      font-size: 14px;
+      grid-column: 1 / 3;
+      font-size: 17px;
       font-weight: 500;
     }
 
-    .card-sub {
-      font-size: 11px;
-      color: var(--muted);
-      max-width: 640px;
+    .card-short {
+      grid-column: 1 / 3;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.6;
     }
 
     .card-tags {
+      grid-column: 1 / 3;
       display: flex;
       flex-wrap: wrap;
       gap: 4px;
@@ -485,118 +385,469 @@
     }
 
     .card-tag {
-      font-size: 9px;
-      padding: 2px 7px;
+      padding: 3px 7px;
       border-radius: 999px;
-      background: var(--bg-soft-2);
+      background: rgba(2,4,9,0.98);
       color: var(--muted);
-      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 9px;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .card-admin-actions {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      display: none;
+      gap: 4px;
+    }
+
+    .card.open .card-admin-actions {
+      top: 8px;
+    }
+
+    .card-edit-btn,
+    .card-del-btn {
+      padding: 3px 7px;
+      border-radius: 999px;
+      font-size: 8px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.8);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all var(--tr-fast);
+    }
+
+    .card-edit-btn:hover {
+      color: var(--accent-strong);
+      border-color: var(--accent-strong);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.9);
+    }
+
+    .card-del-btn:hover {
+      color: var(--danger);
+      border-color: var(--danger);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.9);
+    }
+
+    .card-arrow {
+      font-size: 10px;
+      color: var(--muted);
+      align-self: flex-start;
+      margin-top: 2px;
+      transition: transform var(--tr-fast), color var(--tr-fast);
+    }
+
+    .card-changelog {
+      grid-column: 1 / 4;
+      display: none;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card-changelog h1,
+    .card-changelog h2,
+    .card-changelog h3 {
+      margin: 6px 0 2px;
+      font-weight: 500;
+      color: var(--accent-strong);
+    }
+
+    .card-changelog ul {
+      margin-left: 18px;
+      margin-top: 4px;
+    }
+
+    .card.open .card-changelog {
+      display: block;
+    }
+
+    .card.open .card-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-strong);
+    }
+
+    /* ADMIN BUTTON */
+
+    .admin-btn {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 0, rgba(0,255,198,0.8), rgba(0,0,0,1));
+      border: 1px solid rgba(0,255,198,0.7);
+      color: var(--text);
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      box-shadow: 0 26px 80px rgba(0,0,0,1);
+      z-index: 80;
+      transition: all var(--tr-fast);
+    }
+
+    .admin-btn span.icon {
+      font-size: 14px;
+    }
+
+    .admin-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 34px 96px rgba(0,0,0,1);
+    }
+
+    /* BACKDROPS */
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+    }
+
+    /* LOGIN MODAL */
+
+    .modal-login {
+      background: var(--bg-panel);
+      padding: 16px 16px 12px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow-strong);
+      max-width: 360px;
+      width: 100%;
+      font-size: 11px;
+    }
+
+    .modal-login h2 {
+      font-size: 16px;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    .modal-login p {
+      font-size: 10px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .modal-login label {
+      display: block;
+      font-size: 9px;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .modal-login input {
+      width: 100%;
+      padding: 7px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #02040a;
+      color: var(--text);
+      font-size: 11px;
+      outline: none;
+      margin-bottom: 6px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: none;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all var(--tr-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, var(--accent), var(--accent-alt));
+      color: #020308;
+      font-weight: 600;
+      box-shadow: 0 14px 32px rgba(0,0,0,1);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid rgba(255,74,106,0.7);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 44px rgba(0,0,0,1);
+    }
+
+    /* ADMIN PANEL 999V */
+
+    .modal-admin {
+      background: radial-gradient(circle at top left, rgba(0,170,255,0.18), transparent),
+                  var(--bg-panel);
+      padding: 16px;
+      border-radius: 26px;
+      border: 1px solid rgba(0,170,255,0.32);
+      box-shadow: var(--shadow-strong);
+      max-width: 1180px;
+      width: 96%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.4fr);
+      gap: 16px;
+      font-size: 10px;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .admin-header h2 {
+      font-size: 15px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--accent-alt);
+    }
+
+    .admin-header span {
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .field-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-bottom: 6px;
+    }
+
+    .field-label {
+      font-size: 8px;
+      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
 
-    .card-date {
+    .field-input,
+    .field-select {
+      padding: 7px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #02040a;
+      color: var(--text);
+      font-size: 10px;
+      outline: none;
+    }
+
+    .editor-wrap {
+      background: #02040a;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 6px 6px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .editor-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .tool-btn {
+      padding: 3px 7px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 8px;
+      background: rgba(3,6,12,0.98);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all var(--tr-fast);
+    }
+
+    .tool-btn.active,
+    .tool-btn:hover {
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      box-shadow: 0 8px 18px rgba(0,0,0,1);
+    }
+
+    .editor-area {
+      margin-top: 2px;
+      padding: 6px;
+      min-height: 56px;
+      max-height: 220px;
+      overflow-y: auto;
+      font-size: 10px;
+      line-height: 1.6;
+      color: var(--text);
+      outline: none;
+      border-radius: 8px;
+    }
+
+    #editorChangelog {
+      min-height: 120px;
+    }
+
+    .toggle-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
       font-size: 9px;
+      color: var(--muted);
+    }
+
+    .toggle-row label {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .toggle-row input {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .admin-actions {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* PREVIEW */
+
+    .preview-box {
+      background: var(--bg-card);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      padding: 10px 10px 8px;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.2fr) auto;
+      column-gap: 10px;
+      row-gap: 4px;
+      font-size: 9px;
+    }
+
+    .preview-label {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      grid-column: 1 / 2;
+    }
+
+    .preview-title {
+      grid-column: 1 / 3;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .preview-short {
+      grid-column: 1 / 3;
+      font-size: 10px;
+      color: var(--text);
+    }
+
+    .preview-date {
+      font-size: 8px;
       color: var(--muted);
       text-align: right;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 3px;
       align-items: flex-end;
-      min-width: 90px;
     }
 
-    .card-date span.ver {
-      font-size: 10px;
-      padding: 3px 8px;
+    .preview-date span {
+      padding: 2px 6px;
       border-radius: 999px;
-      background: #030712;
-      border: 1px solid rgba(46,163,255,0.4);
-      color: var(--accent);
+      border: 1px solid rgba(0,170,255,0.42);
+      color: var(--accent-strong);
+      font-size: 7px;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
     }
 
-    .card-body {
-      display: none;
+    .preview-changelog {
       grid-column: 1 / 4;
-      font-size: 11px;
-      color: var(--muted);
-      padding-top: 6px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      margin-top: 4px;
-      line-height: 1.6;
-    }
-
-    .card.open .card-body {
-      display: block;
-    }
-
-    .card.open::after {
-      content: "▼";
-      position: absolute;
-      right: 16px;
-      top: 10px;
-      font-size: 9px;
-      color: var(--accent-alt);
-    }
-
-    .card::after {
-      content: "▲";
-      position: absolute;
-      right: 16px;
-      top: 10px;
       font-size: 9px;
       color: var(--muted);
-      transition: transform var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
-      opacity: 0.8;
+      padding-top: 4px;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    .card:hover::after {
-      color: var(--accent-alt);
-      transform: translateY(-1px);
-    }
-
-    /* Footer */
-
-    footer {
-      margin-top: 24px;
-      padding: 12px 4px 4px;
-      font-size: 9px;
+    .admin-note {
+      margin-top: 6px;
+      font-size: 8px;
       color: var(--muted);
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      border-top: 1px solid rgba(255,255,255,0.04);
+      line-height: 1.5;
     }
 
-    footer a {
-      font-size: 9px;
-    }
-
-    /* Responsive */
-
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
       header {
         flex-direction: column;
         align-items: flex-start;
       }
-      nav {
-        justify-content: flex-start;
-      }
-      .featured {
+      .modal-admin {
         grid-template-columns: 1fr;
+        width: 94%;
+        max-height: 94vh;
+        overflow-y: auto;
       }
+      .preview-box,
       .card {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1.7fr) auto;
       }
-      .card-date {
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-      }
-      .card-body {
-        grid-column: 1 / 2;
+      .card-header,
+      .card-title,
+      .card-short,
+      .card-tags,
+      .card-changelog,
+      .preview-label,
+      .preview-title,
+      .preview-short,
+      .preview-changelog {
+        grid-column: 1 / 3;
       }
     }
   </style>
@@ -606,300 +857,643 @@
   <header>
     <div class="brand">
       <div class="brand-logo">OX</div>
-      <div class="brand-title">
-        <span>OXeall Games Hub</span>
-        <span>Официальные новости и патч-ноуты</span>
+      <div class="brand-text">
+        <span>OXEALL STUDIOS CLNEWS 999V</span>
+        <span>Официальный центр обновлений и патч-ноутов</span>
       </div>
     </div>
     <nav>
-      <div class="nav-link active">Обновления</div>
-      <div class="nav-link">Игры</div>
-      <div class="nav-link">Дорожная карта</div>
-      <div class="nav-link">О студии</div>
-      <div class="nav-link">GitHub</div>
+      <div class="nav-pill"><span class="dot"></span>Updates Feed</div>
+      <div class="nav-pill">Steam-inspired • Own Design</div>
     </nav>
   </header>
 
-  <section class="top-bar">
-    <div class="top-title">
-      <h1>Новости и обновления игр OXeall</h1>
-      <p>Здесь публикуются официальные анонсы, патч-ноуты и заметки разработчика по всем проектам.</p>
-    </div>
-
-    <div class="controls">
+  <section class="top">
+    <h1>Лента обновлений OXeall Studios</h1>
+    <p>
+      Все ключевые обновления, багфиксы, хотфиксы, крупные релизы и технические объявления по проектам OXeall
+      собраны в одном месте. Структура понятная, без лишнего шума.
+    </p>
+    <div class="filters">
       <div class="select">
         <label for="gameFilter">Игра</label>
         <select id="gameFilter">
-          <option value="all">Все игры</option>
-          <option value="cityport">CityPort: Bridges &amp; Ports</option>
-          <option value="arena">Neon Arena</option>
-          <option value="sandbox">OXeall Sandbox</option>
+          <option value="all">Все проекты</option>
         </select>
       </div>
       <div class="search">
-        <input id="searchInput" type="text" placeholder="Поиск по патч-ноутам..." />
+        <input type="text" id="searchInput" placeholder="Поиск по заголовкам и изменениям..." />
       </div>
-      <div class="tag-label">Для игроков и тестеров</div>
+      <div class="tag">Developer Verified • OXeall</div>
     </div>
   </section>
 
   <section class="featured">
-    <!-- FEATURED UPDATE (редактируй как «шапку» последнего крупного патча) -->
-    <article class="featured-banner" data-game="cityport">
-      <div class="featured-kicker">
-        Крупное обновление
-        <span class="date">29 октября 2025</span>
-      </div>
-      <div class="featured-title">CityPort: Bridges &amp; Ports — Патч 1.3.6f1</div>
+    <div class="featured-box empty" id="featuredBox">
+      <div class="featured-label">Featured обновление не выбрано</div>
       <div class="featured-sub">
-        Новый контент для портов, улучшенная логистика грузов, переработанная система трафика и десятки правок баланса.
-        Полный список изменений доступен ниже.
+        Отметь любое обновление как <b>Featured</b> в панели разработчика — оно закрепится здесь
+        как главный официальный анонс.
       </div>
-      <div class="featured-tags">
-        <div class="pill">CityPort</div>
-        <div class="pill">Patch Notes</div>
-        <div class="pill">Баланс &amp; Фиксы</div>
-      </div>
-      <div class="featured-actions">
-        <button class="btn" data-scroll-target="#updates-list">
-          <span>Читать патч-ноут</span><span class="arrow">↗</span>
-        </button>
-        <button class="btn outline" onclick="window.open('https://youtube.com', '_blank')">
-          Трейлер обновления
-        </button>
-      </div>
-      <div class="featured-meta">
-        Разработчик: OXeall • Версия клиента: 1.3.6f1 • Поддержка: Windows / Linux / Dedicated
-      </div>
-    </article>
-
-    <!-- RIGHT SIDEBAR: быстрые ссылки и мини-лента -->
-    <aside class="side-card">
-      <div class="side-title">Последние релизы</div>
-
-      <!-- КАРТОЧКА #1 -->
-      <div class="side-item" data-scroll-target="#update-cityport-136f1">
-        <div>
-          <div class="side-game">CityPort</div>
-          <div class="side-label">Bridges &amp; Ports — 1.3.6f1</div>
-          <div class="side-sub">Крупное контентное обновление, новые мосты и порты.</div>
-        </div>
-        <div class="side-date">
-          29.10.2025
-        </div>
-      </div>
-
-      <!-- КАРТОЧКА #2 -->
-      <div class="side-item" data-scroll-target="#update-arena-021">
-        <div>
-          <div class="side-game">Neon Arena</div>
-          <div class="side-label">Season 2.1 — Ranked Reset</div>
-          <div class="side-sub">Новый боевой пропуск, переработка рейтинга.</div>
-        </div>
-        <div class="side-date">
-          18.10.2025
-        </div>
-      </div>
-
-      <!-- КАРТОЧКА #3 -->
-      <div class="side-item" data-scroll-target="#update-sandbox-010">
-        <div>
-          <div class="side-game">OXeall Sandbox</div>
-          <div class="side-label">0.1.0 Experimental</div>
-          <div class="side-sub">Первый публичный билд для раннего доступа.</div>
-        </div>
-        <div class="side-date">
-          05.10.2025
-        </div>
-      </div>
-    </aside>
+    </div>
   </section>
 
-  <div class="list-header" id="updates-list">
-    <span><strong>Лента обновлений</strong></span>
-    <span>Клик по карточке — раскрыть полный changelog.</span>
+  <div class="list-header">
+    <div><strong>Все обновления</strong></div>
+    <div>Клик по карточке — открыть подробный changelog. Админ может редактировать в один клик.</div>
   </div>
 
-  <section class="announcements" id="announcementList">
-    <!-- ПРИМЕР НОВОСТИ / ПАТЧ-НОУТА -->
-    <article
-      class="card"
-      id="update-cityport-136f1"
-      data-game="cityport"
-      data-title="Bridges & Ports - 1.3.6f1"
-      data-tags="cityport ports bridges 1.3.6 balance bugfix"
-    >
-      <div class="card-label">Крупное обновление</div>
-      <div class="card-main">
-        <div class="card-title">CityPort: Bridges &amp; Ports — Патч 1.3.6f1</div>
-        <div class="card-sub">
-          Новый набор мостов и портовых терминалов, переработка грузового трафика,
-          оптимизация производительности на крупных картах и исправление критических вылетов.
-        </div>
-        <div class="card-tags">
-          <span class="card-tag">CityPort</span>
-          <span class="card-tag">Patch Notes</span>
-          <span class="card-tag">Content Update</span>
-        </div>
-      </div>
-      <div class="card-date">
-        <span>29 окт 2025</span>
-        <span class="ver">v1.3.6f1</span>
-      </div>
-      <div class="card-body">
-        <!-- ТУТ ПОЛНЫЙ CHANGELOG -->
-        <p><strong>Основное:</strong></p>
-        <ul>
-          <li>Добавлены 6 новых типов мостов и 4 портовых терминала с уникальной визуализацией.</li>
-          <li>Улучшен ИИ грузового транспорта, снижен риск «пробок смерти» у портовых въездов.</li>
-          <li>Добавлена вкладка <em>Port Analytics</em> с отображением пропускной способности.</li>
-        </ul>
-        <p><strong>Баланс:</strong></p>
-        <ul>
-          <li>Снижена стоимость содержания логистических узлов на 8–12%.</li>
-          <li>Понижен уровень шума от грузовых терминалов.</li>
-        </ul>
-        <p><strong>Исправления:</strong></p>
-        <ul>
-          <li>Исправлен вылет при удалении моста с активным поездом.</li>
-          <li>Исправлены некорректные тени на ночных сценах.</li>
-        </ul>
-        <p>Рекомендуем обновить сохранения до 1.3.6f1 и отправлять баг-репорты через GitHub Issues.</p>
-      </div>
-    </article>
+  <div id="emptyState" class="empty-state">
+    Ещё нет опубликованных обновлений. Открой <b>Admin Update Panel</b> снизу справа, создай первое объявление —
+    оно сразу появится здесь.
+  </div>
 
-    <!-- ЕЩЁ ОДИН ПРИМЕР -->
-    <article
-      class="card"
-      id="update-arena-021"
-      data-game="arena"
-      data-title="Neon Arena Season 2.1"
-      data-tags="neon arena season ranked reset"
-    >
-      <div class="card-label">Сезонное обновление</div>
-      <div class="card-main">
-        <div class="card-title">Neon Arena — Season 2.1: Ranked Reset &amp; Balance</div>
-        <div class="card-sub">
-          Полный мягкий сброс рейтинга, новая карта «MetroCore», реворк трёх оружий и защита от читеров на уровне серверов.
-        </div>
-        <div class="card-tags">
-          <span class="card-tag">Neon Arena</span>
-          <span class="card-tag">Season 2.1</span>
-          <span class="card-tag">Anti-cheat</span>
-        </div>
-      </div>
-      <div class="card-date">
-        <span>18 окт 2025</span>
-        <span class="ver">v2.1.0</span>
-      </div>
-      <div class="card-body">
-        <p><strong>Новая карта:</strong> MetroCore — вертикальный кибер-метрополис с открытыми лейнами.</p>
-        <p><strong>Рейтинг:</strong> мягкий сброс, быстрый калибровочный плейсмент в 5 матчей.</p>
-        <p><strong>Anti-cheat:</strong> серверные проверки движения и стрельбы, интеграция с внутренней системой репортов.</p>
-      </div>
-    </article>
+  <section id="announcementList" class="announcements"></section>
 
-    <!-- ПРИМЕР ДЛЯ РАННЕГО ДОСТУПА -->
-    <article
-      class="card"
-      id="update-sandbox-010"
-      data-game="sandbox"
-      data-title="OXeall Sandbox 0.1.0"
-      data-tags="sandbox early access experimental"
-    >
-      <div class="card-label">Ранний доступ</div>
-      <div class="card-main">
-        <div class="card-title">OXeall Sandbox — Версия 0.1.0 Experimental</div>
-        <div class="card-sub">
-          Первый публичный билд экспериментального проекта: базовые механики мира, сохранения и dev-консоль.
-        </div>
-        <div class="card-tags">
-          <span class="card-tag">Sandbox</span>
-          <span class="card-tag">Experimental</span>
-        </div>
-      </div>
-      <div class="card-date">
-        <span>05 окт 2025</span>
-        <span class="ver">v0.1.0</span>
-      </div>
-      <div class="card-body">
-        <p>Включено:</p>
-        <ul>
-          <li>Генерация мира (биомы: лес, промышленная зона, побережье).</li>
-          <li>Система сохранений (локально в браузере / клиенте).</li>
-          <li>Dev-консоль для тестеров (<code>F8</code>): телепорт, спавн объектов, лог сети.</li>
-        </ul>
-        <p>Задача версии — собрать фидбек, поэтому возможны вайпы. Все найденные баги — в Issues.</p>
-      </div>
-    </article>
-
-    <!-- ШАБЛОН ДЛЯ НОВЫХ ОБНОВЛЕНИЙ:
-         1. Скопируй блок <article class="card"> ... </article>.
-         2. Поставь свой id, data-game, заголовки, дату, описание.
-         3. Все работает без бэкенда, чистый HTML+JS. -->
-  </section>
-
-  <footer>
-    <div>© <span id="year"></span> OXeall. Все права защищены.</div>
-    <div>
-      Репозиторий обновлений: <a href="https://github.com/" target="_blank">GitHub</a> ·
-      Связь: <a href="mailto:contact@oxeall.dev">contact@oxeall.dev</a>
-    </div>
+  <footer style="margin-top:22px;font-size:9px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;border-top:1px solid rgba(255,255,255,0.06);padding-top:8px;">
+    <div>© <span id="year"></span> OXeall Studios. CLNEWS 999V.</div>
+    <div>Управление контентом — локальная Admin Update Panel. Публикуй только то, что считаешь официальным.</div>
   </footer>
 </div>
 
+<!-- Admin floating button -->
+<button class="admin-btn" id="adminBtn">
+  <span class="icon">⚙️</span>
+  <span>Admin Update Panel</span>
+</button>
+
+<!-- Login modal -->
+<div class="backdrop" id="loginBackdrop">
+  <div class="modal-login">
+    <h2>Вход в панель разработчика</h2>
+    <p>Пароль только для OXeall Studios. Используется для локального управления лентой.</p>
+    <label for="adminPassword">Пароль</label>
+    <input type="password" id="adminPassword" placeholder="Введите пароль" />
+    <div id="loginError" style="display:none;color:var(--danger);font-size:8px;margin-bottom:4px;">Неверный пароль.</div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="loginCancel">Отмена</button>
+      <button class="btn btn-primary" id="loginSubmit">Войти</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin panel -->
+<div class="backdrop" id="adminBackdrop">
+  <div class="modal-admin">
+    <!-- LEFT: FORM + EDITORS -->
+    <div>
+      <div class="admin-header">
+        <h2>Admin Update Panel</h2>
+        <span>Создание и редактирование обновлений в стиле 999V.</span>
+      </div>
+
+      <div class="field-block">
+        <div class="field-label">Игра / Проект</div>
+        <input id="fieldGame" class="field-input" type="text" placeholder="Например: CityPort, Neon Arena..." />
+      </div>
+
+      <div class="field-row">
+        <div class="field-block">
+          <div class="field-label">Тип обновления</div>
+          <select id="fieldType" class="field-select">
+            <option value="Major">Major Update</option>
+            <option value="Minor">Minor Update</option>
+            <option value="Patch">Patch</option>
+            <option value="Hotfix">Hotfix</option>
+            <option value="Announcement">Announcement</option>
+            <option value="DevLog">DevLog</option>
+          </select>
+        </div>
+        <div class="field-block">
+          <div class="field-label">Версия</div>
+          <input id="fieldVersion" class="field-input" type="text" placeholder="1.2.1.0 / 1.3.6f1..." />
+        </div>
+        <div class="field-block">
+          <div class="field-label">Дата</div>
+          <input id="fieldDate" class="field-input" type="date" />
+        </div>
+      </div>
+
+      <div class="field-block">
+        <div class="field-label">Заголовок обновления</div>
+        <input id="fieldTitle" class="field-input" type="text" placeholder="Крупный официальный заголовок, как в Steam News" />
+      </div>
+
+      <!-- Overview editor -->
+      <div class="field-block">
+        <div class="field-label">Краткое описание (overview)</div>
+        <div class="editor-wrap" data-editor="overview">
+          <div class="editor-toolbar">
+            <button type="button" class="tool-btn" data-cmd="bold">B</button>
+            <button type="button" class="tool-btn" data-cmd="italic">I</button>
+            <button type="button" class="tool-btn" data-cmd="formatBlock" data-value="h3">H3</button>
+            <button type="button" class="tool-btn" data-cmd="insertUnorderedList">• List</button>
+          </div>
+          <div id="editorOverview" class="editor-area" contenteditable="true">
+Кратко опиши ключевые изменения, чтобы игрок за 1–2 строки понял суть.</div>
+        </div>
+      </div>
+
+      <!-- Changelog editor -->
+      <div class="field-block">
+        <div class="field-label">Полный changelog</div>
+        <div class="editor-wrap" data-editor="changelog">
+          <div class="editor-toolbar">
+            <button type="button" class="tool-btn" data-cmd="bold">B</button>
+            <button type="button" class="tool-btn" data-cmd="italic">I</button>
+            <button type="button" class="tool-btn" data-cmd="formatBlock" data-value="h3">H3</button>
+            <button type="button" class="tool-btn" data-cmd="insertUnorderedList">• List</button>
+            <button type="button" class="tool-btn" data-cmd="insertOrderedList">1. List</button>
+          </div>
+          <div id="editorChangelog" class="editor-area" contenteditable="true">
+- Добавь пункты изменений
+- Используй списки, заголовки и форматирование
+- Стиль как у официальных патч-ноутов</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-block">
+          <div class="field-label">Фон (URL, опционально)</div>
+          <input id="fieldBg" class="field-input" type="text" placeholder="Картинка баннера / карточки" />
+        </div>
+        <div class="field-block">
+          <div class="field-label">Теги (через запятую)</div>
+          <input id="fieldTags" class="field-input" type="text" placeholder="CityPort, Patch, Balance..." />
+        </div>
+        <div class="field-block">
+          <div class="field-label">ID (для редактирования)</div>
+          <input id="fieldId" class="field-input" type="text" placeholder="Генерируется автоматически" disabled />
+        </div>
+      </div>
+
+      <div class="toggle-row">
+        <label><input type="checkbox" id="fieldFeatured" /> Сделать Featured (главный баннер)</label>
+        <label><input type="checkbox" id="fieldPin" /> Закрепить вверху ленты</label>
+      </div>
+
+      <div class="admin-actions">
+        <button class="btn btn-primary" id="btnSaveUpdate">Сохранить / Обновить</button>
+        <button class="btn btn-outline" id="btnNew">Новый пост</button>
+        <button class="btn btn-danger" id="btnClearLocal">Сбросить локальные посты</button>
+        <button class="btn btn-outline" id="btnClosePanel">Закрыть панель</button>
+      </div>
+
+      <div class="admin-note">
+        Все изменения сохраняются в <b>localStorage</b> этого браузера. Редактируй посты в панели или по кнопке
+        «Edit» на карточке. Если захочешь сделать глобально для всех — перенеси сгенерированные данные в статический код.
+      </div>
+    </div>
+
+    <!-- RIGHT: PREVIEW -->
+    <div>
+      <div class="admin-header">
+        <h2>Live Preview</h2>
+        <span>Карточка как в реальной ленте CLNEWS 999V.</span>
+      </div>
+      <div class="preview-box">
+        <div class="preview-label" id="previewType">MAJOR UPDATE</div>
+        <div class="preview-title" id="previewTitle">Заголовок обновления</div>
+        <div class="preview-short" id="previewShort">
+          Краткое официальное описание обновления будет отображаться здесь более крупным текстом.
+        </div>
+        <div class="preview-date">
+          <div id="previewGame">OXeall Project</div>
+          <span id="previewVersion">vX.X.X</span>
+        </div>
+        <div class="preview-changelog" id="previewChangelog">
+          Полный changelog в формате списков и заголовков появится здесь.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  // Текущий год
-  document.getElementById('year').textContent = new Date().getFullYear();
+  const ADMIN_PASSWORD = "OXS11993384756281";
+  const STORAGE_KEY = "oxeall_clnews_999v_updates";
 
-  // Открытие / закрытие карточек
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('click', e => {
-      // Не ловим клики по ссылкам
-      if (e.target.tagName === 'A' || e.target.closest('a')) return;
-      card.classList.toggle('open');
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  let isAdmin = false;
+  let updates = [];
+  let editingId = null; // если редактируем существующий пост
+
+  /* ---------- Utils ---------- */
+
+  function formatDate(str) {
+    if (!str) return "";
+    const d = new Date(str);
+    if (isNaN(d)) return str;
+    const m = ["янв","фев","мар","апр","май","июн","июл","авг","сен","окт","ноя","дек"];
+    return String(d.getDate()).padStart(2,"0") + " " + m[d.getMonth()] + " " + d.getFullYear();
+  }
+
+  function typeLabel(t) {
+    switch (t) {
+      case "Major": return "MAJOR UPDATE";
+      case "Minor": return "MINOR UPDATE";
+      case "Patch": return "PATCH";
+      case "Hotfix": return "HOTFIX";
+      case "Announcement": return "ANNOUNCEMENT";
+      case "DevLog": return "DEVLOG";
+      default: return "UPDATE";
+    }
+  }
+
+  function genId() {
+    return "upd-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,8);
+  }
+
+  function saveLocal() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(updates)); } catch(e){}
+  }
+
+  function loadLocal() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (Array.isArray(data)) updates = data;
+    } catch(e){}
+  }
+
+  /* ---------- Render ---------- */
+
+  function renderFeatured() {
+    const box = document.getElementById("featuredBox");
+    const feat = updates.find(u => u.featured);
+    if (!feat) {
+      box.classList.add("empty");
+      box.style.backgroundImage = "none";
+      box.innerHTML = `
+        <div class="featured-label">Featured обновление не выбрано</div>
+        <div class="featured-sub">
+          Отметь любое обновление как <b>Featured</b> в панели — оно закрепится здесь как главный анонс.
+        </div>`;
+      return;
+    }
+    box.classList.remove("empty");
+    if (feat.background) {
+      box.style.backgroundImage =
+        `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.98)), url('${feat.background}')`;
+      box.style.backgroundSize = "cover";
+      box.style.backgroundPosition = "center";
+    } else {
+      box.style.backgroundImage = "none";
+    }
+    box.innerHTML = `
+      <div class="featured-label">${typeLabel(feat.type)} • ${feat.game}</div>
+      <div class="featured-title">${feat.title}</div>
+      <div class="featured-sub">${feat.overview || ""}</div>
+      <div class="featured-meta">
+        ${formatDate(feat.date)} · Версия: ${feat.version || "—"}
+        ${feat.tags && feat.tags.length ? " · " + feat.tags.join(", ") : ""}
+      </div>`;
+  }
+
+  function renderUpdates() {
+    const list = document.getElementById("announcementList");
+    const empty = document.getElementById("emptyState");
+    list.innerHTML = "";
+
+    if (!updates.length) {
+      empty.style.display = "block";
+      renderFeatured();
+      return;
+    }
+    empty.style.display = "none";
+
+    // sort: pinned first, then by date desc
+    updates.sort((a,b) => {
+      if (a.pin && !b.pin) return -1;
+      if (!a.pin && b.pin) return 1;
+      return (new Date(b.date||0)) - (new Date(a.date||0));
     });
-  });
 
-  // Фильтр по игре
-  const gameFilter = document.getElementById('gameFilter');
-  const searchInput = document.getElementById('searchInput');
-  const cards = Array.from(document.querySelectorAll('.card'));
-
-  function applyFilters() {
-    const game = gameFilter.value;
-    const q = (searchInput.value || '').toLowerCase().trim();
-
-    cards.forEach(card => {
-      const cardGame = card.dataset.game || 'all';
-      const text = (
-        (card.dataset.title || '') + ' ' +
-        (card.dataset.tags || '') + ' ' +
-        card.innerText
+    updates.forEach(u => {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.dataset.id = u.id;
+      card.dataset.game = u.game || "";
+      card.dataset.search = (
+        (u.title||"") + " " +
+        (u.overview||"") + " " +
+        (u.changelog||"") + " " +
+        (u.tags||[]).join(" ")
       ).toLowerCase();
 
-      const matchGame = (game === 'all') || (cardGame === game);
-      const matchSearch = !q || text.includes(q);
+      if (u.background) {
+        card.style.backgroundImage =
+          `linear-gradient(to bottom, rgba(0,0,0,0.70), rgba(0,0,0,0.98)), url('${u.background}')`;
+        card.style.backgroundSize = "cover";
+        card.style.backgroundPosition = "center";
+      }
 
-      card.style.display = (matchGame && matchSearch) ? '' : 'none';
+      const header = document.createElement("div");
+      header.className = "card-header";
+      header.innerHTML = `
+        <div class="badge-type">${typeLabel(u.type)}</div>
+        <div class="badge-game">${u.game || "OXeall Project"}</div>
+        <div class="badge-version">${u.version ? "v"+u.version : "Без версии"}</div>
+        <div class="badge-date">${formatDate(u.date)}</div>
+      `;
+
+      const title = document.createElement("div");
+      title.className = "card-title";
+      title.textContent = u.title || "Без названия";
+
+      const short = document.createElement("div");
+      short.className = "card-short";
+      short.innerHTML = u.overview || "";
+
+      const tagsDiv = document.createElement("div");
+      tagsDiv.className = "card-tags";
+      (u.tags || []).forEach(t => {
+        const span = document.createElement("div");
+        span.className = "card-tag";
+        span.textContent = t;
+        tagsDiv.appendChild(span);
+      });
+
+      const arrow = document.createElement("div");
+      arrow.className = "card-arrow";
+      arrow.textContent = "▼";
+
+      const changelog = document.createElement("div");
+      changelog.className = "card-changelog";
+      changelog.innerHTML = u.changelog || "";
+
+      const adminActions = document.createElement("div");
+      adminActions.className = "card-admin-actions";
+      adminActions.innerHTML = `
+        <button class="card-edit-btn">Edit</button>
+        <button class="card-del-btn">Del</button>
+      `;
+      card.appendChild(adminActions);
+
+      if (u.overview) card.appendChild(header); else card.appendChild(header);
+      card.appendChild(title);
+      if (u.overview) card.appendChild(short);
+      if (u.tags && u.tags.length) card.appendChild(tagsDiv);
+      card.appendChild(arrow);
+      if (u.changelog) card.appendChild(changelog);
+
+      card.addEventListener("click", e => {
+        if (e.target.closest(".card-edit-btn") || e.target.closest(".card-del-btn")) return;
+        if (e.target.tagName === "A" || e.target.closest("a")) return;
+        card.classList.toggle("open");
+      });
+
+      if (isAdmin) {
+        adminActions.style.display = "flex";
+        adminActions.querySelector(".card-edit-btn").addEventListener("click", (e) => {
+          e.stopPropagation();
+          loadUpdateToForm(u.id);
+        });
+        adminActions.querySelector(".card-del-btn").addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (!confirm("Удалить это обновление из локального списка?")) return;
+          updates = updates.filter(x => x.id !== u.id);
+          saveLocal();
+          renderUpdates();
+        });
+      }
+
+      list.appendChild(card);
+    });
+
+    renderFeatured();
+    attachFilters();
+  }
+
+  function attachFilters() {
+    const select = document.getElementById("gameFilter");
+    const search = document.getElementById("searchInput");
+    const cards = Array.from(document.querySelectorAll(".card"));
+
+    const games = Array.from(new Set(updates.map(u => u.game).filter(Boolean)));
+    select.innerHTML = '<option value="all">Все проекты</option>' +
+      games.map(g => `<option value="${g}">${g}</option>`).join("");
+
+    function apply() {
+      const g = select.value;
+      const q = (search.value || "").toLowerCase().trim();
+      cards.forEach(c => {
+        const mg = (g === "all") || (c.dataset.game === g);
+        const ms = !q || c.dataset.search.includes(q);
+        c.style.display = (mg && ms) ? "" : "none";
+      });
+    }
+
+    select.onchange = apply;
+    search.oninput = apply;
+    apply();
+  }
+
+  /* ---------- Admin: login ---------- */
+
+  const adminBtn = document.getElementById("adminBtn");
+  const loginBackdrop = document.getElementById("loginBackdrop");
+  const adminBackdrop = document.getElementById("adminBackdrop");
+  const loginInput = document.getElementById("adminPassword");
+  const loginError = document.getElementById("loginError");
+
+  adminBtn.addEventListener("click", () => {
+    if (isAdmin) {
+      adminBackdrop.style.display = "flex";
+      return;
+    }
+    loginError.style.display = "none";
+    loginInput.value = "";
+    loginBackdrop.style.display = "flex";
+    loginInput.focus();
+  });
+
+  document.getElementById("loginCancel").addEventListener("click", () => {
+    loginBackdrop.style.display = "none";
+  });
+
+  document.getElementById("loginSubmit").addEventListener("click", () => {
+    if (loginInput.value === ADMIN_PASSWORD) {
+      isAdmin = true;
+      loginBackdrop.style.display = "none";
+      adminBackdrop.style.display = "flex";
+      renderUpdates(); // чтобы показать edit-кнопки
+    } else {
+      loginError.style.display = "block";
+    }
+  });
+
+  loginInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") document.getElementById("loginSubmit").click();
+  });
+
+  loginBackdrop.addEventListener("click", e => {
+    if (e.target === loginBackdrop) loginBackdrop.style.display = "none";
+  });
+
+  adminBackdrop.addEventListener("click", e => {
+    if (e.target === adminBackdrop) adminBackdrop.style.display = "none";
+  });
+
+  document.getElementById("btnClosePanel").addEventListener("click", () => {
+    adminBackdrop.style.display = "none";
+  });
+
+  /* ---------- Admin: editors ---------- */
+
+  let activeEditor = null;
+
+  function bindEditorToolbar(wrapper) {
+    const area = wrapper.querySelector(".editor-area");
+    const buttons = wrapper.querySelectorAll(".tool-btn");
+    area.addEventListener("focus", () => { activeEditor = area; });
+    area.addEventListener("click", () => { activeEditor = area; });
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (!activeEditor) activeEditor = area;
+        activeEditor.focus();
+        const cmd = btn.dataset.cmd;
+        const val = btn.dataset.value || null;
+        document.execCommand(cmd, false, val);
+      });
     });
   }
 
-  gameFilter.addEventListener('change', applyFilters);
-  searchInput.addEventListener('input', applyFilters);
+  document.querySelectorAll(".editor-wrap").forEach(bindEditorToolbar);
 
-  // Скролл к элементу (для кнопок и сайдбара)
-  document.querySelectorAll('[data-scroll-target]').forEach(el => {
-    el.addEventListener('click', () => {
-      const target = document.querySelector(el.dataset.scrollTarget);
-      if (!target) return;
-      const top = target.getBoundingClientRect().top + window.scrollY - 96;
-      window.scrollTo({ top, behavior: 'smooth' });
-      if (target.classList.contains('card')) {
-        target.classList.add('open');
-      }
-    });
+  /* ---------- Admin: form & preview ---------- */
+
+  const fieldGame = document.getElementById("fieldGame");
+  const fieldType = document.getElementById("fieldType");
+  const fieldVersion = document.getElementById("fieldVersion");
+  const fieldDate = document.getElementById("fieldDate");
+  const fieldTitle = document.getElementById("fieldTitle");
+  const fieldBg = document.getElementById("fieldBg");
+  const fieldTags = document.getElementById("fieldTags");
+  const fieldId = document.getElementById("fieldId");
+  const fieldFeatured = document.getElementById("fieldFeatured");
+  const fieldPin = document.getElementById("fieldPin");
+  const editorOverview = document.getElementById("editorOverview");
+  const editorChangelog = document.getElementById("editorChangelog");
+
+  const previewType = document.getElementById("previewType");
+  const previewTitle = document.getElementById("previewTitle");
+  const previewShort = document.getElementById("previewShort");
+  const previewGame = document.getElementById("previewGame");
+  const previewVersion = document.getElementById("previewVersion");
+  const previewChangelog = document.getElementById("previewChangelog");
+
+  function updatePreview() {
+    previewType.textContent = typeLabel(fieldType.value);
+    previewTitle.textContent = fieldTitle.value || "Заголовок обновления";
+    previewShort.innerHTML = editorOverview.innerHTML || "Краткое официальное описание обновления.";
+    previewGame.textContent = fieldGame.value || "OXeall Project";
+    previewVersion.textContent = fieldVersion.value ? "v"+fieldVersion.value : "vX.X.X";
+    previewChangelog.innerHTML = editorChangelog.innerHTML || "Changelog будет отображён здесь.";
+  }
+
+  [
+    fieldGame, fieldType, fieldVersion, fieldDate, fieldTitle,
+    fieldBg, fieldTags, fieldFeatured, fieldPin
+  ].forEach(el => el.addEventListener("input", updatePreview));
+
+  editorOverview.addEventListener("input", updatePreview);
+  editorChangelog.addEventListener("input", updatePreview);
+
+  updatePreview();
+
+  function resetForm() {
+    editingId = null;
+    fieldGame.value = "";
+    fieldType.value = "Major";
+    fieldVersion.value = "";
+    fieldDate.value = "";
+    fieldTitle.value = "";
+    fieldBg.value = "";
+    fieldTags.value = "";
+    fieldFeatured.checked = false;
+    fieldPin.checked = false;
+    fieldId.value = "";
+    editorOverview.innerHTML = "Кратко опиши ключевые изменения, чтобы игрок за 1–2 строки понял суть.";
+    editorChangelog.innerHTML = "- Добавь пункты изменений<br>- Используй списки, заголовки и форматирование<br>- Стиль как у официальных патч-ноутов";
+    updatePreview();
+  }
+
+  document.getElementById("btnNew").addEventListener("click", () => {
+    resetForm();
   });
+
+  document.getElementById("btnClearLocal").addEventListener("click", () => {
+    if (!confirm("Удалить все локально сохранённые обновления?")) return;
+    updates = [];
+    saveLocal();
+    renderUpdates();
+    resetForm();
+  });
+
+  document.getElementById("btnSaveUpdate").addEventListener("click", () => {
+    const id = editingId || genId();
+    const nowISO = new Date().toISOString().slice(0,10);
+    const upd = {
+      id,
+      game: fieldGame.value.trim() || "OXeall Project",
+      type: fieldType.value,
+      version: fieldVersion.value.trim(),
+      date: fieldDate.value || nowISO,
+      title: fieldTitle.value.trim() || "Без названия",
+      overview: editorOverview.innerHTML.trim(),
+      changelog: editorChangelog.innerHTML.trim(),
+      background: fieldBg.value.trim(),
+      tags: (fieldTags.value || "").split(",").map(t => t.trim()).filter(Boolean),
+      featured: fieldFeatured.checked,
+      pin: fieldPin.checked
+    };
+
+    if (upd.featured) {
+      updates.forEach(u => u.featured = false);
+    }
+
+    const idx = updates.findIndex(u => u.id === id);
+    if (idx >= 0) {
+      updates[idx] = upd;
+    } else {
+      updates.unshift(upd);
+    }
+
+    editingId = id;
+    fieldId.value = id;
+
+    saveLocal();
+    renderUpdates();
+    alert("Обновление сохранено локально и отображено в ленте.");
+  });
+
+  function loadUpdateToForm(id) {
+    const upd = updates.find(u => u.id === id);
+    if (!upd) return;
+    editingId = upd.id;
+    fieldId.value = upd.id;
+    fieldGame.value = upd.game || "";
+    fieldType.value = upd.type || "Major";
+    fieldVersion.value = upd.version || "";
+    fieldDate.value = upd.date || "";
+    fieldTitle.value = upd.title || "";
+    editorOverview.innerHTML = upd.overview || "";
+    editorChangelog.innerHTML = upd.changelog || "";
+    fieldBg.value = upd.background || "";
+    fieldTags.value = (upd.tags || []).join(", ");
+    fieldFeatured.checked = !!upd.featured;
+    fieldPin.checked = !!upd.pin;
+    updatePreview();
+    adminBackdrop.style.display = "flex";
+  }
+
+  /* ---------- Init ---------- */
+
+  loadLocal();
+  renderUpdates();
 </script>
 </body>
 </html>
