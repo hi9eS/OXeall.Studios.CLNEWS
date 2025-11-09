@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>OXeall | Game Updates & Patch Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Официальные новости, обновления и патч-ноуты игр OXeall." />
+  <style>
+    :root {
+      --bg: #050814;
+      --bg-soft: #0d111c;
+      --bg-soft-2: #151b28;
+      --accent: #2ea3ff;
+      --accent-soft: rgba(46,163,255,0.15);
+      --accent-alt: #00d8ff;
+      --text: #f5f5f5;
+      --muted: #9aa4b2;
+      --border: #222a38;
+      --radius-xl: 22px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 40px rgba(0,0,0,0.55);
+      --transition-fast: 0.18s ease-out;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", -system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #10182a 0, var(--bg) 40%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Layout */
+
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 18px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(
+        135deg,
+        rgba(46,163,255,0.12),
+        rgba(0,0,0,0.9)
+      );
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 12px;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 0, #ffffff, #2ea3ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #02030a;
+      font-size: 18px;
+    }
+
+    .brand-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title span:first-child {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 13px;
+      color: var(--accent-alt);
+      text-transform: uppercase;
+    }
+
+    .brand-title span:last-child {
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      padding: 6px 10px;
+      border-radius: 999px;
+      transition: background var(--transition-fast), color var(--transition-fast),
+                  transform var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      background: var(--accent-soft);
+      color: var(--accent-alt);
+      transform: translateY(-1px);
+    }
+
+    /* Top controls */
+
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 24px 2px 18px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .top-title h1 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .top-title p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .select,
+    .search {
+      background: var(--bg-soft);
+      border-radius: 999px;
+      padding: 7px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.55);
+    }
+
+    .select label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--muted);
+    }
+
+    .select select {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .search input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 12px;
+      width: 150px;
+    }
+
+    .tag-label {
+      font-size: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      text-transform: uppercase;
+      border: 1px solid rgba(46,163,255,0.28);
+      letter-spacing: 0.12em;
+    }
+
+    /* Featured */
+
+    .featured {
+      display: grid;
+      grid-template-columns: minmax(0, 2.3fr) minmax(260px, 1.4fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .featured-banner {
+      position: relative;
+      padding: 18px 18px 16px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(to bottom, rgba(4,8,18,0), rgba(0,0,0,0.9)),
+        url("https://images.pexels.com/photos/4610776/pexels-photo-4610776.jpeg?auto=compress&cs=tinysrgb&w=1200")
+        center/cover no-repeat;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+
+    .featured-kicker {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent-alt);
+      margin-bottom: 4px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .featured-kicker span.date {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .featured-title {
+      font-size: 19px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      text-shadow: 0 4px 16px #000;
+    }
+
+    .featured-sub {
+      font-size: 12px;
+      color: var(--muted);
+      max-width: 430px;
+      margin-bottom: 10px;
+    }
+
+    .featured-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      font-size: 9px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(2,5,12,0.8);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .featured-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #02030a;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all var(--transition-fast);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .btn span.arrow {
+      font-size: 13px;
+    }
+
+    .btn.outline {
+      background: transparent;
+      color: var(--accent-alt);
+      border: 1px solid var(--accent-alt);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.9);
+    }
+
+    .featured-meta {
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .side-card {
+      padding: 14px 14px 13px;
+      border-radius: var(--radius-xl);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .side-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-alt);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .side-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 7px 8px;
+      border-radius: var(--radius-md);
+      background: var(--bg-soft-2);
+      border: 1px solid rgba(255,255,255,0.03);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .side-item:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 14px 32px rgba(0,0,0,0.85);
+    }
+
+    .side-item div {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .side-game {
+      font-size: 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .side-label {
+      font-size: 11px;
+      color: var(--text);
+    }
+
+    .side-sub {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .side-date {
+      font-size: 9px;
+      color: var(--muted);
+      opacity: 0.85;
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+
+    /* Announcements list */
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 2px 6px;
+      gap: 10px;
+    }
+
+    .list-header span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .list-header span strong {
+      color: var(--accent-alt);
+    }
+
+    .announcements {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card {
+      background: var(--bg-soft);
+      border-radius: var(--radius-xl);
+      padding: 12px 14px 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.8);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: flex-start;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.95);
+    }
+
+    .card-label {
+      font-size: 9px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .card-main {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .card-sub {
+      font-size: 11px;
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .card-tag {
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: var(--bg-soft-2);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.06);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .card-date {
+      font-size: 9px;
+      color: var(--muted);
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-end;
+      min-width: 90px;
+    }
+
+    .card-date span.ver {
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #030712;
+      border: 1px solid rgba(46,163,255,0.4);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .card-body {
+      display: none;
+      grid-column: 1 / 4;
+      font-size: 11px;
+      color: var(--muted);
+      padding-top: 6px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin-top: 4px;
+      line-height: 1.6;
+    }
+
+    .card.open .card-body {
+      display: block;
+    }
+
+    .card.open::after {
+      content: "▼";
+      position: absolute;
+      right: 16px;
+      top: 10px;
+      font-size: 9px;
+      color: var(--accent-alt);
+    }
+
+    .card::after {
+      content: "▲";
+      position: absolute;
+      right: 16px;
+      top: 10px;
+      font-size: 9px;
+      color: var(--muted);
+      transition: transform var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
+      opacity: 0.8;
+    }
+
+    .card:hover::after {
+      color: var(--accent-alt);
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+
+    footer {
+      margin-top: 24px;
+      padding: 12px 4px 4px;
+      font-size: 9px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    footer a {
+      font-size: 9px;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 860px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        justify-content: flex-start;
+      }
+      .featured {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        grid-template-columns: 1fr;
+      }
+      .card-date {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .card-body {
+        grid-column: 1 / 2;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="brand">
+      <div class="brand-logo">OX</div>
+      <div class="brand-title">
+        <span>OXeall Games Hub</span>
+        <span>Официальные новости и патч-ноуты</span>
+      </div>
+    </div>
+    <nav>
+      <div class="nav-link active">Обновления</div>
+      <div class="nav-link">Игры</div>
+      <div class="nav-link">Дорожная карта</div>
+      <div class="nav-link">О студии</div>
+      <div class="nav-link">GitHub</div>
+    </nav>
+  </header>
+
+  <section class="top-bar">
+    <div class="top-title">
+      <h1>Новости и обновления игр OXeall</h1>
+      <p>Здесь публикуются официальные анонсы, патч-ноуты и заметки разработчика по всем проектам.</p>
+    </div>
+
+    <div class="controls">
+      <div class="select">
+        <label for="gameFilter">Игра</label>
+        <select id="gameFilter">
+          <option value="all">Все игры</option>
+          <option value="cityport">CityPort: Bridges &amp; Ports</option>
+          <option value="arena">Neon Arena</option>
+          <option value="sandbox">OXeall Sandbox</option>
+        </select>
+      </div>
+      <div class="search">
+        <input id="searchInput" type="text" placeholder="Поиск по патч-ноутам..." />
+      </div>
+      <div class="tag-label">Для игроков и тестеров</div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <!-- FEATURED UPDATE (редактируй как «шапку» последнего крупного патча) -->
+    <article class="featured-banner" data-game="cityport">
+      <div class="featured-kicker">
+        Крупное обновление
+        <span class="date">29 октября 2025</span>
+      </div>
+      <div class="featured-title">CityPort: Bridges &amp; Ports — Патч 1.3.6f1</div>
+      <div class="featured-sub">
+        Новый контент для портов, улучшенная логистика грузов, переработанная система трафика и десятки правок баланса.
+        Полный список изменений доступен ниже.
+      </div>
+      <div class="featured-tags">
+        <div class="pill">CityPort</div>
+        <div class="pill">Patch Notes</div>
+        <div class="pill">Баланс &amp; Фиксы</div>
+      </div>
+      <div class="featured-actions">
+        <button class="btn" data-scroll-target="#updates-list">
+          <span>Читать патч-ноут</span><span class="arrow">↗</span>
+        </button>
+        <button class="btn outline" onclick="window.open('https://youtube.com', '_blank')">
+          Трейлер обновления
+        </button>
+      </div>
+      <div class="featured-meta">
+        Разработчик: OXeall • Версия клиента: 1.3.6f1 • Поддержка: Windows / Linux / Dedicated
+      </div>
+    </article>
+
+    <!-- RIGHT SIDEBAR: быстрые ссылки и мини-лента -->
+    <aside class="side-card">
+      <div class="side-title">Последние релизы</div>
+
+      <!-- КАРТОЧКА #1 -->
+      <div class="side-item" data-scroll-target="#update-cityport-136f1">
+        <div>
+          <div class="side-game">CityPort</div>
+          <div class="side-label">Bridges &amp; Ports — 1.3.6f1</div>
+          <div class="side-sub">Крупное контентное обновление, новые мосты и порты.</div>
+        </div>
+        <div class="side-date">
+          29.10.2025
+        </div>
+      </div>
+
+      <!-- КАРТОЧКА #2 -->
+      <div class="side-item" data-scroll-target="#update-arena-021">
+        <div>
+          <div class="side-game">Neon Arena</div>
+          <div class="side-label">Season 2.1 — Ranked Reset</div>
+          <div class="side-sub">Новый боевой пропуск, переработка рейтинга.</div>
+        </div>
+        <div class="side-date">
+          18.10.2025
+        </div>
+      </div>
+
+      <!-- КАРТОЧКА #3 -->
+      <div class="side-item" data-scroll-target="#update-sandbox-010">
+        <div>
+          <div class="side-game">OXeall Sandbox</div>
+          <div class="side-label">0.1.0 Experimental</div>
+          <div class="side-sub">Первый публичный билд для раннего доступа.</div>
+        </div>
+        <div class="side-date">
+          05.10.2025
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <div class="list-header" id="updates-list">
+    <span><strong>Лента обновлений</strong></span>
+    <span>Клик по карточке — раскрыть полный changelog.</span>
+  </div>
+
+  <section class="announcements" id="announcementList">
+    <!-- ПРИМЕР НОВОСТИ / ПАТЧ-НОУТА -->
+    <article
+      class="card"
+      id="update-cityport-136f1"
+      data-game="cityport"
+      data-title="Bridges & Ports - 1.3.6f1"
+      data-tags="cityport ports bridges 1.3.6 balance bugfix"
+    >
+      <div class="card-label">Крупное обновление</div>
+      <div class="card-main">
+        <div class="card-title">CityPort: Bridges &amp; Ports — Патч 1.3.6f1</div>
+        <div class="card-sub">
+          Новый набор мостов и портовых терминалов, переработка грузового трафика,
+          оптимизация производительности на крупных картах и исправление критических вылетов.
+        </div>
+        <div class="card-tags">
+          <span class="card-tag">CityPort</span>
+          <span class="card-tag">Patch Notes</span>
+          <span class="card-tag">Content Update</span>
+        </div>
+      </div>
+      <div class="card-date">
+        <span>29 окт 2025</span>
+        <span class="ver">v1.3.6f1</span>
+      </div>
+      <div class="card-body">
+        <!-- ТУТ ПОЛНЫЙ CHANGELOG -->
+        <p><strong>Основное:</strong></p>
+        <ul>
+          <li>Добавлены 6 новых типов мостов и 4 портовых терминала с уникальной визуализацией.</li>
+          <li>Улучшен ИИ грузового транспорта, снижен риск «пробок смерти» у портовых въездов.</li>
+          <li>Добавлена вкладка <em>Port Analytics</em> с отображением пропускной способности.</li>
+        </ul>
+        <p><strong>Баланс:</strong></p>
+        <ul>
+          <li>Снижена стоимость содержания логистических узлов на 8–12%.</li>
+          <li>Понижен уровень шума от грузовых терминалов.</li>
+        </ul>
+        <p><strong>Исправления:</strong></p>
+        <ul>
+          <li>Исправлен вылет при удалении моста с активным поездом.</li>
+          <li>Исправлены некорректные тени на ночных сценах.</li>
+        </ul>
+        <p>Рекомендуем обновить сохранения до 1.3.6f1 и отправлять баг-репорты через GitHub Issues.</p>
+      </div>
+    </article>
+
+    <!-- ЕЩЁ ОДИН ПРИМЕР -->
+    <article
+      class="card"
+      id="update-arena-021"
+      data-game="arena"
+      data-title="Neon Arena Season 2.1"
+      data-tags="neon arena season ranked reset"
+    >
+      <div class="card-label">Сезонное обновление</div>
+      <div class="card-main">
+        <div class="card-title">Neon Arena — Season 2.1: Ranked Reset &amp; Balance</div>
+        <div class="card-sub">
+          Полный мягкий сброс рейтинга, новая карта «MetroCore», реворк трёх оружий и защита от читеров на уровне серверов.
+        </div>
+        <div class="card-tags">
+          <span class="card-tag">Neon Arena</span>
+          <span class="card-tag">Season 2.1</span>
+          <span class="card-tag">Anti-cheat</span>
+        </div>
+      </div>
+      <div class="card-date">
+        <span>18 окт 2025</span>
+        <span class="ver">v2.1.0</span>
+      </div>
+      <div class="card-body">
+        <p><strong>Новая карта:</strong> MetroCore — вертикальный кибер-метрополис с открытыми лейнами.</p>
+        <p><strong>Рейтинг:</strong> мягкий сброс, быстрый калибровочный плейсмент в 5 матчей.</p>
+        <p><strong>Anti-cheat:</strong> серверные проверки движения и стрельбы, интеграция с внутренней системой репортов.</p>
+      </div>
+    </article>
+
+    <!-- ПРИМЕР ДЛЯ РАННЕГО ДОСТУПА -->
+    <article
+      class="card"
+      id="update-sandbox-010"
+      data-game="sandbox"
+      data-title="OXeall Sandbox 0.1.0"
+      data-tags="sandbox early access experimental"
+    >
+      <div class="card-label">Ранний доступ</div>
+      <div class="card-main">
+        <div class="card-title">OXeall Sandbox — Версия 0.1.0 Experimental</div>
+        <div class="card-sub">
+          Первый публичный билд экспериментального проекта: базовые механики мира, сохранения и dev-консоль.
+        </div>
+        <div class="card-tags">
+          <span class="card-tag">Sandbox</span>
+          <span class="card-tag">Experimental</span>
+        </div>
+      </div>
+      <div class="card-date">
+        <span>05 окт 2025</span>
+        <span class="ver">v0.1.0</span>
+      </div>
+      <div class="card-body">
+        <p>Включено:</p>
+        <ul>
+          <li>Генерация мира (биомы: лес, промышленная зона, побережье).</li>
+          <li>Система сохранений (локально в браузере / клиенте).</li>
+          <li>Dev-консоль для тестеров (<code>F8</code>): телепорт, спавн объектов, лог сети.</li>
+        </ul>
+        <p>Задача версии — собрать фидбек, поэтому возможны вайпы. Все найденные баги — в Issues.</p>
+      </div>
+    </article>
+
+    <!-- ШАБЛОН ДЛЯ НОВЫХ ОБНОВЛЕНИЙ:
+         1. Скопируй блок <article class="card"> ... </article>.
+         2. Поставь свой id, data-game, заголовки, дату, описание.
+         3. Все работает без бэкенда, чистый HTML+JS. -->
+  </section>
+
+  <footer>
+    <div>© <span id="year"></span> OXeall. Все права защищены.</div>
+    <div>
+      Репозиторий обновлений: <a href="https://github.com/" target="_blank">GitHub</a> ·
+      Связь: <a href="mailto:contact@oxeall.dev">contact@oxeall.dev</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Текущий год
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Открытие / закрытие карточек
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', e => {
+      // Не ловим клики по ссылкам
+      if (e.target.tagName === 'A' || e.target.closest('a')) return;
+      card.classList.toggle('open');
+    });
+  });
+
+  // Фильтр по игре
+  const gameFilter = document.getElementById('gameFilter');
+  const searchInput = document.getElementById('searchInput');
+  const cards = Array.from(document.querySelectorAll('.card'));
+
+  function applyFilters() {
+    const game = gameFilter.value;
+    const q = (searchInput.value || '').toLowerCase().trim();
+
+    cards.forEach(card => {
+      const cardGame = card.dataset.game || 'all';
+      const text = (
+        (card.dataset.title || '') + ' ' +
+        (card.dataset.tags || '') + ' ' +
+        card.innerText
+      ).toLowerCase();
+
+      const matchGame = (game === 'all') || (cardGame === game);
+      const matchSearch = !q || text.includes(q);
+
+      card.style.display = (matchGame && matchSearch) ? '' : 'none';
+    });
+  }
+
+  gameFilter.addEventListener('change', applyFilters);
+  searchInput.addEventListener('input', applyFilters);
+
+  // Скролл к элементу (для кнопок и сайдбара)
+  document.querySelectorAll('[data-scroll-target]').forEach(el => {
+    el.addEventListener('click', () => {
+      const target = document.querySelector(el.dataset.scrollTarget);
+      if (!target) return;
+      const top = target.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top, behavior: 'smooth' });
+      if (target.classList.contains('card')) {
+        target.classList.add('open');
+      }
+    });
+  });
+</script>
+</body>
+</html>
