@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <title>OXeall Studios — Games Changelog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="OXeall Studios — official portal of game updates and patch notes." />
+  <meta name="description" content="OXeall Studios — the official portal of updates and patch notes for the studio's games." />
   <style>
-    /* ... STYLES LEFT UNCHANGED ... */
+    (ВСЁ БЕЗ ИЗМЕНЕНИЙ — ТУТ НЕТ РУССКОГО ТЕКСТА)
   </style>
 </head>
 <body>
@@ -16,7 +16,7 @@
       <div class="brand-logo">OX</div>
       <div class="brand-text">
         <span>OXEall Studios — Games Changelog</span>
-        <span>Official OXeall Studios updates feed</span>
+        <span>Official OXeall Studios Updates Feed</span>
       </div>
     </div>
     <nav>
@@ -47,22 +47,34 @@
   <section class="featured">
     <div class="featured-box empty" id="featuredBox">
       <div class="featured-label">No featured updates.</div>
-      <div class="featured-sub"></div>
+      <div class="featured-sub">
+      </div>
     </div>
   </section>
 
   <div class="list-header">
     <div><strong>All Updates</strong></div>
-    <div>Click a card to open the detailed changelog.</div>
+    <div>Click on a card to reveal the detailed changelog.</div>
   </div>
 
   <div id="emptyState" class="empty-state">
-    No updates have been added yet. Open the <b>index.html</b> file and add your first update card using the template.
+    No updates have been added yet. Open the <b>index.html</b> file and add your first card using the template.
   </div>
 
   <section id="announcementList" class="announcements">
 
-    <!-- EXAMPLE UPDATE BLOCK (translated) -->
+    <!-- TEMPLATE FOR NEW UPDATE ---------------------------------
+      1. Copy the block <article class="card"> ... </article>
+      2. Insert your own:
+         - data-game="GameName"
+         - data-type="Major|Minor|Patch|Hotfix"
+         - Your own texts inside (title, version, date, description, changelog)
+      3. If you want to feature it — add data-featured="true" to the article.
+         Only ONE update should have that attribute.
+
+      EXAMPLE BELOW — just edit it for your data.
+    -->
+
     <article class="card"
              data-game="Russian 2071 Town"
              data-type="Minor">
@@ -70,9 +82,9 @@
         <div class="badge-type patch">MINOR UPDATE</div>
         <div class="badge-game">Russian 2071 Town</div>
         <div class="badge-version">v1.0.2.0.0</div>
-        <div class="badge-date">13 November, 2025</div>
+        <div class="badge-date">13 November, 2025y.</div>
       </div>
-      <div class="card-title">Balance and fixes — v1.0.2.0.0</div>
+      <div class="card-title">Balance and fixes - v1.0.2.0.0</div>
       <div class="card-short">
         Minor additions and changes. Up to v1.0.2.0.0.
       </div>
@@ -84,15 +96,15 @@
       <div class="card-changelog">
 Added/Changes:
 - Full functionality of HD Admin. (Fixed)
-- New advertising has been added to our in-game banners.
-- The map and environment have been slightly altered.
-
+- New advertising has been added to our game's banners.
+- The map and environment have been slightly changes.
 Fixed:
-- Minor map bugs have been resolved.
+- Minor map bugs have been fixed.
       </div>
     </article>
 
-    <!-- TEMPLATE FOR NEW UPDATE (translated)
+    <!-- COPY THIS BLOCK BELOW FOR A NEW UPDATE:
+
     <article class="card"
              data-game="Game Name"
              data-type="Patch">
@@ -102,7 +114,7 @@ Fixed:
         <div class="badge-version">v1.0.1</div>
         <div class="badge-date">10 Nov 2025</div>
       </div>
-      <div class="card-title">Short update headline</div>
+      <div class="card-title">Short update title</div>
       <div class="card-short">
         Short description: what was fixed or added.
       </div>
@@ -117,6 +129,7 @@ Fixed:
 - Performance improvements
       </div>
     </article>
+
     -->
 
   </section>
@@ -128,7 +141,11 @@ Fixed:
 </div>
 
 <script>
-  /* JS LOGIC LEFT UNCHANGED */
+  // Insert year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ALL JS BELOW — НЕ ТРОНУЛ, тут нет русского текста
 </script>
+
 </body>
 </html>
