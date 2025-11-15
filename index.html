@@ -380,7 +380,6 @@
       background: linear-gradient(to right, #ff8fa3, #ff0033);
       box-shadow: 0 0 16px rgba(255,0,51,0.8);
     }
-
     .badge-game {
       color: var(--accent-strong);
       font-size: 10px;
@@ -500,7 +499,7 @@
   <section class="top">
     <h1>OXeall Studios Game Updates Feed</h1>
     <p>
-      All Major, Minor, Patch, and Hotfix studio updates in one place. 
+      All Major, Minor, Patch, and Hotfix studio updates in one place.
     </p>
     <div class="filters">
       <div class="select">
@@ -519,9 +518,7 @@
   <section class="featured">
     <div class="featured-box empty" id="featuredBox">
       <div class="featured-label">There are no pinned updates.</div>
-      <div class="featured-sub">
-        
-      </div>
+      <div class="featured-sub"></div>
     </div>
   </section>
 
@@ -535,121 +532,201 @@
   </div>
 
   <section id="announcementList" class="announcements">
-
-    <!--
-      ШАБЛОН ДЛЯ НОВОГО ОБНОВЛЕНИЯ
-      ---------------------------------
-      1. Скопируй блок <article class="card"> ... </article>
-      2. Поставь свои:
-         - data-game="НазваниеИгры"
-         - data-type="Major|Minor|Patch|Hotfix"
-         - Нужные тексты внутри (заголовок, версия, дата, описание, changelog)
-      3. Если хочешь сделать его главным — добавь data-featured="true"
-         к article. Только у одного обновления должен быть этот атрибут.
-
-      ПРИМЕР НИЖЕ — просто отредактируй под свои данные.
-    -->
-
-        <article class="card"
-             data-game="Racing Friends"
-             data-type="major">
+    <!-- CARD 1 — Racing Friends -->
+    <article class="card" data-game="Racing Friends" data-type="major">
       <div class="card-header">
         <div class="badge-type patch">MAJOR UPDATE</div>
         <div class="badge-game">Racing Friends</div>
         <div class="badge-version">v1.1.0.0.0</div>
         <div class="badge-date">14 November, 2025y.</div>
       </div>
+
       <div class="card-title">Racing Friends is back!</div>
-      <div class="card-short">
-        The game is available again. Minor changes to the map.
-      </div>
+      <div class="card-short">The game is available again. Minor changes to the map.</div>
+
       <div class="card-tags">
         <div class="card-tag">Minor</div>
         <div class="card-tag">IS BACK</div>
-        <div class="card-tag"> Small map changes</div>
+        <div class="card-tag">Small map changes</div>
       </div>
+
       <div class="card-arrow">▼</div>
-<div class="card-changelog">
-Added/Changes:
-- Added more obstacles at the track borders.  
-- Minor changes and adjustments to the building design (Spawn)
-Fixed:
-- Checkpoint locations have been corrected.
 
-<!-- BEFORE/AFTER SLIDER -->
-<div class="ox-ba-wrapper">
-    <div class="ox-ba-container">
-        <img src="assets/img/before.png" class="ox-before">
-        <img src="assets/img/after.png" class="ox-after">
-        <div class="ox-divider"></div>
-        <div class="ox-handle">
-            <div class="ox-arrow-left"></div>
-            <div class="ox-arrow-right"></div>
+      <div class="card-changelog">
+        Added/Changes:
+        - Added more obstacles at the track borders.
+        - Minor changes and adjustments to the building design (Spawn)
+        Fixed:
+        - Checkpoint locations have been corrected.
+
+        <!-- BEFORE/AFTER SLIDER -->
+        <div class="ox-slider">
+          <div class="ox-slider-inner">
+            <img src="assets/before_racing.png" class="ox-before">
+            <img src="assets/after_racing.png" class="ox-after">
+            <div class="ox-handle"></div>
+          </div>
         </div>
-    </div>
-</div>
-</div>
-
+      </div>
     </article>
 
-        <article class="card"
-             data-game="Russian 2071 Town"
-             data-type="Minor">
+
+    <!-- CARD 2 — Russian 2071 Town -->
+    <article class="card" data-game="Russian 2071 Town" data-type="Minor">
       <div class="card-header">
         <div class="badge-type patch">MINOR UPDATE</div>
         <div class="badge-game">Russian 2071 Town</div>
         <div class="badge-version">v1.0.1.0.0</div>
         <div class="badge-date">13 November, 2025y.</div>
       </div>
+
       <div class="card-title">Balance and fixes - v1.0.2.0.0</div>
-      <div class="card-short">
-        Minor additions and changes. Up to v1.0.2.0.0.
-      </div>
+      <div class="card-short">Minor additions and changes. Up to v1.0.2.0.0.</div>
+
       <div class="card-tags">
         <div class="card-tag">Minor</div>
         <div class="card-tag">Balance</div>
       </div>
+
       <div class="card-arrow">▼</div>
+
       <div class="card-changelog">
-Added/Changes:
-- Full functionality of HD Admin. (Fixed)
-- New advertising has been added to our game's banners.
-- The map and environment have been slightly changes.
-Fixed:
-- Minor map bugs have been fixed.
+        Added/Changes:
+        - Full functionality of HD Admin. (Fixed)
+        - New advertising has been added to our game's banners.
+        - The map and environment have been slightly changes.
+        Fixed:
+        - Minor map bugs have been fixed.
+
+        <!-- BEFORE/AFTER SLIDER -->
+        <div class="ox-slider">
+          <div class="ox-slider-inner">
+            <img src="assets/before_2071.png" class="ox-before">
+            <img src="assets/after_2071.png" class="ox-after">
+            <div class="ox-handle"></div>
+          </div>
+        </div>
       </div>
     </article>
 
-    <!--
-    СКОПИРУЙ ЭТОТ БЛОК НИЖЕ ДЛЯ НОВОГО ОБНОВЛЕНИЯ:
 
-    <article class="card"
-             data-game="Название Игры"
-             data-type="Patch">
+    <!-- CARD 3 — TEMPLATE FOR FUTURE -->
+    <article class="card" data-game="Example Game" data-type="Major">
       <div class="card-header">
-        <div class="badge-type patch">PATCH UPDATE</div>
-        <div class="badge-game">Название Игры</div>
-        <div class="badge-version">v1.0.1</div>
-        <div class="badge-date">10 ноя 2025</div>
+        <div class="badge-type major">MAJOR UPDATE</div>
+        <div class="badge-game">Example Game</div>
+        <div class="badge-version">v1.0.0</div>
+        <div class="badge-date">01 January, 2026</div>
       </div>
-      <div class="card-title">Краткий заголовок обновления</div>
-      <div class="card-short">
-        Краткое описание: что пофиксили или добавили.
-      </div>
+
+      <div class="card-title">Template with Slider</div>
+      <div class="card-short">Use this card to add future updates with before/after images.</div>
+
       <div class="card-tags">
-        <div class="card-tag">Patch</div>
-        <div class="card-tag">Balance</div>
+        <div class="card-tag">Template</div>
+        <div class="card-tag">Slider</div>
       </div>
+
       <div class="card-arrow">▼</div>
+
       <div class="card-changelog">
-- Список изменённых параметров
-- Исправление вылетов
-- Улучшение производительности
+        - Add your changelog text here
+        - And your images below
+
+        <!-- BEFORE/AFTER SLIDER -->
+        <div class="ox-slider">
+          <div class="ox-slider-inner">
+            <img src="assets/example_before.png" class="ox-before">
+            <img src="assets/example_after.png" class="ox-after">
+            <div class="ox-handle"></div>
+          </div>
+        </div>
       </div>
     </article>
+    <!-- SLIDER CSS -->
+    <style>
+      .ox-slider {
+        width: 100%;
+        margin-top: 16px;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        background: #000;
+      }
 
-    -->
+      .ox-slider-inner {
+        position: relative;
+        width: 100%;
+        height: auto;
+        user-select: none;
+      }
 
+      .ox-slider-inner img {
+        display: block;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+      }
+
+      .ox-before {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .ox-after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        clip-path: inset(0 50% 0 0);
+      }
+
+      .ox-handle {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 4px;
+        height: 100%;
+        background: #00c8ff;
+        box-shadow: 0 0 14px #00c8ff;
+        cursor: ew-resize;
+        z-index: 10;
+      }
+    </style>
+    <!-- SLIDER JS -->
+    <script>
+      document.querySelectorAll(".ox-slider").forEach(slider => {
+        const inner = slider.querySelector(".ox-slider-inner");
+        const after = slider.querySelector(".ox-after");
+        const handle = slider.querySelector(".ox-handle");
+
+        let isDown = false;
+
+        const move = (x) => {
+          const rect = inner.getBoundingClientRect();
+          let pos = x - rect.left;
+
+          if (pos < 0) pos = 0;
+          if (pos > rect.width) pos = rect.width;
+
+          const percent = (pos / rect.width) * 100;
+          after.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+          handle.style.left = percent + "%";
+        };
+
+        handle.addEventListener("mousedown", () => isDown = true);
+        window.addEventListener("mouseup", () => isDown = false);
+        window.addEventListener("mousemove", e => {
+          if (isDown) move(e.clientX);
+        });
+
+        handle.addEventListener("touchstart", () => isDown = true);
+        window.addEventListener("touchend", () => isDown = false);
+        window.addEventListener("touchmove", e => {
+          if (isDown) move(e.touches[0].clientX);
+        });
+      });
+    </script>
   </section>
 
   <footer>
@@ -658,6 +735,7 @@ Fixed:
   </footer>
 </div>
 
+<!-- MAIN JS -->
 <script>
   // Подставляем год
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -678,6 +756,7 @@ Fixed:
     if (!featured) return;
 
     featuredBox.classList.remove('empty');
+
     const title = featured.querySelector('.card-title')?.textContent || '';
     const short = featured.querySelector('.card-short')?.textContent || '';
     const game = featured.dataset.game || featured.querySelector('.badge-game')?.textContent || 'OXeall Project';
@@ -704,6 +783,7 @@ Fixed:
       const arrow = card.querySelector('.card-arrow');
       const changelog = card.querySelector('.card-changelog');
       if (!arrow || !changelog) return;
+
       card.addEventListener('click', (e) => {
         if (e.target.tagName === 'A' || e.target.closest('a')) return;
         card.classList.toggle('open');
@@ -754,5 +834,6 @@ Fixed:
   setupCardToggles();
   setupFilters();
 </script>
+
 </body>
 </html>
