@@ -1,2660 +1,992 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OXeall Brackets — Private Admin Visualizer</title>
-  <meta name="description" content="Private tournament builder & bracket visualizer (Swiss / Single / Double / Groups)." />
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <meta charset="UTF-8" />
+  <title>OXeall Studios — Games Changelog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="OXeall Studios — официальный портал обновлений и патч-ноутов по играм студии." />
   <style>
-    :root{
-      --bg:#0b0d12;
-      --bg2:#0f1320;
-      --panel:#12162a;
-      --panel2:#151b33;
-      --border:#262e4d;
-      --text:#e8ecf8;
-      --muted:#9aa5c1;
-      --accent:#ffb000;
-      --good:#3ddc97;
-      --bad:#ff5d5d;
-      --warn:#ffd36b;
-      --shadow: 0 14px 40px rgba(0,0,0,.42);
-      --radius: 16px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    :root {
+      --bg: #02040a;
+      --bg-gradient: radial-gradient(circle at top, rgba(0,180,255,0.12), transparent 85%);
+      --bg-card: #070b13;
+      --bg-card-soft: #0b101a;
+      --accent: #00aaff;
+      --accent-soft: rgba(0,170,255,0.16);
+      --accent-strong: #35c3ff;
+      --accent-alt: #00ffc6;
+      --text: #f5f7ff;
+      --muted: #9aa7c5;
+      --border: #202838;
+      --radius-xl: 22px;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 52px rgba(0,0,0,0.9);
+      --shadow-strong: 0 26px 90px rgba(0,0,0,0.98);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --tr-fast: 0.18s ease-out;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      color:var(--text);
-      background:
-        radial-gradient(900px 500px at 30% -10%, rgba(255,176,0,.16), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(61,220,151,.10), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--bg-gradient), var(--bg);
+      color: var(--text);
+      min-height: 100vh;
     }
-    .wrap{max-width:1280px;margin:0 auto;padding:0 16px}
-    .topbar{
-      position:sticky;top:0;z-index:50;
-      background: rgba(8,10,16,.72);
-      backdrop-filter: blur(14px);
-      border-bottom:1px solid rgba(255,255,255,.06);
+
+    .page {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 22px 18px 40px;
     }
-    .topbar__inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 16px}
-    .brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--text)}
-    .brand__mark{
-      font-weight:900;letter-spacing:.6px;
-      background:linear-gradient(90deg,var(--accent),#ffd36b);
-      color:#151515;padding:4px 9px;border-radius:12px
+
+    a {
+      color: var(--accent-strong);
+      text-decoration: none;
     }
-    .brand__name{font-weight:900}
-    .brand__tag{font-size:12px;color:var(--muted)}
-    .topbar__right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .pill{
-      font-family:var(--mono);
-      font-size:12px;
+    a:hover { text-decoration: underline; }
+
+    /* HEADER */
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 18px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(0,170,255,0.16), rgba(2,4,10,0.98));
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow-soft);
+      position: sticky;
+      top: 10px;
+      z-index: 40;
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 18% 0, #ffffff, #00aaff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      color: #020308;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.98);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-text span:first-child {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-alt);
+    }
+
+    .brand-text span:last-child {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .nav-pill {
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.78);
+      border: 1px solid rgba(255,255,255,0.09);
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .nav-pill span.dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    /* TOP */
+
+    .top {
+      margin: 24px 2px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .top h1 {
+      font-size: 26px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .top p {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    .filters {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .select,
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: var(--bg-card-soft);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.9);
+      font-size: 11px;
+    }
+
+    .select label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .select select {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 11px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .search input {
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 11px;
+      min-width: 180px;
+    }
+
+    .tag {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,170,255,0.35);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* FEATURED */
+
+    .featured {
+      margin-top: 16px;
+      margin-bottom: 12px;
+    }
+
+    .featured-box {
+      padding: 14px 16px 12px;
+      border-radius: var(--radius-xl);
+      background: var(--bg-card-soft);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .featured-box.empty {
+      border-style: dashed;
+      opacity: 0.86;
+      color: var(--muted);
+      background: rgba(4,7,14,0.98);
+    }
+
+    .featured-label {
+      font-size: 9px;
+      color: var(--accent-strong);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .featured-title {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .featured-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .featured-meta {
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    /* LIST HEADER */
+
+    .list-header {
+      margin: 16px 2px 8px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .list-header strong {
+      color: var(--accent-strong);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    /* FEED / CARDS */
+
+    .announcements {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .empty-state {
+      font-size: 11px;
+      color: var(--muted);
+      padding: 12px 13px;
+      border-radius: var(--radius-lg);
+      border: 1px dashed rgba(255,255,255,0.22);
+      background: rgba(5,8,16,0.98);
+      margin-top: 4px;
+    }
+
+    .card {
+      padding: 14px 16px 10px;
+      border-radius: var(--radius-xl);
+      background: var(--bg-card);
+      border: 1px solid rgba(0,170,255,0.13);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 2.6fr) minmax(0, 1.4fr) auto;
+      column-gap: 14px;
+      row-gap: 6px;
+      align-items: flex-start;
+      position: relative;
+      cursor: pointer;
+      transition: all var(--tr-fast);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(4px);
+      animation: fadeInUp 0.22s forwards;
+    }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at top left, rgba(0,255,198,0.08), transparent 55%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--tr-fast);
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+      border-color: rgba(0,170,255,0.45);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 10px;
+      color: var(--muted);
+      grid-column: 1 / 3;
+    }
+
+    .badge-type {
+      padding: 4px 12px 3px;
+      border-radius: 999px;
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.12);
+      text-shadow: 0 0 6px rgba(0,0,0,0.9);
+      box-shadow: 0 0 12px rgba(0,0,0,0.9) inset;
+      color: #fff;
+    }
+
+    .badge-type.major {
+      background: linear-gradient(to right, #1dd6ff, #0064ff);
+      box-shadow: 0 0 14px rgba(0,132,255,0.7);
+    }
+
+    .badge-type.minor {
+      background: linear-gradient(to right, #ffe07a, #c4a100);
+      color: #111;
+      box-shadow: 0 0 14px rgba(255,224,122,0.5);
+    }
+
+    .badge-type.patch {
+      background: linear-gradient(to right, #6dffb5, #00a85a);
+      color: #021008;
+      box-shadow: 0 0 14px rgba(0,200,130,0.5);
+    }
+
+    .badge-type.hotfix {
+      background: linear-gradient(to right, #ff8fa3, #ff0033);
+      box-shadow: 0 0 16px rgba(255,0,51,0.8);
+    }
+    
+    .badge-type.news {
+      background: linear-gradient(to right, #ffffff, #cccccc);
+      color: #000;
+      box-shadow: 0 0 14px rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    }
+    .badge-game {
+      color: var(--accent-strong);
+      font-size: 10px;
+    }
+
+    .badge-version {
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .badge-date {
+      font-size: 9px;
+      color: var(--muted);
+    }
+
+    .card-title {
+      grid-column: 1 / 3;
+      font-size: 17px;
+      font-weight: 500;
+    }
+
+    .card-short {
+      grid-column: 1 / 3;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .card-tags {
+      grid-column: 1 / 3;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .card-tag {
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(4,7,14,1);
+      color: var(--muted);
+      font-size: 9px;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .card-arrow {
+      font-size: 10px;
+      color: var(--muted);
+      align-self: flex-start;
+      margin-top: 2px;
+      transition: transform var(--tr-fast), color var(--tr-fast);
+    }
+
+    .card-changelog {
+      grid-column: 1 / 4;
+      display: none;
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    .card.open .card-changelog { display: block; }
+    .card.open .card-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-strong);
+    }
+
+    footer {
+      margin-top:22px;
+      font-size:9px;
       color:var(--muted);
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      padding:8px 10px;
-      border-radius:999px;
-    }
-    .btn{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:14px;
-      cursor:pointer;
-      user-select:none;
-    }
-    .btn:hover{border-color:rgba(255,176,0,.35);background:rgba(255,176,0,.08)}
-    .btn:active{transform:translateY(1px)}
-    .btn--ghost{background:transparent}
-    .btn--accent{
-      border-color:rgba(255,176,0,.45);
-      background:rgba(255,176,0,.14);
-    }
-    .btn--danger{
-      border-color:rgba(255,93,93,.45);
-      background:rgba(255,93,93,.10);
-    }
-    .btn--block{width:100%;text-align:left;margin-bottom:8px}
-    .main{display:grid;grid-template-columns:330px 1fr;gap:16px;padding:16px 0 24px}
-    @media (max-width: 980px){ .main{grid-template-columns:1fr} }
-
-    .sidebar{display:flex;flex-direction:column;gap:16px}
-    .content{min-width:0}
-
-    .nav{
-      display:flex;flex-direction:column;gap:8px;
-      padding:14px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-    }
-    .nav__link{
-      text-decoration:none;color:var(--muted);
-      padding:10px 12px;border-radius:14px;border:1px solid transparent;
-    }
-    .nav__link:hover{color:var(--text);background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
-    .nav__link.isActive{color:var(--text);background:rgba(255,176,0,.12);border-color:rgba(255,176,0,.25)}
-
-    .panel{
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .panel--content{min-height:720px}
-    .panel__head{
-      display:flex;align-items:baseline;justify-content:space-between;gap:10px;
-      padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06)
-    }
-    .panel__title{margin:0;font-size:16px}
-    .panel__meta{font-size:12px;color:var(--muted)}
-    .panel__body{padding:14px 16px}
-    .panel__foot{padding:10px 16px;border-top:1px solid rgba(255,255,255,.06)}
-    .hint{color:var(--muted);font-size:12px;line-height:1.4}
-    code{font-family:var(--mono);font-size:12px}
-
-    .row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    .kicker{font-family:var(--mono);font-size:12px;color:var(--muted)}
-    .badge{
-      font-size:12px;padding:4px 8px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);color:var(--muted);
-    }
-    .badge--live{border-color:rgba(61,220,151,.35);color:var(--good);background:rgba(61,220,151,.08)}
-    .badge--draft{border-color:rgba(255,211,107,.30);color:var(--warn);background:rgba(255,211,107,.08)}
-    .badge--done{border-color:rgba(154,165,193,.25);color:var(--muted);background:rgba(154,165,193,.06)}
-
-    .grid{display:grid;grid-template-columns: 1fr 1fr;gap:12px}
-    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
-
-    .field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
-    .label{font-size:12px;color:var(--muted)}
-    .input, select, textarea{
-      width:100%;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.18);
-      color:var(--text);
-      outline:none;
-    }
-    textarea{min-height:110px;resize:vertical}
-    .input:focus, select:focus, textarea:focus{
-      border-color:rgba(255,176,0,.45);
-      box-shadow:0 0 0 4px rgba(255,176,0,.12);
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      padding-top:8px;
     }
 
-    .table{width:100%;border-collapse:separate;border-spacing:0 10px}
-    .table th{font-size:12px;color:var(--muted);text-align:left;padding:0 10px 6px}
-    .table td{
-      padding:10px;
-      border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.14);
-      vertical-align:top;
+    @media (max-width: 900px) {
+      header { flex-direction: column; align-items: flex-start; }
+      .card {
+        grid-template-columns: minmax(0, 1.7fr) auto;
+      }
+      .card-header,
+      .card-title,
+      .card-short,
+      .card-tags,
+      .card-changelog {
+        grid-column: 1 / 3;
+      }
     }
-    .table tr td:first-child{border-radius:14px 0 0 14px}
-    .table tr td:last-child{border-radius:0 14px 14px 0}
-
-    .card{
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:14px;
-      background:rgba(0,0,0,.12);
-      padding:12px;
-    }
-    .sep{height:1px;background:rgba(255,255,255,.06);margin:12px 0}
-
-    .teamLine{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--mono)}
-    .teamName{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:520px}
-    .seed{color:var(--muted)}
-    .score{font-family:var(--mono);font-weight:900}
-    .win{color:var(--good)}
-    .lose{color:var(--bad)}
-
-    /* Bracket visuals */
-    .bracketWrap{display:flex;flex-direction:column;gap:12px}
-    .roundBlock{border:1px solid rgba(255,255,255,.10);border-radius:14px;background:rgba(0,0,0,.12);padding:12px}
-    .roundTitle{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
-    .roundTitle h3{margin:0;font-size:14px}
-    .matchCard{border:1px solid rgba(255,255,255,.10);border-radius:14px;background:rgba(0,0,0,.14);padding:10px;margin-bottom:10px}
-    .matchMeta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
-    .matchMeta .kicker{display:flex;gap:10px;flex-wrap:wrap}
-    .matchTeams{display:flex;flex-direction:column;gap:6px}
-    .matchTeam{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--mono)}
-    .matchTeam .left{display:flex;align-items:center;gap:10px;min-width:0}
-    .logo{
-      width:26px;height:26px;border-radius:10px;
-      background: rgba(255,176,0,.20);
-      border:1px solid rgba(255,176,0,.35);
-      display:grid;place-items:center;font-size:12px;font-weight:900;
-      flex:0 0 auto;
-    }
-    .muted{color:var(--muted)}
-    .small{font-size:12px}
-    .link{color:var(--text);text-decoration:none;border-bottom:1px dashed rgba(255,176,0,.35)}
-    .link:hover{border-bottom-color:rgba(255,176,0,.75)}
-
-    /* Modal */
-    .modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center}
-    .modal__overlay{position:absolute;inset:0;background:rgba(0,0,0,.6)}
-    .modal__card{
-      position:relative;
-      width:min(920px, calc(100vw - 24px));
-      max-height:calc(100vh - 24px);
-      overflow:auto;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:20px;
-      background:linear-gradient(180deg, rgba(18,22,42,.98), rgba(21,27,51,.98));
-      box-shadow:0 18px 60px rgba(0,0,0,.6);
-    }
-    .modal__head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
-    .modal__title{font-weight:900}
-    .modal__body{padding:14px 16px}
-    .modal__foot{padding:12px 16px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
-
-    /* Export layer */
-    .exportLayer{
-      position:fixed; inset:0; z-index:500;
-      background:#000;
-      display:grid; place-items:center;
-    }
-    .exportLayer__inner{
-      width:1280px;
-      background: radial-gradient(900px 500px at 30% -10%, rgba(255,176,0,.20), transparent 60%),
-                  linear-gradient(180deg, #090a0f, #0b1020);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:22px;
-      padding:18px;
-      box-shadow:0 20px 80px rgba(0,0,0,.75);
-      color:#fff;
-    }
-    .exportHeader{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:14px}
-    .exportHeader__title{font-size:18px;font-weight:900}
-    .exportHeader__meta{font-size:12px;color:rgba(255,255,255,.72);font-family:var(--mono)}
-    .exportFooter{margin-top:12px;font-size:12px;color:rgba(255,255,255,.65);font-family:var(--mono);display:flex;justify-content:space-between}
-    .presentation .topbar__right .btn,
-    .presentation .sidebar,
-    .presentation .nav,
-    .presentation .panel__foot,
-    .presentation .hint { display:none !important; }
-    .presentation .main{grid-template-columns:1fr}
-    .presentation .panel--content{min-height:auto}
   </style>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="wrap topbar__inner">
-      <a class="brand" href="#/dashboard">
-        <span class="brand__mark">OX</span>
-        <span class="brand__name">OXeall Brackets</span>
-        <span class="brand__tag">Private Admin Visualizer</span>
-      </a>
-
-      <div class="topbar__right">
-        <div class="pill" id="modePill">MODE: ADMIN</div>
-        <div class="pill" id="lockPill">LOCK: OPEN</div>
-        <button class="btn btn--ghost" id="btnPresentation" type="button">Presentation</button>
-        <button class="btn btn--accent" id="btnExport" type="button">Export PNG</button>
+<div class="page">
+  <header>
+    <div class="brand">
+      <div class="brand-logo">OX</div>
+      <div class="brand-text">
+        <span>OXEall Studios — Games Changelog</span>
+        <span>OXeall Studios Official Update Feed</span>
       </div>
     </div>
+    <nav>
+      <div class="nav-pill"><span class="dot"></span>Official Updates Feed</div>
+      <div class="nav-pill">Website build version: #60-#69</div>
+    </nav>
   </header>
 
-  <main class="wrap main">
-    <aside class="sidebar">
-      <nav class="nav" id="nav">
-        <a class="nav__link" href="#/dashboard">Dashboard</a>
-        <a class="nav__link" href="#/tournaments">Tournaments</a>
-        <a class="nav__link" href="#/teams">Teams</a>
-        <a class="nav__link" href="#/bracket">Bracket</a>
-        <a class="nav__link" href="#/news">News</a>
-        <a class="nav__link" href="#/settings">Settings</a>
-      </nav>
-
-      <section class="panel">
-        <div class="panel__head">
-          <h2 class="panel__title">Active</h2>
-          <div class="panel__meta" id="activeMeta">—</div>
-        </div>
-        <div class="panel__body" id="activeBox"></div>
-      </section>
-
-      <section class="panel">
-        <div class="panel__head">
-          <h2 class="panel__title">Quick actions</h2>
-          <div class="panel__meta">Build</div>
-        </div>
-        <div class="panel__body">
-          <button class="btn btn--block" id="qaNewTournament" type="button">Create tournament (Wizard)</button>
-          <button class="btn btn--block" id="qaGenerateRound" type="button">Generate next round</button>
-          <button class="btn btn--block" id="qaLock" type="button">Lock / Unlock editing</button>
-          <button class="btn btn--block btn--danger" id="qaReset" type="button">Reset local data</button>
-        </div>
-        <div class="panel__foot hint">
-          Viewer mode: добавь <code>?view=1</code> к URL (read-only). Admin lock хранится в localStorage.
-        </div>
-      </section>
-    </aside>
-
-    <section class="content">
-      <div class="panel panel--content">
-        <div class="panel__head">
-          <h1 class="panel__title" id="viewTitle">—</h1>
-          <div class="panel__meta" id="viewMeta">—</div>
-        </div>
-        <div class="panel__body" id="app"></div>
-        <div class="panel__foot hint" id="footerHint"></div>
+  <section class="top">
+    <h1>OXeall Studios Game Updates Feed</h1>
+    <p>
+      All Major, Minor, Patch, and Hotfix studio updates in one place.
+    </p>
+    <div class="filters">
+      <div class="select">
+        <label for="gameFilter">Game</label>
+        <select id="gameFilter">
+          <option value="all">All projects</option>
+        </select>
       </div>
-    </section>
-  </main>
-
-  <!-- Modal -->
-  <div class="modal" id="modal" hidden>
-    <div class="modal__overlay" data-close="1"></div>
-    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal__head">
-        <div class="modal__title" id="modalTitle">—</div>
-        <button class="btn btn--ghost" id="modalClose" data-close="1" type="button">×</button>
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="Поиск по названию, игре, изменениям..." />
       </div>
-      <div class="modal__body" id="modalBody"></div>
-      <div class="modal__foot" id="modalFoot"></div>
+      <div class="tag">Developer Verified • OXeall</div>
     </div>
+  </section>
+
+  <section class="featured">
+    <div class="featured-box empty" id="featuredBox">
+      <div class="featured-label">There are no pinned updates.</div>
+      <div class="featured-sub"></div>
+    </div>
+  </section>
+
+  <div class="list-header">
+    <div><strong>All updates</strong></div>
+    <div>Click on the card to open the detailed changelog.</div>
   </div>
 
-  <!-- Export -->
-  <div id="exportLayer" class="exportLayer" hidden>
-    <div class="exportLayer__inner">
-      <div class="exportHeader">
-        <div>
-          <div class="exportHeader__title" id="exportTitle">—</div>
-          <div class="exportHeader__meta" id="exportSub">—</div>
-        </div>
-        <div class="exportHeader__meta" id="exportStamp">—</div>
-      </div>
-      <div id="exportBracket"></div>
-      <div class="exportFooter">
-        <div id="exportFooterLeft">Generated by OXeall Brackets</div>
-        <div id="exportFooterRight">—</div>
-      </div>
-    </div>
+  <div id="emptyState" class="empty-state">
+    No updates have been added yet. Open the <b>index.html</b> file and add the first card using the template.
   </div>
 
-<script>
-/* ===========================
-   OXeall Brackets — single-file app
-   Storage: localStorage
-   Viewer mode: ?view=1 (read-only)
-   Admin lock: local PIN (local only)
-   =========================== */
+<section id="announcementList" class="announcements">
 
-/* ---------- Utils ---------- */
-const $ = (sel, root=document) => root.querySelector(sel);
-const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
-const uid = (p="id") => `${p}_${Math.random().toString(16).slice(2)}_${Date.now().toString(16)}`;
-const nowISO = () => new Date().toISOString();
-const fmtLocal = (iso) => new Intl.DateTimeFormat(undefined, {
-  year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit"
-}).format(new Date(iso));
+<!-- NEWS CARD 3 -->
+<article class="card" data-game="OXeall News" data-type="News">
+  <div class="card-header">
+    <div class="badge-type news">NEWS</div>
+    <div class="badge-game">OXeall Studios</div>
+    <div class="badge-version">Info</div>
+    <div class="badge-date">14 December, 2025y.</div>
+  </div>
 
-function safeInt(x, def=0){
-  const n = parseInt(x, 10);
-  return Number.isFinite(n) ? n : def;
-}
-function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+  <div class="card-title">Games status website (by OXeall Studios)</div>
+  <div class="card-short">
+    OXeall Studios Status (ALT2) is used to display the current status of OXeall Studios games available on the Roblox platform.
+  </div>
 
-function escapeHtml(s){
-  return String(s ?? "")
-    .replaceAll("&","&amp;").replaceAll("<","&lt;")
-    .replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-}
+  <div class="card-tags">
+    <div class="card-tag">News</div>
+    <div class="card-tag">Official</div>
+    <div class="card-tag">Status web-site</div>
+    <div class="card-tag">Roblox Game Status</div>
+  </div>
 
-function teamTag(name){
-  const t = String(name||"").trim().toUpperCase().replace(/[^A-Z0-9]/g,"");
-  return (t.slice(0,3) || "TM").padEnd(2,"X").slice(0,3);
-}
+  <div class="card-arrow">▼</div>
 
-/* ---------- App state ---------- */
-const STORAGE_KEY = "oxb_state_v2";
-const VIEW_ONLY = new URLSearchParams(location.search).get("view") === "1";
+  <div class="card-changelog news-body">
+The page provides information on server stability, player data, APIs, avatar loading, and other core components of Roblox projects.
+Statuses are generated through internal monitoring and reflect the actual state of services at the current time.
+- The platform is intended solely for operational status visibility of Roblox games and related systems.
 
-const DEFAULT_STATE = {
-  build: "v2",
-  createdAt: nowISO(),
-  adminLocked: false,
-  adminPinHash: "",   // naive hash (client-side)
-  activeTournamentId: "",
-  tournaments: [],
-  teams: {},          // by tournamentId: Team[]
-  matches: {},        // by tournamentId: Match[]
-  news: {},           // by tournamentId: NewsPost[]
-  globalNews: []      // optional general posts
-};
+Website: <a href="https://hi9es.github.io/OXeall.Studios.Status.alt2/" target="_blank" rel="noopener">
+  https://hi9es.github.io/OXeall.Studios.Status.alt2/
+</a>
+  </div>
+</article>
+  
+<!-- NEWS CARD 2 -->
+<article class="card" data-game="OXeall News" data-type="News">
+  <div class="card-header">
+    <div class="badge-type news">NEWS</div>
+    <div class="badge-game">OXeall Studios</div>
+    <div class="badge-version">Info</div>
+    <div class="badge-date">14 December, 2025y.</div>
+  </div>
 
-let state = loadState();
-let presentation = false;
+  <div class="card-title">Introducing — OXSync</div>
+  <div class="card-short">
+    Official server synchronization system by OXeall Studios.
+  </div>
 
-function loadState(){
-  try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if(!raw) return seedDefault();
-    const parsed = JSON.parse(raw);
-    return { ...DEFAULT_STATE, ...parsed };
-  }catch{
-    return seedDefault();
-  }
-}
+  <div class="card-tags">
+    <div class="card-tag">News</div>
+    <div class="card-tag">Official</div>
+    <div class="card-tag">OXSync</div>
+  </div>
 
-function seedDefault(){
-  const s = structuredClone(DEFAULT_STATE);
-  // add a sample tournament so UI is not empty
-  const tid = uid("t");
-  s.activeTournamentId = tid;
-  s.tournaments.push({
-    id: tid,
-    name: "Sample — Swiss Stage",
-    type: "swiss",
-    status: "draft",  // draft | live | done
-    createdAt: nowISO(),
-    settings: {
-      teamsCount: 16,
-      swissRounds: 5,
-      advWins: 3,
-      elimLosses: 3,
-      bo: "bo3",
-      seedingRule: "1vN"
-    }
-  });
-  s.teams[tid] = [];
-  s.matches[tid] = [];
-  s.news[tid] = [];
-  return s;
-}
+  <div class="card-arrow">▼</div>
 
-function saveState(){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-}
+  <div class="card-changelog news-body">
+OXeall Studios officially introduces OXSync, an official server-side global synchronization system designed as a core infrastructure standard for the studio’s projects.
+    
+OXSync is built to synchronize server processes, game and system events, as well as user states across servers and game sessions. 
+The system ensures consistent server logic, reduces the impact of network instability, and improves overall predictability of gameplay behavior.
+The primary objective of OXSync is network stabilization. 
+By optimizing server-side processing and data exchange. 
+Gameplay feels smoother and more responsive — with reduced perceived latency, without modifying actual network metrics.
+Within the OXeall Studios Status (ALT2) infrastructure, the system is labeled as
+Global Synchronization and serves as the official source of server environment status.
 
-/* ---------- Lock / permissions ---------- */
-function naiveHash(str){
-  // intentionally simple; this is NOT secure—only local UX lock
-  let h = 2166136261;
-  for(let i=0;i<str.length;i++){
-    h ^= str.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return (h>>>0).toString(16);
-}
-function isEditingAllowed(){
-  if(VIEW_ONLY) return false;
-  if(state.adminLocked) return false;
-  return true;
-}
+Project support:
+- City DayX 2:
+OXSync will be active from the moment of release.
+Release date: January 2, 2026, 10:45 AM (PST).
+- Racing Friends:
+OXSync support is temporarily disabled and will be enabled on December 27.
+No other studio projects currently use OXSync.
 
-/* ---------- Routing ---------- */
-function getRoute(){
-  const h = (location.hash || "#/dashboard").replace("#","");
-  const r = h.split("?")[0];
-  if(["/dashboard","/tournaments","/teams","/bracket","/news","/settings"].includes(r)) return r;
-  return "/dashboard";
-}
+OXSync is not a visual optimization or a client-side effect — it is an official server-side system forming the foundation of a stable, scalable, and connected OXeall Studios ecosystem.
 
-/* ---------- UI references ---------- */
-const modePill = $("#modePill");
-const lockPill = $("#lockPill");
-const viewTitle = $("#viewTitle");
-const viewMeta = $("#viewMeta");
-const app = $("#app");
-const footerHint = $("#footerHint");
-const activeMeta = $("#activeMeta");
-const activeBox = $("#activeBox");
+By OXeall Studios.
+  </div>
+</article>
+  
+  <!-- CARD -1 — Russian 2071 Town (NEW UPDATE) -->
+  <article class="card" data-game="Russian 2071 Town" data-type="Minor">
+    <div class="card-header">
+      <div class="badge-type minor">MINOR UPDATE</div>
+      <div class="badge-game">Russian 2071 Town</div>
+      <div class="badge-version">v1.0.4.0.0e</div>
+      <div class="badge-date">17 November, 2025y.</div>
+    </div>
 
-/* ---------- Modal ---------- */
-const modal = $("#modal");
-const modalTitle = $("#modalTitle");
-const modalBody = $("#modalBody");
-const modalFoot = $("#modalFoot");
+    <div class="card-title">Fixes & Changes</div>
+    <div class="card-short">Minor update with map fixes and changes.</div>
 
-function openModal(title, bodyHtml, footHtml){
-  modalTitle.textContent = title;
-  modalBody.innerHTML = bodyHtml || "";
-  modalFoot.innerHTML = footHtml || "";
-  modal.hidden = false;
-}
-function closeModal(){
-  modal.hidden = true;
-  modalTitle.textContent = "—";
-  modalBody.innerHTML = "";
-  modalFoot.innerHTML = "";
-}
-modal.addEventListener("click", (e)=>{
-  const close = e.target?.getAttribute?.("data-close");
-  if(close === "1") closeModal();
-});
+    <div class="card-tags">
+      <div class="card-tag">Minor</div>
+      <div class="card-tag">Fixes</div>
+      <div class="card-tag">Changes</div>
+    </div>
 
-/* ---------- Active tournament helpers ---------- */
-function activeTournament(){
-  return state.tournaments.find(t => t.id === state.activeTournamentId) || null;
-}
-function ensureActive(){
-  if(state.tournaments.length === 0){
-    state.activeTournamentId = "";
-    return null;
-  }
-  if(!state.activeTournamentId || !state.tournaments.some(t=>t.id===state.activeTournamentId)){
-    state.activeTournamentId = state.tournaments[0].id;
-  }
-  return activeTournament();
-}
-function teamsOf(tid){
-  return state.teams[tid] || [];
-}
-function matchesOf(tid){
-  return state.matches[tid] || [];
-}
-function newsOf(tid){
-  return state.news[tid] || [];
-}
+    <div class="card-arrow">▼</div>
 
-/* ---------- Data models ---------- */
-function createTournamentModel(input){
-  const id = uid("t");
-  const base = {
-    id,
-    name: input.name,
-    type: input.type, // swiss | single | double | groups
-    status: "draft",
-    createdAt: nowISO(),
-    settings: input.settings
-  };
-  state.tournaments.unshift(base);
-  state.activeTournamentId = id;
-  state.teams[id] = [];
-  state.matches[id] = [];
-  state.news[id] = [];
-  saveState();
-  return id;
-}
+    <div class="card-changelog">
+Added/Changes:
+- Small <b>changes/additions</b> to the map
 
-function upsertTeam(tid, team){
-  const arr = teamsOf(tid);
-  const idx = arr.findIndex(x=>x.id===team.id);
-  if(idx>=0) arr[idx] = team; else arr.push(team);
-  arr.sort((a,b)=>a.seed-b.seed);
-  state.teams[tid] = arr;
-  saveState();
-}
+Fixed:
+- Small <b>fixes</b> to the map 
+    </div>
+  </article>
 
-function deleteTeam(tid, teamId){
-  state.teams[tid] = teamsOf(tid).filter(t=>t.id!==teamId);
-  // also remove from matches
-  state.matches[tid] = matchesOf(tid).filter(m => m.aId!==teamId && m.bId!==teamId);
-  saveState();
-}
 
-function upsertMatch(tid, match){
-  const arr = matchesOf(tid);
-  const idx = arr.findIndex(x=>x.id===match.id);
-  if(idx>=0) arr[idx] = match; else arr.push(match);
-  state.matches[tid] = arr;
-  saveState();
-}
+<section id="announcementList" class="announcements">
 
-function deleteMatch(tid, matchId){
-  state.matches[tid] = matchesOf(tid).filter(m=>m.id!==matchId);
-  saveState();
-}
+  <!-- CARD 0 — Russian 2071 Town (NEW UPDATE) -->
+  <article class="card" data-game="Russian 2071 Town" data-type="Minor">
+    <div class="card-header">
+      <div class="badge-type minor">MINOR UPDATE</div>
+      <div class="badge-game">Russian 2071 Town</div>
+      <div class="badge-version">v1.0.3.0.0e</div>
+      <div class="badge-date">15 November, 2025y.</div>
+    </div>
 
-function addNewsPost(tid, post){
-  const arr = newsOf(tid);
-  arr.unshift(post);
-  state.news[tid] = arr;
-  saveState();
-}
-function updateNewsPost(tid, post){
-  const arr = newsOf(tid);
-  const idx = arr.findIndex(n=>n.id===post.id);
-  if(idx>=0) arr[idx] = post;
-  state.news[tid] = arr;
-  saveState();
-}
-function deleteNewsPost(tid, postId){
-  state.news[tid] = newsOf(tid).filter(n=>n.id!==postId);
-  saveState();
-}
+    <div class="card-title">World Expansion, New Content & Fixes</div>
+    <div class="card-short">Some new things on the map, and other non-critical fixes</div>
 
-/* ---------- Bracket logic ---------- */
+    <div class="card-tags">
+      <div class="card-tag">Minor</div>
+      <div class="card-tag">Fixes</div>
+      <div class="card-tag">Changes</div>
+      <div class="card-tag">Entertainment</div>
+    </div>
 
-/*
-Swiss approach:
-- standings derived from matches: wins/losses
-- round 1 pairing by seed: (1 vs N), (2 vs N-1), ...
-- next rounds: group by record (w-l), inside group pair by seed order (or by Buchholz later)
-- avoids rematches best-effort
-*/
-function computeSwissStandings(tid){
-  const T = teamsOf(tid).map(t => ({...t, wins:0, losses:0, played:0, mapDiff:0, rdDiff:0}));
-  const m = matchesOf(tid).filter(x => x.stage === "swiss");
-  const byId = new Map(T.map(x=>[x.id,x]));
-  for(const match of m){
-    if(match.status !== "done") continue;
-    const A = byId.get(match.aId), B = byId.get(match.bId);
-    if(!A || !B) continue;
-    A.played++; B.played++;
-    const aScore = safeInt(match.aScore, 0);
-    const bScore = safeInt(match.bScore, 0);
-    if(aScore > bScore){ A.wins++; B.losses++; }
-    else if(bScore > aScore){ B.wins++; A.losses++; }
-  }
-  // sort: wins desc, losses asc, seed asc
-  T.sort((x,y) => (y.wins-x.wins) || (x.losses-y.losses) || (x.seed-y.seed));
-  return T;
-}
+    <div class="card-arrow">▼</div>
 
-function roundNumberMax(tid, stage="swiss"){
-  const ms = matchesOf(tid).filter(m=>m.stage===stage);
-  return ms.reduce((acc,m)=>Math.max(acc, safeInt(m.round,0)), 0);
-}
+    <div class="card-changelog">
+Added/Changes:
+- Changes to buildings 39_BLDG, 30_BLDG, 7.5_BLDG.
+- Added a new location (street).
+- Added +1 additional car (Sedan, white).
+- Night-Day cycle. <b>(Temporarily disabled on servers)</b>
+- Added some new things to the map.
+- Play-Time Leaderboard.
+- Cats!!!
 
-function alreadyPlayedPair(tid, aId, bId, stage="swiss"){
-  const ms = matchesOf(tid).filter(m=>m.stage===stage);
-  return ms.some(m => (m.aId===aId && m.bId===bId) || (m.aId===bId && m.bId===aId));
-}
+Fixed:
+- Lighting has been corrected in some places.
+    </div>
+  </article>
 
-function swissEligibleTeams(tid){
-  const tour = activeTournament();
-  const st = computeSwissStandings(tid);
-  const advWins = safeInt(tour.settings.advWins, 3);
-  const elimLosses = safeInt(tour.settings.elimLosses, 3);
-  return st.filter(t => t.wins < advWins && t.losses < elimLosses);
-}
 
-function swissGenerateRound(tid){
-  const tour = state.tournaments.find(t=>t.id===tid);
-  if(!tour || tour.type!=="swiss") return {ok:false, reason:"Not a Swiss tournament"};
-  const teams = teamsOf(tid);
-  const settings = tour.settings;
+<!-- NEWS CARD 1 -->
+<article class="card" data-game="OXeall News" data-type="News">
+  <div class="card-header">
+    <div class="badge-type news">NEWS</div>
+    <div class="badge-game">OXeall Studios</div>
+    <div class="badge-version">Info</div>
+    <div class="badge-date">14 November, 2025y.</div>
+  </div>
 
-  if(teams.length !== safeInt(settings.teamsCount, teams.length)){
-    // allow mismatch but warn
-  }
+  <div class="card-title">Racing Friends Returns — Minor Update with Track Fixes and Map Improvements</div>
+  <div class="card-short">
+    A minor update restoring gameplay stability, improving the map, and fixing checkpoint issues.
+  </div>
 
-  const nextRound = roundNumberMax(tid, "swiss") + 1;
-  const maxRounds = safeInt(settings.swissRounds, 5);
-  if(nextRound > maxRounds) return {ok:false, reason:"Max rounds reached"};
+  <div class="card-tags">
+    <div class="card-tag">News</div>
+    <div class="card-tag">Official</div>
+    <div class="card-tag">+Minor Update</div>
+    <div class="card-tag">Racing Friends</div>
+  </div>
 
-  const standings = computeSwissStandings(tid);
-  const eligible = swissEligibleTeams(tid);
-  if(eligible.length < 2) return {ok:false, reason:"Not enough eligible teams"};
+  <div class="card-arrow">▼</div>
 
-  // Round 1: seed pairing 1vN
-  let pairings = [];
-  if(nextRound === 1){
-    const sorted = [...teams].sort((a,b)=>a.seed-b.seed);
-    for(let i=0;i<Math.floor(sorted.length/2);i++){
-      pairings.push([sorted[i].id, sorted[sorted.length-1-i].id]);
-    }
-  } else {
-    // group by record
-    const groups = new Map(); // key "w-l" => teamIds
-    for(const t of eligible){
-      const key = `${t.wins}-${t.losses}`;
-      if(!groups.has(key)) groups.set(key, []);
-      groups.get(key).push(t);
-    }
-    // sort keys: higher wins first
-    const keys = Array.from(groups.keys()).sort((a,b)=>{
-      const [aw,al]=a.split("-").map(Number);
-      const [bw,bl]=b.split("-").map(Number);
-      return (bw-aw) || (al-bl);
-    });
+  <div class="card-changelog news-body">
+Racing Friends officially returns — an important milestone for the project.  
+While the gameplay remains familiar, this update focuses on refining the track  
+and restoring the game to a stable, playable state. 
+-
+New obstacles have been placed along the track borders to improve race flow  
+and eliminate unintended shortcuts. The spawn building has received several  
+minor adjustments as well, making the starting area cleaner and more consistent  
+with the updated layout.
+Additionally, checkpoint placement issues have been fixed to ensure that laps  
+are detected correctly and races progress smoothly.
+This update is not about large-scale additions — it is about bringing the game  
+back online, stabilizing its core systems, and preparing a solid foundation  
+for future improvements and new content.
+  </div>
+</article>
 
-    // within group: seed asc; pair adjacent; avoid rematches by swapping
-    for(const key of keys){
-      const g = groups.get(key).slice().sort((x,y)=>x.seed-y.seed);
-      const pool = g.map(x=>x.id);
-      while(pool.length >= 2){
-        const aId = pool.shift();
-        // pick best bId that avoids rematch, else take next
-        let pickIndex = 0;
-        for(let i=0;i<pool.length;i++){
-          if(!alreadyPlayedPair(tid, aId, pool[i], "swiss")){
-            pickIndex = i;
-            break;
-          }
-        }
-        const bId = pool.splice(pickIndex,1)[0];
-        pairings.push([aId,bId]);
+
+  <!-- CARD 1 — Racing Friends -->
+  <article class="card" data-game="Racing Friends" data-type="major">
+    <div class="card-header">
+      <div class="badge-type major">MAJOR UPDATE</div>
+      <div class="badge-game">Racing Friends</div>
+      <div class="badge-version">v1.1.0.0.0</div>
+      <div class="badge-date">14 November, 2025y.</div>
+    </div>
+
+    <div class="card-title">Racing Friends is back!</div>
+    <div class="card-short">The game is available again. Minor changes to the map.</div>
+
+    <div class="card-tags">
+      <div class="card-tag">Minor</div>
+      <div class="card-tag">IS BACK</div>
+      <div class="card-tag">Small map changes</div>
+    </div>
+
+    <div class="card-arrow">▼</div>
+
+    <div class="card-changelog">
+Added/Changes:
+- Added more obstacles at the track borders.
+- Minor changes and adjustments to the building design (Spawn)
+
+Fixed:
+- Checkpoint locations have been corrected.
+    </div>
+  </article>
+
+
+  <!-- CARD 2 — Russian 2071 Town -->
+  <article class="card" data-game="Russian 2071 Town" data-type="Minor">
+    <div class="card-header">
+      <div class="badge-type minor">MINOR UPDATE</div>
+      <div class="badge-game">Russian 2071 Town</div>
+      <div class="badge-version">v1.0.2.0.0</div>
+      <div class="badge-date">13 November, 2025y.</div>
+    </div>
+
+    <div class="card-title">Balance and fixes - v1.0.2.0.0</div>
+    <div class="card-short">Minor additions and changes. Up to v1.0.2.0.0.</div>
+
+    <div class="card-tags">
+      <div class="card-tag">Minor</div>
+      <div class="card-tag">Balance</div>
+    </div>
+
+    <div class="card-arrow">▼</div>
+
+    <div class="card-changelog">
+Added/Changes:
+- Full functionality of HD Admin. (Fixed)
+- New advertising has been added to our game's banners.
+- The map and environment have been slightly changes.
+
+Fixed:
+- Minor map bugs have been fixed.
+    </div>
+  </article>
+
+</section>
+
+    <!-- SLIDER CSS -->
+    <style>
+      .ox-slider {
+        width: 100%;
+        margin-top: 16px;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        background: #000;
       }
-    }
-  }
 
-  // Create matches
-  const bo = settings.bo || "bo3";
-  const created = [];
-  for(const [aId,bId] of pairings){
-    if(!aId || !bId) continue;
-    const m = {
-      id: uid("m"),
-      tournamentId: tid,
-      stage: "swiss",
-      round: nextRound,
-      bo,
-      status: "scheduled", // scheduled | live | done
-      aId, bId,
-      aScore: "",
-      bScore: "",
-      createdAt: nowISO()
-    };
-    upsertMatch(tid, m);
-    created.push(m.id);
-  }
+      .ox-slider-inner {
+        position: relative;
+        width: 100%;
+        height: auto;
+        user-select: none;
+      }
 
-  if(tour.status === "draft") tour.status = "live";
-  saveState();
-  return {ok:true, created, round: nextRound};
-}
+      .ox-slider-inner img {
+        display: block;
+        width: 100%;
+        height: auto;
+        pointer-events: none;
+      }
 
-/*
-Single Elimination:
-- generates bracket rounds from seeded teams
-- creates R1 matches 1vN, 2vN-1...
-- later rounds created after previous done (simple)
-*/
-function singleGenerateInitial(tid){
-  const tour = state.tournaments.find(t=>t.id===tid);
-  if(!tour || tour.type!=="single") return {ok:false, reason:"Not single elimination"};
-  const teams = [...teamsOf(tid)].sort((a,b)=>a.seed-b.seed);
-  if(teams.length < 2) return {ok:false, reason:"Not enough teams"};
-  // clear existing bracket matches for stage "single"
-  state.matches[tid] = matchesOf(tid).filter(m=>m.stage!=="single");
-  const bo = tour.settings.bo || "bo3";
-  const created = [];
-  const n = teams.length;
-  const r1 = 1;
-  for(let i=0;i<Math.floor(n/2);i++){
-    const a = teams[i], b = teams[n-1-i];
-    const m = {
-      id: uid("m"),
-      tournamentId: tid,
-      stage: "single",
-      round: r1,
-      bo,
-      status: "scheduled",
-      aId: a.id, bId: b.id,
-      aScore:"", bScore:"",
-      createdAt: nowISO()
-    };
-    upsertMatch(tid, m);
-    created.push(m.id);
-  }
-  if(tour.status==="draft") tour.status="live";
-  saveState();
-  return {ok:true, created, round: 1};
-}
+      .ox-before {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
 
-function singleGenerateNextRound(tid){
-  const tour = state.tournaments.find(t=>t.id===tid);
-  if(!tour || tour.type!=="single") return {ok:false, reason:"Not single elimination"};
-  const ms = matchesOf(tid).filter(m=>m.stage==="single");
-  const maxR = roundNumberMax(tid, "single");
-  const lastRound = ms.filter(m=>safeInt(m.round,0)===maxR);
-  if(lastRound.length===0) return {ok:false, reason:"No matches"};
-  if(lastRound.some(m=>m.status!=="done")) return {ok:false, reason:"Finish current round first"};
-  const winners = [];
-  for(const m of lastRound){
-    const a = safeInt(m.aScore,0), b = safeInt(m.bScore,0);
-    winners.push(a>b ? m.aId : m.bId);
-  }
-  if(winners.length < 2){
-    tour.status = "done";
-    saveState();
-    return {ok:true, created:[], round:maxR, done:true};
-  }
-  const nextR = maxR+1;
-  const bo = tour.settings.bo || "bo3";
-  const created = [];
-  for(let i=0;i<Math.floor(winners.length/2);i++){
-    const aId = winners[i];
-    const bId = winners[winners.length-1-i];
-    const m = {
-      id: uid("m"),
-      tournamentId: tid,
-      stage: "single",
-      round: nextR,
-      bo,
-      status: "scheduled",
-      aId, bId,
-      aScore:"", bScore:"",
-      createdAt: nowISO()
-    };
-    upsertMatch(tid, m);
-    created.push(m.id);
-  }
-  saveState();
-  return {ok:true, created, round: nextR};
-}
+      .ox-after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        clip-path: inset(0 50% 0 0);
+      }
 
-/*
-Groups:
-- define groups count + teams per group
-- auto-assign by seed serpentine into groups
-- round-robin schedule (simple pair generation)
-*/
-function groupsGenerate(tid){
-  const tour = state.tournaments.find(t=>t.id===tid);
-  if(!tour || tour.type!=="groups") return {ok:false, reason:"Not groups"};
-  const teams = [...teamsOf(tid)].sort((a,b)=>a.seed-b.seed);
-  const gCount = safeInt(tour.settings.groupsCount, 4);
-  const per = Math.ceil(teams.length / gCount);
-  const groups = Array.from({length:gCount}, ()=>[]);
-  // serpentine distribution
-  let dir = 1, gi = 0;
-  for(const t of teams){
-    groups[gi].push(t.id);
-    gi += dir;
-    if(gi===gCount){ gi = gCount-1; dir = -1; }
-    if(gi<0){ gi = 0; dir = 1; }
-  }
+      .ox-handle {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 4px;
+        height: 100%;
+        background: #00c8ff;
+        box-shadow: 0 0 14px #00c8ff;
+        cursor: ew-resize;
+        z-index: 10;
+      }
+    </style>
+    <!-- SLIDER JS -->
+    <script>
+      document.querySelectorAll(".ox-slider").forEach(slider => {
+        const inner = slider.querySelector(".ox-slider-inner");
+        const after = slider.querySelector(".ox-after");
+        const handle = slider.querySelector(".ox-handle");
 
-  // clear previous group matches
-  state.matches[tid] = matchesOf(tid).filter(m=>m.stage!=="groups");
-  const bo = tour.settings.bo || "bo1";
-  const created = [];
-  // schedule round robin per group
-  let groupIndex = 0;
-  for(const g of groups){
-    groupIndex++;
-    const ids = g.slice();
-    // round robin pairings
-    for(let i=0;i<ids.length;i++){
-      for(let j=i+1;j<ids.length;j++){
-        const m = {
-          id: uid("m"),
-          tournamentId: tid,
-          stage: "groups",
-          group: groupIndex,
-          round: 1,
-          bo,
-          status: "scheduled",
-          aId: ids[i],
-          bId: ids[j],
-          aScore:"", bScore:"",
-          createdAt: nowISO()
+        let isDown = false;
+
+        const move = (x) => {
+          const rect = inner.getBoundingClientRect();
+          let pos = x - rect.left;
+
+          if (pos < 0) pos = 0;
+          if (pos > rect.width) pos = rect.width;
+
+          const percent = (pos / rect.width) * 100;
+          after.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+          handle.style.left = percent + "%";
         };
-        upsertMatch(tid, m);
-        created.push(m.id);
-      }
-    }
-  }
 
-  if(tour.status==="draft") tour.status="live";
-  // store group composition for rendering
-  tour.settings._groups = groups;
-  saveState();
-  return {ok:true, created};
-}
+        handle.addEventListener("mousedown", () => isDown = true);
+        window.addEventListener("mouseup", () => isDown = false);
+        window.addEventListener("mousemove", e => {
+          if (isDown) move(e.clientX);
+        });
 
-/*
-Double Elimination:
-- this is a professional-sized feature; here is functional baseline:
-  creates Upper R1 from seeds, and later allows manual progression via "Advance" button (UI).
-  Full auto-lowering logic can be added later, but baseline is usable for visualization.
-*/
-function doubleGenerateInitial(tid){
-  const tour = state.tournaments.find(t=>t.id===tid);
-  if(!tour || tour.type!=="double") return {ok:false, reason:"Not double elimination"};
-  const teams = [...teamsOf(tid)].sort((a,b)=>a.seed-b.seed);
-  if(teams.length < 2) return {ok:false, reason:"Not enough teams"};
-
-  state.matches[tid] = matchesOf(tid).filter(m=>m.stage!=="doubleU" && m.stage!=="doubleL");
-  const bo = tour.settings.bo || "bo3";
-  const n = teams.length;
-  const created = [];
-
-  // Upper bracket round 1
-  for(let i=0;i<Math.floor(n/2);i++){
-    const a = teams[i], b = teams[n-1-i];
-    const m = {
-      id: uid("m"),
-      tournamentId: tid,
-      stage: "doubleU",
-      round: 1,
-      bo,
-      status:"scheduled",
-      aId:a.id, bId:b.id,
-      aScore:"", bScore:"",
-      createdAt: nowISO()
-    };
-    upsertMatch(tid, m);
-    created.push(m.id);
-  }
-  // Lower bracket starts empty
-  if(tour.status==="draft") tour.status="live";
-  saveState();
-  return {ok:true, created};
-}
-
-/* ---------- Rendering ---------- */
-function setActiveNav(){
-  const route = getRoute();
-  $$(".nav__link").forEach(a=>{
-    a.classList.toggle("isActive", a.getAttribute("href")==="#"+route);
-  });
-}
-
-function renderShell(){
-  modePill.textContent = VIEW_ONLY ? "MODE: VIEWER" : "MODE: ADMIN";
-  lockPill.textContent = state.adminLocked ? "LOCK: CLOSED" : "LOCK: OPEN";
-  lockPill.style.borderColor = state.adminLocked ? "rgba(255,93,93,.35)" : "rgba(61,220,151,.35)";
-  lockPill.style.color = state.adminLocked ? "var(--bad)" : "var(--good)";
-  footerHint.textContent = isEditingAllowed()
-    ? "Editing enabled. Data stored locally in your browser (localStorage)."
-    : (VIEW_ONLY ? "Viewer mode: read-only." : "Editing locked: unlock in Settings or Quick actions.");
-}
-
-function renderActiveBox(){
-  const t = ensureActive();
-  if(!t){
-    activeMeta.textContent = "No tournaments";
-    activeBox.innerHTML = `<div class="hint">Create a tournament to start.</div>
-      <button class="btn btn--block btn--accent" type="button" id="activeCreateBtn">Create tournament</button>`;
-    setTimeout(()=>{
-      const b = $("#activeCreateBtn");
-      if(b) b.onclick = ()=>openTournamentWizard();
-    },0);
-    return;
-  }
-  const teams = teamsOf(t.id);
-  const matches = matchesOf(t.id);
-  const roundsSwiss = roundNumberMax(t.id,"swiss");
-  const roundsSingle = roundNumberMax(t.id,"single");
-  const statusBadge = t.status==="live" ? "badge--live" : (t.status==="done" ? "badge--done":"badge--draft");
-  activeMeta.textContent = `${t.type.toUpperCase()} • ${teams.length} teams`;
-  activeBox.innerHTML = `
-    <div class="card">
-      <div class="row">
-        <div>
-          <div class="kicker">TOURNAMENT</div>
-          <div style="font-weight:900">${escapeHtml(t.name)}</div>
-        </div>
-        <span class="badge ${statusBadge}">${t.status.toUpperCase()}</span>
-      </div>
-      <div class="sep"></div>
-      <div class="row">
-        <div class="kicker">Matches: ${matches.length}</div>
-        <div class="kicker">Swiss rounds: ${roundsSwiss}</div>
-        <div class="kicker">Single rounds: ${roundsSingle}</div>
-      </div>
-      <div class="sep"></div>
-      <div class="row">
-        <a class="link" href="#/bracket">Open bracket</a>
-        <a class="link" href="#/teams">Manage teams</a>
-        <a class="link" href="#/news">Post news</a>
-      </div>
-    </div>
-  `;
-}
-
-function render(){
-  setActiveNav();
-  renderShell();
-  renderActiveBox();
-
-  const route = getRoute();
-  const t = ensureActive();
-
-  if(route==="/dashboard") return renderDashboard(t);
-  if(route==="/tournaments") return renderTournaments(t);
-  if(route==="/teams") return renderTeams(t);
-  if(route==="/bracket") return renderBracket(t);
-  if(route==="/news") return renderNews(t);
-  if(route==="/settings") return renderSettings(t);
-}
-
-/* ---------- Views ---------- */
-function renderDashboard(t){
-  viewTitle.textContent = "Dashboard";
-  viewMeta.textContent = `Build ${state.build} • ${fmtLocal(state.createdAt)}`;
-  const canEdit = isEditingAllowed();
-
-  const active = t ? `
-    <div class="card">
-      <div class="row">
-        <div>
-          <div class="kicker">ACTIVE TOURNAMENT</div>
-          <div style="font-weight:900">${escapeHtml(t.name)}</div>
-          <div class="hint">${escapeHtml(t.type.toUpperCase())} • status: ${escapeHtml(t.status)}</div>
-        </div>
-        <div class="row">
-          <button class="btn" type="button" id="dashGoBracket">Open bracket</button>
-          <button class="btn btn--accent" type="button" id="dashWizard">Create tournament</button>
-        </div>
-      </div>
-    </div>
-  ` : `
-    <div class="card">
-      <div style="font-weight:900">No tournaments yet</div>
-      <div class="hint">Create your first tournament using the Wizard.</div>
-      <div class="sep"></div>
-      <button class="btn btn--accent" type="button" id="dashWizard">Create tournament</button>
-    </div>
-  `;
-
-  app.innerHTML = `
-    <div class="grid">
-      <div class="card">
-        <div class="row">
-          <div>
-            <div class="kicker">CREATION</div>
-            <div style="font-weight:900">Tournament Wizard</div>
-            <div class="hint">Swiss / Single / Double / Groups. Seed-based team entry.</div>
-          </div>
-          <button class="btn btn--accent" type="button" id="dashWizard2">Open</button>
-        </div>
-        <div class="sep"></div>
-        <div class="hint">
-          Доступ к созданию турнира открыт: <b>Dashboard</b> и <b>Tournaments</b> → Create.
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="kicker">MODE</div>
-        <div style="font-weight:900">${VIEW_ONLY ? "Viewer (read-only)" : (state.adminLocked ? "Admin (locked)" : "Admin (editable)")}</div>
-        <div class="sep"></div>
-        <div class="hint">
-          Viewer mode: <code>?view=1</code><br>
-          Lock влияет только на редактирование в этом браузере.
-        </div>
-      </div>
-    </div>
-
-    <div class="sep"></div>
-    ${active}
-
-    <div class="sep"></div>
-
-    <div class="card">
-      <div class="row">
-        <div>
-          <div class="kicker">EXPORT</div>
-          <div style="font-weight:900">Presentation + PNG</div>
-          <div class="hint">One click to share bracket screenshots to channels.</div>
-        </div>
-        <div class="row">
-          <button class="btn" type="button" id="dashPresentation">Toggle Presentation</button>
-          <button class="btn btn--accent" type="button" id="dashExport">Export PNG</button>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Wire buttons
-  $("#dashWizard")?.addEventListener("click", ()=>openTournamentWizard());
-  $("#dashWizard2")?.addEventListener("click", ()=>openTournamentWizard());
-  $("#dashGoBracket")?.addEventListener("click", ()=>location.hash="#/bracket");
-  $("#dashPresentation")?.addEventListener("click", ()=>togglePresentation());
-  $("#dashExport")?.addEventListener("click", ()=>exportPNG());
-}
-
-function renderTournaments(t){
-  viewTitle.textContent = "Tournaments";
-  viewMeta.textContent = `Total: ${state.tournaments.length}`;
-
-  const canEdit = isEditingAllowed();
-
-  app.innerHTML = `
-    <div class="row" style="margin-bottom:12px">
-      <div class="hint">Create, select, rename, and configure tournaments.</div>
-      <button class="btn btn--accent" type="button" id="btnCreateTour">Create tournament</button>
-    </div>
-
-    <table class="table" role="table" aria-label="Tournaments">
-      <thead>
-        <tr>
-          <th>Active</th><th>Name</th><th>Type</th><th>Status</th><th>Created</th><th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${state.tournaments.map(tt=>{
-          const isActive = tt.id===state.activeTournamentId;
-          const badge = tt.status==="live" ? "badge--live" : (tt.status==="done" ? "badge--done":"badge--draft");
-          return `
-            <tr>
-              <td>${isActive ? `<span class="badge badge--live">ACTIVE</span>` : `<button class="btn" data-act="select" data-id="${tt.id}">Select</button>`}</td>
-              <td>
-                <div style="font-weight:900">${escapeHtml(tt.name)}</div>
-                <div class="kicker">${tt.id}</div>
-              </td>
-              <td class="kicker">${escapeHtml(tt.type.toUpperCase())}</td>
-              <td><span class="badge ${badge}">${escapeHtml(tt.status.toUpperCase())}</span></td>
-              <td class="kicker">${fmtLocal(tt.createdAt)}</td>
-              <td>
-                <div class="row">
-                  <button class="btn" data-act="edit" data-id="${tt.id}">Edit</button>
-                  <button class="btn btn--danger" data-act="delete" data-id="${tt.id}">Delete</button>
-                </div>
-              </td>
-            </tr>
-          `;
-        }).join("")}
-      </tbody>
-    </table>
-
-    <div class="sep"></div>
-
-    <div class="card">
-      <div class="kicker">Note</div>
-      <div class="hint">
-        Сетки строятся во вкладке <b>Bracket</b>. Команды — во вкладке <b>Teams</b>.<br>
-        Для Swiss: Generate next round создаёт пары на текущий раунд.
-      </div>
-    </div>
-  `;
-
-  $("#btnCreateTour")?.addEventListener("click", ()=>openTournamentWizard());
-
-  app.addEventListener("click", (e)=>{
-    const btn = e.target.closest("button[data-act]");
-    if(!btn) return;
-    const act = btn.getAttribute("data-act");
-    const id = btn.getAttribute("data-id");
-    if(!id) return;
-
-    if(act==="select"){
-      state.activeTournamentId = id;
-      saveState();
-      render();
-      return;
-    }
-    if(act==="edit"){
-      openTournamentEdit(id);
-      return;
-    }
-    if(act==="delete"){
-      if(!isEditingAllowed()){
-        alert("Editing is disabled (viewer mode or locked).");
-        return;
-      }
-      const ok = confirm("Delete tournament and all related data (teams/matches/news)?");
-      if(!ok) return;
-      // delete
-      state.tournaments = state.tournaments.filter(x=>x.id!==id);
-      delete state.teams[id];
-      delete state.matches[id];
-      delete state.news[id];
-      if(state.activeTournamentId===id) state.activeTournamentId = state.tournaments[0]?.id || "";
-      saveState();
-      render();
-      return;
-    }
-  }, {once:true}); // avoid re-binding loops; view re-renders anyway
-}
-
-function renderTeams(t){
-  viewTitle.textContent = "Teams";
-  if(!t){
-    viewMeta.textContent = "No active tournament";
-    app.innerHTML = `<div class="card"><div style="font-weight:900">No active tournament</div><div class="hint">Create/select a tournament first.</div></div>`;
-    return;
-  }
-  viewMeta.textContent = `${t.name} • ${t.type.toUpperCase()} • Teams: ${teamsOf(t.id).length}`;
-
-  const canEdit = isEditingAllowed();
-
-  app.innerHTML = `
-    <div class="grid">
-      <div class="card">
-        <div class="row">
-          <div>
-            <div class="kicker">ADD TEAM</div>
-            <div style="font-weight:900">Seed-based entry</div>
-            <div class="hint">Seeds must be unique per tournament.</div>
-          </div>
-        </div>
-        <div class="sep"></div>
-        <div class="field">
-          <div class="label">Team name</div>
-          <input class="input" id="teamName" placeholder="e.g. Vitality">
-        </div>
-        <div class="field">
-          <div class="label">Seed</div>
-          <input class="input" id="teamSeed" type="number" placeholder="e.g. 1">
-        </div>
-        <div class="row">
-          <button class="btn btn--accent" id="btnAddTeam" type="button">Add</button>
-          <button class="btn" id="btnBulkTeams" type="button">Bulk add</button>
-        </div>
-        <div class="hint" style="margin-top:10px">
-          Bulk format (each line): <code>Seed TeamName</code> or <code>Seed;TeamName</code>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="kicker">TOOLS</div>
-        <div style="font-weight:900">Sort / validate</div>
-        <div class="sep"></div>
-        <button class="btn btn--block" id="btnValidateSeeds" type="button">Validate unique seeds</button>
-        <button class="btn btn--block" id="btnClearTeams" type="button">Clear all teams</button>
-        <div class="hint">Clearing teams also removes matches that include deleted teams.</div>
-      </div>
-    </div>
-
-    <div class="sep"></div>
-
-    <table class="table" role="table" aria-label="Teams">
-      <thead>
-        <tr><th>#</th><th>Team</th><th>Tag</th><th>Seed</th><th>Actions</th></tr>
-      </thead>
-      <tbody>
-        ${teamsOf(t.id).map((tm, i)=>`
-          <tr>
-            <td class="kicker">${i+1}</td>
-            <td><div style="font-weight:900">${escapeHtml(tm.name)}</div><div class="kicker">${tm.id}</div></td>
-            <td class="kicker">${escapeHtml(tm.tag)}</td>
-            <td class="kicker">${tm.seed}</td>
-            <td>
-              <div class="row">
-                <button class="btn" data-act="editTeam" data-id="${tm.id}" type="button">Edit</button>
-                <button class="btn btn--danger" data-act="delTeam" data-id="${tm.id}" type="button">Delete</button>
-              </div>
-            </td>
-          </tr>
-        `).join("")}
-      </tbody>
-    </table>
-  `;
-
-  $("#btnAddTeam")?.addEventListener("click", ()=>{
-    if(!isEditingAllowed()) return alert("Editing disabled.");
-    const name = ($("#teamName").value || "").trim();
-    const seed = safeInt($("#teamSeed").value, 0);
-    if(!name || seed<=0) return alert("Enter team name and seed (>0).");
-    if(teamsOf(t.id).some(x=>x.seed===seed)) return alert("Seed already exists.");
-    const tm = { id: uid("team"), name, seed, tag: teamTag(name) };
-    upsertTeam(t.id, tm);
-    $("#teamName").value = "";
-    $("#teamSeed").value = "";
-    render();
-  });
-
-  $("#btnBulkTeams")?.addEventListener("click", ()=>{
-    if(!isEditingAllowed()) return alert("Editing disabled.");
-    openBulkTeamsModal(t.id);
-  });
-
-  $("#btnValidateSeeds")?.addEventListener("click", ()=>{
-    const seeds = teamsOf(t.id).map(x=>x.seed);
-    const set = new Set(seeds);
-    alert(set.size===seeds.length ? "OK: all seeds are unique." : "ERROR: duplicate seeds found.");
-  });
-
-  $("#btnClearTeams")?.addEventListener("click", ()=>{
-    if(!isEditingAllowed()) return alert("Editing disabled.");
-    const ok = confirm("Clear ALL teams for this tournament? Matches will be affected.");
-    if(!ok) return;
-    state.teams[t.id] = [];
-    state.matches[t.id] = [];
-    saveState();
-    render();
-  });
-
-  // team actions
-  app.addEventListener("click", (e)=>{
-    const btn = e.target.closest("button[data-act]");
-    if(!btn) return;
-    const act = btn.getAttribute("data-act");
-    const id = btn.getAttribute("data-id");
-    if(!id) return;
-
-    if(act==="editTeam"){
-      openEditTeamModal(t.id, id);
-      return;
-    }
-    if(act==="delTeam"){
-      if(!isEditingAllowed()) return alert("Editing disabled.");
-      const ok = confirm("Delete team and related matches?");
-      if(!ok) return;
-      deleteTeam(t.id, id);
-      render();
-      return;
-    }
-  }, {once:true});
-}
-
-function renderBracket(t){
-  viewTitle.textContent = "Bracket";
-  if(!t){
-    viewMeta.textContent = "No active tournament";
-    app.innerHTML = `<div class="card"><div style="font-weight:900">No active tournament</div><div class="hint">Create/select a tournament first.</div></div>`;
-    return;
-  }
-  const tid = t.id;
-  const canEdit = isEditingAllowed();
-  const teams = teamsOf(tid);
-  const ms = matchesOf(tid);
-
-  viewMeta.textContent = `${t.name} • ${t.type.toUpperCase()} • Teams: ${teams.length} • Matches: ${ms.length}`;
-
-  // Controls based on type
-  let controls = "";
-  if(t.type==="swiss"){
-    const s = computeSwissStandings(tid);
-    const r = roundNumberMax(tid,"swiss");
-    controls = `
-      <div class="card">
-        <div class="row">
-          <div>
-            <div class="kicker">SWISS CONTROLS</div>
-            <div style="font-weight:900">Rounds generated: ${r}/${safeInt(t.settings.swissRounds,5)}</div>
-            <div class="hint">Generate next round creates pairings based on current W-L. Edit match scores below.</div>
-          </div>
-          <div class="row">
-            <button class="btn btn--accent" id="btnSwissNext" type="button">Generate next round</button>
-            <button class="btn" id="btnSwissStandings" type="button">Standings</button>
-          </div>
-        </div>
-      </div>
-    `;
-  } else if(t.type==="single"){
-    const r = roundNumberMax(tid,"single");
-    controls = `
-      <div class="card">
-        <div class="row">
-          <div>
-            <div class="kicker">SINGLE ELIM CONTROLS</div>
-            <div style="font-weight:900">Rounds generated: ${r}</div>
-            <div class="hint">Generate initial creates R1 by seed. Next round requires all matches in current round done.</div>
-          </div>
-          <div class="row">
-            <button class="btn btn--accent" id="btnSingleInit" type="button">Generate initial bracket</button>
-            <button class="btn" id="btnSingleNext" type="button">Generate next round</button>
-          </div>
-        </div>
-      </div>
-    `;
-  } else if(t.type==="groups"){
-    controls = `
-      <div class="card">
-        <div class="row">
-          <div>
-            <div class="kicker">GROUP STAGE CONTROLS</div>
-            <div style="font-weight:900">Auto-assign & schedule</div>
-            <div class="hint">Generates group assignment (serpentine by seed) and round-robin matches.</div>
-          </div>
-          <div class="row">
-            <button class="btn btn--accent" id="btnGroupsGen" type="button">Generate groups</button>
-            <button class="btn" id="btnGroupsTable" type="button">Group tables</button>
-          </div>
-        </div>
-      </div>
-    `;
-  } else if(t.type==="double"){
-    controls = `
-      <div class="card">
-        <div class="row">
-          <div>
-            <div class="kicker">DOUBLE ELIM CONTROLS</div>
-            <div style="font-weight:900">Upper/Lower baseline</div>
-            <div class="hint">Initial Upper is auto-generated. дальнейшее продвижение можно делать вручную (редактируя матчи).</div>
-          </div>
-          <div class="row">
-            <button class="btn btn--accent" id="btnDoubleInit" type="button">Generate initial Upper</button>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-
-  // Render bracket blocks
-  let bracketHtml = controls + `<div class="sep"></div>` + renderBracketBlocks(t);
-  app.innerHTML = bracketHtml;
-
-  // Wire type buttons
-  if(t.type==="swiss"){
-    $("#btnSwissNext")?.addEventListener("click", ()=>{
-      if(!isEditingAllowed()) return alert("Editing disabled.");
-      if(teamsOf(tid).length < 2) return alert("Add teams first.");
-      const res = swissGenerateRound(tid);
-      if(!res.ok) return alert(res.reason);
-      addNewsPost(tid, {
-        id: uid("news"),
-        title: `Swiss — Round ${res.round} generated`,
-        body: `Created ${res.created.length} matches.`,
-        createdAt: nowISO(),
-        author: "Admin",
-        pinned: false
+        handle.addEventListener("touchstart", () => isDown = true);
+        window.addEventListener("touchend", () => isDown = false);
+        window.addEventListener("touchmove", e => {
+          if (isDown) move(e.touches[0].clientX);
+        });
       });
-      render();
+    </script>
+  </section>
+
+  <footer>
+    <div>© <span id="year"></span> The Changelog is always updated to the latest version, and all updates since November 2025 are available on the site.</div>
+    <div>All updates are added manually via the HTML of this file.</div>
+  </footer>
+</div>
+
+<!-- MAIN JS -->
+<script>
+  // Подставляем год
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const featuredBox = document.getElementById('featuredBox');
+  const emptyState = document.getElementById('emptyState');
+  const list = document.getElementById('announcementList');
+  const cards = Array.from(list.querySelectorAll('.card'));
+
+  // Если есть хотя бы одна карточка — убираем "пусто"
+  if (cards.length > 0) {
+    emptyState.style.display = 'none';
+  }
+
+  // Featured: берём первую карточку с data-featured="true"
+  function setupFeatured() {
+    const featured = cards.find(c => c.dataset.featured === 'true');
+    if (!featured) return;
+
+    featuredBox.classList.remove('empty');
+
+    const title = featured.querySelector('.card-title')?.textContent || '';
+    const short = featured.querySelector('.card-short')?.textContent || '';
+    const game = featured.dataset.game || featured.querySelector('.badge-game')?.textContent || 'OXeall Project';
+    const type = featured.dataset.type || 'Major';
+    const date = featured.querySelector('.badge-date')?.textContent || '';
+    const version = featured.querySelector('.badge-version')?.textContent || '';
+    const tags = Array.from(featured.querySelectorAll('.card-tag')).map(t => t.textContent);
+
+    featuredBox.innerHTML = `
+      <div class="featured-label">${type.toUpperCase()} UPDATE • ${game}</div>
+      <div class="featured-title">${title}</div>
+      <div class="featured-sub">${short}</div>
+      <div class="featured-meta">
+        ${date}
+        ${version ? ' · ' + version : ''}
+        ${tags.length ? ' · ' + tags.join(', ') : ''}
+      </div>
+    `;
+  }
+
+  // Клик по карточке — раскрытие changelog
+  function setupCardToggles() {
+    cards.forEach(card => {
+      const arrow = card.querySelector('.card-arrow');
+      const changelog = card.querySelector('.card-changelog');
+      if (!arrow || !changelog) return;
+
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A' || e.target.closest('a')) return;
+        card.classList.toggle('open');
+      });
     });
-    $("#btnSwissStandings")?.addEventListener("click", ()=>openSwissStandingsModal(tid));
   }
-  if(t.type==="single"){
-    $("#btnSingleInit")?.addEventListener("click", ()=>{
-      if(!isEditingAllowed()) return alert("Editing disabled.");
-      const res = singleGenerateInitial(tid);
-      if(!res.ok) return alert(res.reason);
-      addNewsPost(tid, { id: uid("news"), title:`Single — R1 generated`, body:`Created ${res.created.length} matches.`, createdAt: nowISO(), author:"Admin", pinned:false });
-      render();
+
+  // Фильтр по игре + поиск
+  function setupFilters() {
+    const gameSelect = document.getElementById('gameFilter');
+    const searchInput = document.getElementById('searchInput');
+
+    const games = Array.from(new Set(cards.map(c => c.dataset.game).filter(Boolean)));
+    games.forEach(g => {
+      const opt = document.createElement('option');
+      opt.value = g;
+      opt.textContent = g;
+      gameSelect.appendChild(opt);
     });
-    $("#btnSingleNext")?.addEventListener("click", ()=>{
-      if(!isEditingAllowed()) return alert("Editing disabled.");
-      const res = singleGenerateNextRound(tid);
-      if(!res.ok) return alert(res.reason);
-      if(res.done) addNewsPost(tid, { id: uid("news"), title:`Single — tournament finished`, body:`Winner decided.`, createdAt: nowISO(), author:"Admin", pinned:false });
-      else addNewsPost(tid, { id: uid("news"), title:`Single — Round ${res.round} generated`, body:`Created ${res.created.length} matches.`, createdAt: nowISO(), author:"Admin", pinned:false });
-      render();
-    });
-  }
-  if(t.type==="groups"){
-    $("#btnGroupsGen")?.addEventListener("click", ()=>{
-      if(!isEditingAllowed()) return alert("Editing disabled.");
-      const res = groupsGenerate(tid);
-      if(!res.ok) return alert(res.reason);
-      addNewsPost(tid, { id: uid("news"), title:`Groups generated`, body:`Created ${res.created.length} matches.`, createdAt: nowISO(), author:"Admin", pinned:false });
-      render();
-    });
-    $("#btnGroupsTable")?.addEventListener("click", ()=>openGroupTablesModal(tid));
-  }
-  if(t.type==="double"){
-    $("#btnDoubleInit")?.addEventListener("click", ()=>{
-      if(!isEditingAllowed()) return alert("Editing disabled.");
-      const res = doubleGenerateInitial(tid);
-      if(!res.ok) return alert(res.reason);
-      addNewsPost(tid, { id: uid("news"), title:`Double — Upper R1 generated`, body:`Created ${res.created.length} matches.`, createdAt: nowISO(), author:"Admin", pinned:false });
-      render();
-    });
-  }
 
-  // Match edit actions
-  app.addEventListener("click", (e)=>{
-    const btn = e.target.closest("button[data-act]");
-    if(!btn) return;
-    const act = btn.getAttribute("data-act");
-    const mid = btn.getAttribute("data-id");
-    if(!mid) return;
-    if(act==="editMatch") openMatchModal(tid, mid);
-    if(act==="delMatch"){
-      if(!isEditingAllowed()) return alert("Editing disabled.");
-      const ok = confirm("Delete match?");
-      if(!ok) return;
-      deleteMatch(tid, mid);
-      render();
-    }
-  }, {once:true});
-}
+    function applyFilters() {
+      const g = gameSelect.value;
+      const q = (searchInput.value || '').toLowerCase().trim();
 
-function renderNews(t){
-  viewTitle.textContent = "News";
-  if(!t){
-    viewMeta.textContent = "No active tournament";
-    app.innerHTML = `<div class="card"><div style="font-weight:900">No active tournament</div><div class="hint">Create/select a tournament first.</div></div>`;
-    return;
-  }
-  const tid = t.id;
-  viewMeta.textContent = `${t.name} • Posts: ${newsOf(tid).length}`;
+      cards.forEach(card => {
+        const cardGame = card.dataset.game || '';
+        const text = (
+          card.textContent +
+          ' ' +
+          (card.dataset.game || '') +
+          ' ' +
+          (card.dataset.type || '')
+        ).toLowerCase();
 
-  const canEdit = isEditingAllowed();
+        const matchGame = (g === 'all') || (cardGame === g);
+        const matchSearch = !q || text.includes(q);
 
-  app.innerHTML = `
-    <div class="grid">
-      <div class="card">
-        <div class="kicker">CREATE POST</div>
-        <div style="font-weight:900">Tournament news</div>
-        <div class="sep"></div>
-        <div class="field">
-          <div class="label">Title</div>
-          <input class="input" id="newsTitle" placeholder="e.g. Swiss Round 3 is LIVE">
-        </div>
-        <div class="field">
-          <div class="label">Body</div>
-          <textarea id="newsBody" placeholder="Write your update..."></textarea>
-        </div>
-        <div class="row">
-          <button class="btn btn--accent" id="btnPostNews" type="button">Publish</button>
-          <button class="btn" id="btnNewsPreview" type="button">Preview</button>
-        </div>
-        <div class="hint" style="margin-top:10px">
-          Посты привязаны к активному турниру. Экспорт сетки делай через Bracket → Export PNG.
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="kicker">TOOLS</div>
-        <div style="font-weight:900">Pins & templates</div>
-        <div class="sep"></div>
-        <button class="btn btn--block" id="btnTemplateLive" type="button">Template: Live round</button>
-        <button class="btn btn--block" id="btnTemplateResults" type="button">Template: Results</button>
-      </div>
-    </div>
-
-    <div class="sep"></div>
-
-    <div class="card">
-      <div class="kicker">FEED</div>
-      <div style="font-weight:900">Latest posts</div>
-      <div class="sep"></div>
-      <div id="newsFeed">
-        ${renderNewsFeed(tid)}
-      </div>
-    </div>
-  `;
-
-  $("#btnPostNews")?.addEventListener("click", ()=>{
-    if(!isEditingAllowed()) return alert("Editing disabled.");
-    const title = ($("#newsTitle").value||"").trim();
-    const body = ($("#newsBody").value||"").trim();
-    if(!title || !body) return alert("Title and body required.");
-    addNewsPost(tid, {
-      id: uid("news"),
-      title, body,
-      createdAt: nowISO(),
-      author: "Admin",
-      pinned: false
-    });
-    $("#newsTitle").value = "";
-    $("#newsBody").value = "";
-    render();
-  });
-
-  $("#btnNewsPreview")?.addEventListener("click", ()=>{
-    const title = ($("#newsTitle").value||"").trim() || "Untitled";
-    const body = ($("#newsBody").value||"").trim() || "(empty)";
-    openModal("News preview",
-      `<div class="card">
-        <div class="row">
-          <div><div class="kicker">${escapeHtml(t.name)}</div><div style="font-weight:900">${escapeHtml(title)}</div></div>
-          <span class="badge badge--draft">PREVIEW</span>
-        </div>
-        <div class="sep"></div>
-        <div>${escapeHtml(body).replaceAll("\n","<br>")}</div>
-        <div class="sep"></div>
-        <div class="kicker">${fmtLocal(nowISO())} • Admin</div>
-      </div>`,
-      `<button class="btn" data-close="1" type="button">Close</button>`
-    );
-  });
-
-  $("#btnTemplateLive")?.addEventListener("click", ()=>{
-    const r = t.type==="swiss" ? roundNumberMax(tid,"swiss") : (t.type==="single" ? roundNumberMax(tid,"single") : 0);
-    $("#newsTitle").value = `${t.type.toUpperCase()} — Round ${Math.max(1,r)} is LIVE`;
-    $("#newsBody").value = `Bracket updated.\nExport PNG available.\n\n${t.name}`;
-  });
-  $("#btnTemplateResults")?.addEventListener("click", ()=>{
-    $("#newsTitle").value = `${t.name} — Results update`;
-    $("#newsBody").value = `Results updated.\nNext matches will be generated soon.\n\nStay tuned.`;
-  });
-
-  // feed actions
-  app.addEventListener("click", (e)=>{
-    const btn = e.target.closest("button[data-act]");
-    if(!btn) return;
-    const act = btn.getAttribute("data-act");
-    const id = btn.getAttribute("data-id");
-    if(!id) return;
-
-    if(act==="editPost") openEditNewsModal(tid, id);
-    if(act==="delPost"){
-      if(!isEditingAllowed()) return alert("Editing disabled.");
-      const ok = confirm("Delete post?");
-      if(!ok) return;
-      deleteNewsPost(tid, id);
-      render();
-    }
-    if(act==="pinPost"){
-      if(!isEditingAllowed()) return alert("Editing disabled.");
-      const arr = newsOf(tid);
-      const p = arr.find(x=>x.id===id);
-      if(!p) return;
-      p.pinned = !p.pinned;
-      updateNewsPost(tid, p);
-      render();
-    }
-  }, {once:true});
-}
-
-function renderSettings(t){
-  viewTitle.textContent = "Settings";
-  viewMeta.textContent = `Storage: localStorage • Key: ${STORAGE_KEY}`;
-
-  app.innerHTML = `
-    <div class="grid">
-      <div class="card">
-        <div class="kicker">EDIT LOCK</div>
-        <div style="font-weight:900">Local admin lock</div>
-        <div class="sep"></div>
-        <div class="hint">
-          Это не серверная безопасность. Это “замок” для защиты от случайных кликов.
-          Для реальной приватности нужен backend (Firebase/Supabase) и auth.
-        </div>
-        <div class="sep"></div>
-
-        <div class="field">
-          <div class="label">Set/Change PIN</div>
-          <input class="input" id="pinInput" type="password" placeholder="Enter PIN">
-        </div>
-        <div class="row">
-          <button class="btn btn--accent" id="btnSetPin" type="button">Set PIN</button>
-          <button class="btn" id="btnUnlock" type="button">Unlock</button>
-          <button class="btn btn--danger" id="btnLock" type="button">Lock</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="kicker">DATA</div>
-        <div style="font-weight:900">Export / Import</div>
-        <div class="sep"></div>
-        <button class="btn btn--block" id="btnExportJSON" type="button">Export JSON</button>
-        <button class="btn btn--block" id="btnImportJSON" type="button">Import JSON</button>
-        <div class="hint">Экспорт/импорт помогает переносить данные между браузерами.</div>
-      </div>
-    </div>
-
-    <div class="sep"></div>
-
-    <div class="card">
-      <div class="kicker">ABOUT</div>
-      <div style="font-weight:900">OXeall Brackets</div>
-      <div class="sep"></div>
-      <div class="hint">
-        Viewer mode: <code>?view=1</code><br>
-        Presentation mode: button in top bar.<br>
-        Export PNG: uses html2canvas.
-      </div>
-    </div>
-  `;
-
-  $("#btnSetPin")?.addEventListener("click", ()=>{
-    if(VIEW_ONLY) return alert("Viewer mode.");
-    const pin = ($("#pinInput").value||"").trim();
-    if(pin.length < 4) return alert("PIN should be at least 4 characters.");
-    state.adminPinHash = naiveHash(pin);
-    saveState();
-    alert("PIN set.");
-  });
-
-  $("#btnLock")?.addEventListener("click", ()=>{
-    if(VIEW_ONLY) return alert("Viewer mode.");
-    state.adminLocked = true;
-    saveState();
-    render();
-  });
-
-  $("#btnUnlock")?.addEventListener("click", ()=>{
-    if(VIEW_ONLY) return alert("Viewer mode.");
-    const pin = ($("#pinInput").value||"").trim();
-    if(!state.adminPinHash){
-      // allow unlock if no pin set
-      state.adminLocked = false;
-      saveState();
-      render();
-      return;
-    }
-    if(naiveHash(pin) !== state.adminPinHash) return alert("Wrong PIN.");
-    state.adminLocked = false;
-    saveState();
-    render();
-  });
-
-  $("#btnExportJSON")?.addEventListener("click", ()=>{
-    const blob = new Blob([JSON.stringify(state, null, 2)], {type:"application/json"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "oxb_state.json";
-    a.click();
-    URL.revokeObjectURL(url);
-  });
-
-  $("#btnImportJSON")?.addEventListener("click", ()=>{
-    if(VIEW_ONLY) return alert("Viewer mode.");
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "application/json";
-    input.onchange = () => {
-      const file = input.files?.[0];
-      if(!file) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        try{
-          const obj = JSON.parse(String(reader.result||""));
-          // basic merge
-          state = { ...DEFAULT_STATE, ...obj };
-          saveState();
-          render();
-          alert("Imported.");
-        }catch{
-          alert("Invalid JSON.");
-        }
-      };
-      reader.readAsText(file);
-    };
-    input.click();
-  });
-}
-
-/* ---------- Bracket rendering helpers ---------- */
-function logoHtml(team){
-  return `<div class="logo" title="${escapeHtml(team.tag)}">${escapeHtml(team.tag.slice(0,3))}</div>`;
-}
-
-function teamById(tid, id){
-  return teamsOf(tid).find(t=>t.id===id) || null;
-}
-
-function matchStatusBadge(m){
-  if(m.status==="live") return `<span class="badge badge--live">LIVE</span>`;
-  if(m.status==="done") return `<span class="badge badge--done">DONE</span>`;
-  return `<span class="badge badge--draft">SCHEDULED</span>`;
-}
-
-function renderBracketBlocks(t){
-  const tid = t.id;
-  const ms = matchesOf(tid);
-
-  if(t.type==="swiss"){
-    const rounds = groupByRound(ms.filter(m=>m.stage==="swiss"));
-    const rNums = Object.keys(rounds).map(Number).sort((a,b)=>a-b);
-    if(rNums.length===0){
-      return `<div class="card">
-        <div style="font-weight:900">No Swiss rounds generated yet</div>
-        <div class="hint">Add teams, then click <b>Generate next round</b>.</div>
-      </div>`;
-    }
-    return `<div class="bracketWrap">
-      ${rNums.map(r => renderRoundBlock(t, "Swiss Round "+r, rounds[r], {stage:"swiss", round:r})).join("")}
-    </div>`;
-  }
-
-  if(t.type==="single"){
-    const rounds = groupByRound(ms.filter(m=>m.stage==="single"));
-    const rNums = Object.keys(rounds).map(Number).sort((a,b)=>a-b);
-    if(rNums.length===0){
-      return `<div class="card">
-        <div style="font-weight:900">No bracket generated</div>
-        <div class="hint">Click <b>Generate initial bracket</b>.</div>
-      </div>`;
-    }
-    return `<div class="bracketWrap">
-      ${rNums.map(r => renderRoundBlock(t, "Round "+r, rounds[r], {stage:"single", round:r})).join("")}
-    </div>`;
-  }
-
-  if(t.type==="groups"){
-    const gms = ms.filter(m=>m.stage==="groups");
-    if(gms.length===0){
-      return `<div class="card">
-        <div style="font-weight:900">No groups generated</div>
-        <div class="hint">Click <b>Generate groups</b>.</div>
-      </div>`;
-    }
-    const byGroup = new Map();
-    for(const m of gms){
-      const g = safeInt(m.group, 1);
-      if(!byGroup.has(g)) byGroup.set(g, []);
-      byGroup.get(g).push(m);
-    }
-    const groups = Array.from(byGroup.keys()).sort((a,b)=>a-b);
-    return `<div class="bracketWrap">
-      ${groups.map(g=>{
-        const list = byGroup.get(g).slice();
-        return renderRoundBlock(t, "Group "+g, list, {stage:"groups", group:g});
-      }).join("")}
-    </div>`;
-  }
-
-  if(t.type==="double"){
-    const upper = ms.filter(m=>m.stage==="doubleU");
-    const lower = ms.filter(m=>m.stage==="doubleL");
-    const uRounds = groupByRound(upper);
-    const lRounds = groupByRound(lower);
-    const uNums = Object.keys(uRounds).map(Number).sort((a,b)=>a-b);
-    const lNums = Object.keys(lRounds).map(Number).sort((a,b)=>a-b);
-    const upperHtml = uNums.length ? uNums.map(r => renderRoundBlock(t, "Upper R"+r, uRounds[r], {stage:"doubleU", round:r})).join("")
-                                    : `<div class="card"><div style="font-weight:900">Upper empty</div><div class="hint">Generate initial Upper.</div></div>`;
-    const lowerHtml = lNums.length ? lNums.map(r => renderRoundBlock(t, "Lower R"+r, lRounds[r], {stage:"doubleL", round:r})).join("")
-                                    : `<div class="card"><div style="font-weight:900">Lower empty</div><div class="hint">Lower bracket created by manual advancement in baseline.</div></div>`;
-    return `<div class="grid">
-      <div>${upperHtml}</div>
-      <div>${lowerHtml}</div>
-    </div>`;
-  }
-
-  return `<div class="card"><div class="hint">Unsupported.</div></div>`;
-}
-
-function groupByRound(matches){
-  const map = {};
-  for(const m of matches){
-    const r = safeInt(m.round, 1);
-    if(!map[r]) map[r] = [];
-    map[r].push(m);
-  }
-  // stable sort
-  for(const k of Object.keys(map)){
-    map[k].sort((a,b)=>a.id.localeCompare(b.id));
-  }
-  return map;
-}
-
-function renderRoundBlock(t, title, matches, ctx){
-  const tid = t.id;
-  const headMeta = [
-    `${matches.length} matches`,
-    ctx.stage ? ctx.stage : ""
-  ].filter(Boolean).join(" • ");
-
-  return `
-    <div class="roundBlock">
-      <div class="roundTitle">
-        <h3>${escapeHtml(title)}</h3>
-        <div class="kicker">${escapeHtml(headMeta)}</div>
-      </div>
-      ${matches.map(m => renderMatchCard(tid, m)).join("")}
-    </div>
-  `;
-}
-
-function renderMatchCard(tid, m){
-  const A = teamById(tid, m.aId);
-  const B = teamById(tid, m.bId);
-  const aName = A ? A.name : "(deleted)";
-  const bName = B ? B.name : "(deleted)";
-  const aTag = A ? A.tag : "NA";
-  const bTag = B ? B.tag : "NB";
-  const aSeed = A ? A.seed : "-";
-  const bSeed = B ? B.seed : "-";
-
-  const aScore = (m.aScore ?? "");
-  const bScore = (m.bScore ?? "");
-
-  const done = m.status==="done";
-  const aWin = done && safeInt(aScore,0) > safeInt(bScore,0);
-  const bWin = done && safeInt(bScore,0) > safeInt(aScore,0);
-
-  return `
-    <div class="matchCard">
-      <div class="matchMeta">
-        <div class="kicker">
-          <span>${escapeHtml((m.bo||"").toUpperCase())}</span>
-          <span>${escapeHtml(m.stage||"")}</span>
-          ${m.group ? `<span>G${m.group}</span>` : ``}
-          ${m.round ? `<span>R${m.round}</span>` : ``}
-        </div>
-        <div class="row">
-          ${matchStatusBadge(m)}
-          <button class="btn" data-act="editMatch" data-id="${m.id}" type="button">Edit</button>
-          <button class="btn btn--danger" data-act="delMatch" data-id="${m.id}" type="button">Del</button>
-        </div>
-      </div>
-      <div class="matchTeams">
-        <div class="matchTeam">
-          <div class="left">
-            <div class="logo">${escapeHtml(aTag.slice(0,3))}</div>
-            <div class="teamName">${escapeHtml(aName)}</div>
-            <div class="seed">#${escapeHtml(aSeed)}</div>
-          </div>
-          <div class="score ${aWin?"win":(bWin?"lose":"")}">${escapeHtml(String(aScore||""))}</div>
-        </div>
-        <div class="matchTeam">
-          <div class="left">
-            <div class="logo">${escapeHtml(bTag.slice(0,3))}</div>
-            <div class="teamName">${escapeHtml(bName)}</div>
-            <div class="seed">#${escapeHtml(bSeed)}</div>
-          </div>
-          <div class="score ${bWin?"win":(aWin?"lose":"")}">${escapeHtml(String(bScore||""))}</div>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-/* ---------- News feed render ---------- */
-function renderNewsFeed(tid){
-  const arr = newsOf(tid).slice();
-  // pinned first, then date desc
-  arr.sort((a,b)=>{
-    const ap = a.pinned?1:0, bp=b.pinned?1:0;
-    if(bp-ap) return bp-ap;
-    return new Date(b.createdAt) - new Date(a.createdAt);
-  });
-  if(arr.length===0) return `<div class="hint">No posts yet.</div>`;
-  return arr.map(p=>{
-    return `
-      <div class="card" style="margin-bottom:10px">
-        <div class="row">
-          <div>
-            <div class="kicker">${fmtLocal(p.createdAt)} • ${escapeHtml(p.author||"Admin")}</div>
-            <div style="font-weight:900">${escapeHtml(p.title)}</div>
-          </div>
-          <div class="row">
-            ${p.pinned ? `<span class="badge badge--live">PINNED</span>` : ``}
-            <button class="btn" data-act="pinPost" data-id="${p.id}" type="button">${p.pinned?"Unpin":"Pin"}</button>
-            <button class="btn" data-act="editPost" data-id="${p.id}" type="button">Edit</button>
-            <button class="btn btn--danger" data-act="delPost" data-id="${p.id}" type="button">Del</button>
-          </div>
-        </div>
-        <div class="sep"></div>
-        <div>${escapeHtml(p.body).replaceAll("\n","<br>")}</div>
-      </div>
-    `;
-  }).join("");
-}
-
-/* ---------- Wizards / modals ---------- */
-function openTournamentWizard(){
-  if(VIEW_ONLY) return alert("Viewer mode.");
-  if(state.adminLocked) return alert("Editing locked. Unlock first.");
-  const body = `
-    <div class="card">
-      <div class="kicker">WIZARD</div>
-      <div style="font-weight:900">Create tournament</div>
-      <div class="sep"></div>
-
-      <div class="field">
-        <div class="label">Name</div>
-        <input class="input" id="wizName" placeholder="e.g. OXCup — Swiss Stage 1">
-      </div>
-
-      <div class="field">
-        <div class="label">Type</div>
-        <select id="wizType">
-          <option value="swiss">Swiss bracket</option>
-          <option value="single">Single-elimination</option>
-          <option value="double">Double-elimination</option>
-          <option value="groups">Group stage</option>
-        </select>
-      </div>
-
-      <div id="wizBranch"></div>
-    </div>
-  `;
-
-  const foot = `
-    <button class="btn" data-close="1" type="button">Cancel</button>
-    <button class="btn btn--accent" id="wizCreate" type="button">Create</button>
-  `;
-
-  openModal("Tournament Wizard", body, foot);
-
-  const branch = ()=>{
-    const type = $("#wizType").value;
-    $("#wizBranch").innerHTML = renderWizardBranch(type);
-  };
-  $("#wizType").addEventListener("change", branch);
-  branch();
-
-  $("#wizCreate").addEventListener("click", ()=>{
-    const name = ($("#wizName").value||"").trim();
-    const type = $("#wizType").value;
-    if(!name) return alert("Tournament name required.");
-
-    const settings = readWizardSettings(type);
-    if(!settings.ok) return alert(settings.reason);
-
-    const tid = createTournamentModel({ name, type, settings: settings.settings });
-    closeModal();
-    location.hash = "#/teams";
-    render();
-  });
-}
-
-function renderWizardBranch(type){
-  if(type==="swiss"){
-    return `
-      <div class="sep"></div>
-      <div class="kicker">SWISS SETTINGS</div>
-      <div class="grid" style="margin-top:10px">
-        <div class="field">
-          <div class="label">Teams count</div>
-          <input class="input" id="swTeams" type="number" value="16" min="2" step="1">
-        </div>
-        <div class="field">
-          <div class="label">Swiss rounds</div>
-          <input class="input" id="swRounds" type="number" value="5" min="1" step="1">
-        </div>
-        <div class="field">
-          <div class="label">Advance at wins</div>
-          <input class="input" id="swAdvWins" type="number" value="3" min="1" step="1">
-        </div>
-        <div class="field">
-          <div class="label">Eliminate at losses</div>
-          <input class="input" id="swElimLoss" type="number" value="3" min="1" step="1">
-        </div>
-      </div>
-      <div class="grid">
-        <div class="field">
-          <div class="label">Default BO</div>
-          <select id="swBO">
-            <option value="bo1">BO1</option>
-            <option value="bo3" selected>BO3</option>
-            <option value="bo5">BO5</option>
-          </select>
-        </div>
-        <div class="field">
-          <div class="label">Round 1 seeding rule</div>
-          <select id="swSeedRule">
-            <option value="1vN" selected>1 vs N</option>
-            <option value="adjacent">Adjacent (1v2, 3v4...)</option>
-          </select>
-        </div>
-      </div>
-      <div class="hint">
-        Pairing: Round 1 uses seed rule. Next rounds group by W-L, avoid rematches best-effort.
-      </div>
-    `;
-  }
-  if(type==="single"){
-    return `
-      <div class="sep"></div>
-      <div class="kicker">SINGLE SETTINGS</div>
-      <div class="grid" style="margin-top:10px">
-        <div class="field">
-          <div class="label">Teams count (recommended)</div>
-          <input class="input" id="siTeams" type="number" value="16" min="2" step="1">
-        </div>
-        <div class="field">
-          <div class="label">Default BO</div>
-          <select id="siBO">
-            <option value="bo1">BO1</option>
-            <option value="bo3" selected>BO3</option>
-            <option value="bo5">BO5</option>
-          </select>
-        </div>
-      </div>
-      <div class="hint">Initial bracket: 1vN, 2vN-1, etc. Next rounds generated after round completion.</div>
-    `;
-  }
-  if(type==="double"){
-    return `
-      <div class="sep"></div>
-      <div class="kicker">DOUBLE SETTINGS</div>
-      <div class="grid" style="margin-top:10px">
-        <div class="field">
-          <div class="label">Teams count (recommended)</div>
-          <input class="input" id="dbTeams" type="number" value="16" min="2" step="1">
-        </div>
-        <div class="field">
-          <div class="label">Default BO</div>
-          <select id="dbBO">
-            <option value="bo1">BO1</option>
-            <option value="bo3" selected>BO3</option>
-            <option value="bo5">BO5</option>
-          </select>
-        </div>
-      </div>
-      <div class="hint">Baseline implementation: generates Upper R1 automatically. Lower progression can be managed manually for visualization.</div>
-    `;
-  }
-  if(type==="groups"){
-    return `
-      <div class="sep"></div>
-      <div class="kicker">GROUPS SETTINGS</div>
-      <div class="grid" style="margin-top:10px">
-        <div class="field">
-          <div class="label">Teams count</div>
-          <input class="input" id="grTeams" type="number" value="16" min="2" step="1">
-        </div>
-        <div class="field">
-          <div class="label">Groups count</div>
-          <input class="input" id="grCount" type="number" value="4" min="1" step="1">
-        </div>
-        <div class="field">
-          <div class="label">Default BO</div>
-          <select id="grBO">
-            <option value="bo1" selected>BO1</option>
-            <option value="bo3">BO3</option>
-          </select>
-        </div>
-      </div>
-      <div class="hint">Auto-assign teams by seed (serpentine). Generates round-robin matches per group.</div>
-    `;
-  }
-  return `<div class="hint">Unknown type.</div>`;
-}
-
-function readWizardSettings(type){
-  try{
-    if(type==="swiss"){
-      const teamsCount = clamp(safeInt($("#swTeams").value, 16), 2, 256);
-      const swissRounds = clamp(safeInt($("#swRounds").value, 5), 1, 20);
-      const advWins = clamp(safeInt($("#swAdvWins").value, 3), 1, 10);
-      const elimLosses = clamp(safeInt($("#swElimLoss").value, 3), 1, 10);
-      const bo = $("#swBO").value || "bo3";
-      const seedingRule = $("#swSeedRule").value || "1vN";
-      if(advWins>swissRounds || elimLosses>swissRounds){
-        return {ok:false, reason:"Advance/Elim thresholds must be <= swissRounds."};
-      }
-      return {ok:true, settings:{teamsCount, swissRounds, advWins, elimLosses, bo, seedingRule}};
-    }
-    if(type==="single"){
-      const teamsCount = clamp(safeInt($("#siTeams").value, 16), 2, 256);
-      const bo = $("#siBO").value || "bo3";
-      return {ok:true, settings:{teamsCount, bo}};
-    }
-    if(type==="double"){
-      const teamsCount = clamp(safeInt($("#dbTeams").value, 16), 2, 256);
-      const bo = $("#dbBO").value || "bo3";
-      return {ok:true, settings:{teamsCount, bo}};
-    }
-    if(type==="groups"){
-      const teamsCount = clamp(safeInt($("#grTeams").value, 16), 2, 256);
-      const groupsCount = clamp(safeInt($("#grCount").value, 4), 1, 32);
-      const bo = $("#grBO").value || "bo1";
-      return {ok:true, settings:{teamsCount, groupsCount, bo}};
-    }
-    return {ok:false, reason:"Unknown tournament type."};
-  }catch(err){
-    return {ok:false, reason:"Wizard settings error."};
-  }
-}
-
-function openTournamentEdit(tid){
-  const t = state.tournaments.find(x=>x.id===tid);
-  if(!t) return;
-
-  const body = `
-    <div class="card">
-      <div class="kicker">EDIT</div>
-      <div style="font-weight:900">${escapeHtml(t.name)}</div>
-      <div class="sep"></div>
-
-      <div class="field">
-        <div class="label">Name</div>
-        <input class="input" id="editTName" value="${escapeHtml(t.name)}">
-      </div>
-
-      <div class="grid">
-        <div class="field">
-          <div class="label">Status</div>
-          <select id="editTStatus">
-            <option value="draft" ${t.status==="draft"?"selected":""}>draft</option>
-            <option value="live" ${t.status==="live"?"selected":""}>live</option>
-            <option value="done" ${t.status==="done"?"selected":""}>done</option>
-          </select>
-        </div>
-        <div class="field">
-          <div class="label">Type</div>
-          <input class="input" value="${escapeHtml(t.type)}" disabled>
-        </div>
-      </div>
-
-      <div class="sep"></div>
-      <div class="kicker">SETTINGS</div>
-      <div class="hint">Settings depend on tournament type. Some values can be edited safely.</div>
-      <div class="sep"></div>
-      ${renderEditSettings(t)}
-    </div>
-  `;
-  const foot = `
-    <button class="btn" data-close="1" type="button">Cancel</button>
-    <button class="btn btn--accent" id="btnSaveTournament" type="button">Save</button>
-  `;
-  openModal("Edit tournament", body, foot);
-
-  $("#btnSaveTournament").addEventListener("click", ()=>{
-    if(!isEditingAllowed()) return alert("Editing disabled.");
-    t.name = ($("#editTName").value||"").trim() || t.name;
-    t.status = $("#editTStatus").value || t.status;
-
-    // apply settings
-    if(t.type==="swiss"){
-      t.settings.teamsCount = clamp(safeInt($("#esTeams").value, t.settings.teamsCount), 2, 256);
-      t.settings.swissRounds = clamp(safeInt($("#esRounds").value, t.settings.swissRounds), 1, 20);
-      t.settings.advWins = clamp(safeInt($("#esAdv").value, t.settings.advWins), 1, 10);
-      t.settings.elimLosses = clamp(safeInt($("#esElim").value, t.settings.elimLosses), 1, 10);
-      t.settings.bo = $("#esBO").value || t.settings.bo;
-    }
-    if(t.type==="single"){
-      t.settings.teamsCount = clamp(safeInt($("#eiTeams").value, t.settings.teamsCount), 2, 256);
-      t.settings.bo = $("#eiBO").value || t.settings.bo;
-    }
-    if(t.type==="double"){
-      t.settings.teamsCount = clamp(safeInt($("#edTeams").value, t.settings.teamsCount), 2, 256);
-      t.settings.bo = $("#edBO").value || t.settings.bo;
-    }
-    if(t.type==="groups"){
-      t.settings.teamsCount = clamp(safeInt($("#egTeams").value, t.settings.teamsCount), 2, 256);
-      t.settings.groupsCount = clamp(safeInt($("#egGroups").value, t.settings.groupsCount), 1, 32);
-      t.settings.bo = $("#egBO").value || t.settings.bo;
+        card.style.display = (matchGame && matchSearch) ? '' : 'none';
+      });
     }
 
-    saveState();
-    closeModal();
-    render();
-  });
-}
-
-function renderEditSettings(t){
-  if(t.type==="swiss"){
-    return `
-      <div class="grid">
-        <div class="field"><div class="label">Teams count</div><input class="input" id="esTeams" type="number" value="${t.settings.teamsCount}"></div>
-        <div class="field"><div class="label">Swiss rounds</div><input class="input" id="esRounds" type="number" value="${t.settings.swissRounds}"></div>
-        <div class="field"><div class="label">Advance wins</div><input class="input" id="esAdv" type="number" value="${t.settings.advWins}"></div>
-        <div class="field"><div class="label">Elim losses</div><input class="input" id="esElim" type="number" value="${t.settings.elimLosses}"></div>
-      </div>
-      <div class="field"><div class="label">Default BO</div>
-        <select id="esBO">
-          <option value="bo1" ${t.settings.bo==="bo1"?"selected":""}>BO1</option>
-          <option value="bo3" ${t.settings.bo==="bo3"?"selected":""}>BO3</option>
-          <option value="bo5" ${t.settings.bo==="bo5"?"selected":""}>BO5</option>
-        </select>
-      </div>
-    `;
-  }
-  if(t.type==="single"){
-    return `
-      <div class="grid">
-        <div class="field"><div class="label">Teams count</div><input class="input" id="eiTeams" type="number" value="${t.settings.teamsCount}"></div>
-        <div class="field"><div class="label">Default BO</div>
-          <select id="eiBO">
-            <option value="bo1" ${t.settings.bo==="bo1"?"selected":""}>BO1</option>
-            <option value="bo3" ${t.settings.bo==="bo3"?"selected":""}>BO3</option>
-            <option value="bo5" ${t.settings.bo==="bo5"?"selected":""}>BO5</option>
-          </select>
-        </div>
-      </div>
-    `;
-  }
-  if(t.type==="double"){
-    return `
-      <div class="grid">
-        <div class="field"><div class="label">Teams count</div><input class="input" id="edTeams" type="number" value="${t.settings.teamsCount}"></div>
-        <div class="field"><div class="label">Default BO</div>
-          <select id="edBO">
-            <option value="bo1" ${t.settings.bo==="bo1"?"selected":""}>BO1</option>
-            <option value="bo3" ${t.settings.bo==="bo3"?"selected":""}>BO3</option>
-            <option value="bo5" ${t.settings.bo==="bo5"?"selected":""}>BO5</option>
-          </select>
-        </div>
-      </div>
-    `;
-  }
-  if(t.type==="groups"){
-    return `
-      <div class="grid">
-        <div class="field"><div class="label">Teams count</div><input class="input" id="egTeams" type="number" value="${t.settings.teamsCount}"></div>
-        <div class="field"><div class="label">Groups count</div><input class="input" id="egGroups" type="number" value="${t.settings.groupsCount}"></div>
-        <div class="field"><div class="label">Default BO</div>
-          <select id="egBO">
-            <option value="bo1" ${t.settings.bo==="bo1"?"selected":""}>BO1</option>
-            <option value="bo3" ${t.settings.bo==="bo3"?"selected":""}>BO3</option>
-          </select>
-        </div>
-      </div>
-    `;
-  }
-  return `<div class="hint">No settings.</div>`;
-}
-
-function openEditTeamModal(tid, teamId){
-  const tm = teamsOf(tid).find(x=>x.id===teamId);
-  if(!tm) return;
-  const body = `
-    <div class="card">
-      <div class="kicker">EDIT TEAM</div>
-      <div style="font-weight:900">${escapeHtml(tm.name)}</div>
-      <div class="sep"></div>
-      <div class="field">
-        <div class="label">Name</div>
-        <input class="input" id="etName" value="${escapeHtml(tm.name)}">
-      </div>
-      <div class="field">
-        <div class="label">Seed</div>
-        <input class="input" id="etSeed" type="number" value="${tm.seed}">
-      </div>
-      <div class="hint">Seeds must be unique.</div>
-    </div>
-  `;
-  const foot = `
-    <button class="btn" data-close="1" type="button">Cancel</button>
-    <button class="btn btn--accent" id="btnSaveTeam" type="button">Save</button>
-  `;
-  openModal("Edit team", body, foot);
-  $("#btnSaveTeam").addEventListener("click", ()=>{
-    if(!isEditingAllowed()) return alert("Editing disabled.");
-    const name = ($("#etName").value||"").trim();
-    const seed = safeInt($("#etSeed").value, tm.seed);
-    if(!name || seed<=0) return alert("Name and seed (>0) required.");
-    if(teamsOf(tid).some(x=>x.seed===seed && x.id!==tm.id)) return alert("Seed already exists.");
-    tm.name = name;
-    tm.seed = seed;
-    tm.tag = teamTag(name);
-    upsertTeam(tid, tm);
-    closeModal();
-    render();
-  });
-}
-
-function openBulkTeamsModal(tid){
-  const body = `
-    <div class="card">
-      <div class="kicker">BULK ADD</div>
-      <div style="font-weight:900">Add many teams</div>
-      <div class="sep"></div>
-      <div class="hint">Each line: <code>Seed TeamName</code> or <code>Seed;TeamName</code></div>
-      <div class="sep"></div>
-      <textarea id="bulkText" placeholder="1 Vitality\n2 FaZe\n3 NAVI\n..."></textarea>
-    </div>
-  `;
-  const foot = `
-    <button class="btn" data-close="1" type="button">Cancel</button>
-    <button class="btn btn--accent" id="btnBulkApply" type="button">Apply</button>
-  `;
-  openModal("Bulk add teams", body, foot);
-
-  $("#btnBulkApply").addEventListener("click", ()=>{
-    if(!isEditingAllowed()) return alert("Editing disabled.");
-    const text = ($("#bulkText").value||"").trim();
-    if(!text) return;
-    const lines = text.split("\n").map(x=>x.trim()).filter(Boolean);
-    for(const line of lines){
-      const parts = line.includes(";") ? line.split(";") : line.split(/\s+/);
-      const seed = safeInt(parts[0], 0);
-      const name = (parts.slice(1).join(" ")||"").trim();
-      if(seed<=0 || !name) continue;
-      if(teamsOf(tid).some(x=>x.seed===seed)) continue;
-      upsertTeam(tid, { id: uid("team"), name, seed, tag: teamTag(name) });
-    }
-    closeModal();
-    render();
-  });
-}
-
-function openMatchModal(tid, matchId){
-  const m = matchesOf(tid).find(x=>x.id===matchId);
-  if(!m) return;
-  const A = teamById(tid, m.aId);
-  const B = teamById(tid, m.bId);
-
-  const body = `
-    <div class="card">
-      <div class="kicker">MATCH EDITOR</div>
-      <div style="font-weight:900">${escapeHtml((m.stage||"").toUpperCase())} ${m.group?("G"+m.group+" "):""}${m.round?("R"+m.round):""}</div>
-      <div class="sep"></div>
-
-      <div class="grid">
-        <div class="card">
-          <div class="kicker">TEAM A</div>
-          <div style="font-weight:900">${escapeHtml(A?.name || "(deleted)")}</div>
-          <div class="sep"></div>
-          <div class="field">
-            <div class="label">Score</div>
-            <input class="input" id="maScore" value="${escapeHtml(String(m.aScore||""))}">
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="kicker">TEAM B</div>
-          <div style="font-weight:900">${escapeHtml(B?.name || "(deleted)")}</div>
-          <div class="sep"></div>
-          <div class="field">
-            <div class="label">Score</div>
-            <input class="input" id="mbScore" value="${escapeHtml(String(m.bScore||""))}">
-          </div>
-        </div>
-      </div>
-
-      <div class="sep"></div>
-
-      <div class="grid">
-        <div class="field">
-          <div class="label">Status</div>
-          <select id="mStatus">
-            <option value="scheduled" ${m.status==="scheduled"?"selected":""}>scheduled</option>
-            <option value="live" ${m.status==="live"?"selected":""}>live</option>
-            <option value="done" ${m.status==="done"?"selected":""}>done</option>
-          </select>
-        </div>
-        <div class="field">
-          <div class="label">BO</div>
-          <select id="mBO">
-            <option value="bo1" ${m.bo==="bo1"?"selected":""}>BO1</option>
-            <option value="bo3" ${m.bo==="bo3"?"selected":""}>BO3</option>
-            <option value="bo5" ${m.bo==="bo5"?"selected":""}>BO5</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="hint">Tip: set status=done to update standings for Swiss / progression for Single (when generating next round).</div>
-    </div>
-  `;
-
-  const foot = `
-    <button class="btn" data-close="1" type="button">Close</button>
-    <button class="btn btn--accent" id="btnSaveMatch" type="button">Save</button>
-  `;
-
-  openModal("Edit match", body, foot);
-
-  $("#btnSaveMatch").addEventListener("click", ()=>{
-    if(!isEditingAllowed()) return alert("Editing disabled.");
-    m.aScore = ($("#maScore").value||"").trim();
-    m.bScore = ($("#mbScore").value||"").trim();
-    m.status = $("#mStatus").value || m.status;
-    m.bo = $("#mBO").value || m.bo;
-    upsertMatch(tid, m);
-    closeModal();
-    render();
-  });
-}
-
-function openSwissStandingsModal(tid){
-  const t = state.tournaments.find(x=>x.id===tid);
-  const st = computeSwissStandings(tid);
-  const adv = safeInt(t.settings.advWins, 3);
-  const elim = safeInt(t.settings.elimLosses, 3);
-
-  const rows = st.map((x,i)=>{
-    const stateLabel = (x.wins>=adv) ? "ADVANCED" : (x.losses>=elim ? "ELIMINATED" : "ACTIVE");
-    const badge = (x.wins>=adv) ? "badge--live" : (x.losses>=elim ? "badge--done" : "badge--draft");
-    return `
-      <tr>
-        <td class="kicker">${i+1}</td>
-        <td><div style="font-weight:900">${escapeHtml(x.name)}</div><div class="kicker">${escapeHtml(x.tag)} • seed #${x.seed}</div></td>
-        <td class="kicker">${x.wins}-${x.losses}</td>
-        <td><span class="badge ${badge}">${stateLabel}</span></td>
-      </tr>
-    `;
-  }).join("");
-
-  openModal("Swiss standings",
-    `<div class="card">
-      <div class="row">
-        <div>
-          <div class="kicker">STANDINGS</div>
-          <div style="font-weight:900">Advance @ ${adv} wins • Elim @ ${elim} losses</div>
-        </div>
-        <span class="badge badge--draft">${escapeHtml(activeTournament()?.name||"")}</span>
-      </div>
-      <div class="sep"></div>
-      <table class="table">
-        <thead><tr><th>#</th><th>Team</th><th>W-L</th><th>Status</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>`,
-    `<button class="btn" data-close="1" type="button">Close</button>`
-  );
-}
-
-function openGroupTablesModal(tid){
-  const ms = matchesOf(tid).filter(m=>m.stage==="groups");
-  const t = activeTournament();
-  const groupsCount = safeInt(t.settings.groupsCount, 4);
-
-  // compute table: wins/losses from done matches
-  const groupTeams = new Map(); // group -> set(teamId)
-  for(const m of ms){
-    const g = safeInt(m.group, 1);
-    if(!groupTeams.has(g)) groupTeams.set(g, new Set());
-    groupTeams.get(g).add(m.aId);
-    groupTeams.get(g).add(m.bId);
+    gameSelect.addEventListener('change', applyFilters);
+    searchInput.addEventListener('input', applyFilters);
+    applyFilters();
   }
 
-  let html = `<div class="bracketWrap">`;
-  for(let g=1; g<=groupsCount; g++){
-    const ids = Array.from(groupTeams.get(g)||[]);
-    const rows = ids.map(id=>{
-      const team = teamById(tid, id);
-      return { id, name: team?.name||"(deleted)", seed: team?.seed||999, wins:0, losses:0, played:0 };
-    });
-    const map = new Map(rows.map(x=>[x.id,x]));
-    for(const m of ms.filter(x=>safeInt(x.group,1)===g && x.status==="done")){
-      const a = map.get(m.aId), b = map.get(m.bId);
-      if(!a || !b) continue;
-      a.played++; b.played++;
-      const as = safeInt(m.aScore,0), bs = safeInt(m.bScore,0);
-      if(as>bs){ a.wins++; b.losses++; } else if(bs>as){ b.wins++; a.losses++; }
-    }
-    rows.sort((x,y)=>(y.wins-x.wins)||(x.losses-y.losses)||(x.seed-y.seed));
-
-    html += `
-      <div class="roundBlock">
-        <div class="roundTitle">
-          <h3>Group ${g}</h3>
-          <div class="kicker">Teams: ${rows.length}</div>
-        </div>
-        <table class="table">
-          <thead><tr><th>#</th><th>Team</th><th>W-L</th><th>Played</th></tr></thead>
-          <tbody>
-            ${rows.map((r,i)=>`
-              <tr>
-                <td class="kicker">${i+1}</td>
-                <td><div style="font-weight:900">${escapeHtml(r.name)}</div><div class="kicker">seed #${escapeHtml(r.seed)}</div></td>
-                <td class="kicker">${r.wins}-${r.losses}</td>
-                <td class="kicker">${r.played}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
-    `;
-  }
-  html += `</div>`;
-
-  openModal("Group tables", html, `<button class="btn" data-close="1" type="button">Close</button>`);
-}
-
-function openEditNewsModal(tid, postId){
-  const p = newsOf(tid).find(x=>x.id===postId);
-  if(!p) return;
-
-  const body = `
-    <div class="card">
-      <div class="kicker">EDIT POST</div>
-      <div style="font-weight:900">${escapeHtml(p.title)}</div>
-      <div class="sep"></div>
-      <div class="field">
-        <div class="label">Title</div>
-        <input class="input" id="epTitle" value="${escapeHtml(p.title)}">
-      </div>
-      <div class="field">
-        <div class="label">Body</div>
-        <textarea id="epBody">${escapeHtml(p.body)}</textarea>
-      </div>
-      <div class="field">
-        <div class="label">Author</div>
-        <input class="input" id="epAuthor" value="${escapeHtml(p.author||"Admin")}">
-      </div>
-    </div>
-  `;
-  const foot = `
-    <button class="btn" data-close="1" type="button">Cancel</button>
-    <button class="btn btn--accent" id="btnSavePost" type="button">Save</button>
-  `;
-  openModal("Edit news", body, foot);
-
-  $("#btnSavePost").addEventListener("click", ()=>{
-    if(!isEditingAllowed()) return alert("Editing disabled.");
-    p.title = ($("#epTitle").value||"").trim() || p.title;
-    p.body = ($("#epBody").value||"").trim() || p.body;
-    p.author = ($("#epAuthor").value||"").trim() || p.author;
-    updateNewsPost(tid, p);
-    closeModal();
-    render();
-  });
-}
-
-/* ---------- Presentation & Export ---------- */
-function togglePresentation(){
-  presentation = !presentation;
-  document.body.classList.toggle("presentation", presentation);
-}
-
-async function exportPNG(){
-  const t = ensureActive();
-  if(!t) return alert("No tournament.");
-  // Build export DOM into exportLayer (presentation snapshot)
-  const layer = $("#exportLayer");
-  const exportBracket = $("#exportBracket");
-  $("#exportTitle").textContent = t.name;
-  $("#exportSub").textContent = `${t.type.toUpperCase()} • ${fmtLocal(nowISO())}`;
-  $("#exportStamp").textContent = `BUILD ${state.build}`;
-  $("#exportFooterRight").textContent = `Active: ${t.id}`;
-
-  // Render bracket HTML into export container
-  exportBracket.innerHTML = renderBracketBlocks(t);
-
-  layer.hidden = false;
-  await new Promise(r=>setTimeout(r, 60)); // allow layout
-
-  const canvas = await html2canvas(layer.querySelector(".exportLayer__inner"), {backgroundColor:"#000"});
-  const url = canvas.toDataURL("image/png");
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `${t.name.replace(/[^\w\-]+/g,"_").slice(0,60)}_bracket.png`;
-  a.click();
-
-  layer.hidden = true;
-}
-
-/* ---------- Topbar buttons ---------- */
-$("#btnPresentation").addEventListener("click", togglePresentation);
-$("#btnExport").addEventListener("click", exportPNG);
-
-/* ---------- Quick actions wiring ---------- */
-$("#qaNewTournament").addEventListener("click", ()=>openTournamentWizard());
-
-$("#qaGenerateRound").addEventListener("click", ()=>{
-  const t = ensureActive();
-  if(!t) return alert("No tournament.");
-  if(!isEditingAllowed()) return alert("Editing disabled.");
-  const tid = t.id;
-
-  if(t.type==="swiss"){
-    const res = swissGenerateRound(tid);
-    if(!res.ok) return alert(res.reason);
-    addNewsPost(tid, { id: uid("news"), title:`Swiss — Round ${res.round} generated`, body:`Created ${res.created.length} matches.`, createdAt: nowISO(), author:"Admin", pinned:false });
-    render();
-    return;
-  }
-  if(t.type==="single"){
-    // if no matches: init; else next round
-    const existing = matchesOf(tid).filter(m=>m.stage==="single").length;
-    const res = existing===0 ? singleGenerateInitial(tid) : singleGenerateNextRound(tid);
-    if(!res.ok) return alert(res.reason);
-    addNewsPost(tid, { id: uid("news"), title:`Single — bracket updated`, body:`Round action executed.`, createdAt: nowISO(), author:"Admin", pinned:false });
-    render();
-    return;
-  }
-  if(t.type==="groups"){
-    const res = groupsGenerate(tid);
-    if(!res.ok) return alert(res.reason);
-    addNewsPost(tid, { id: uid("news"), title:`Groups generated`, body:`Created ${res.created.length} matches.`, createdAt: nowISO(), author:"Admin", pinned:false });
-    render();
-    return;
-  }
-  if(t.type==="double"){
-    const res = doubleGenerateInitial(tid);
-    if(!res.ok) return alert(res.reason);
-    addNewsPost(tid, { id: uid("news"), title:`Double — Upper initialized`, body:`Created ${res.created.length} matches.`, createdAt: nowISO(), author:"Admin", pinned:false });
-    render();
-    return;
-  }
-  alert("Unsupported.");
-});
-
-$("#qaLock").addEventListener("click", ()=>{
-  if(VIEW_ONLY) return alert("Viewer mode.");
-  state.adminLocked = !state.adminLocked;
-  saveState();
-  render();
-});
-
-$("#qaReset").addEventListener("click", ()=>{
-  if(VIEW_ONLY) return alert("Viewer mode.");
-  const ok = confirm("Reset all local data? This clears localStorage for this app.");
-  if(!ok) return;
-  localStorage.removeItem(STORAGE_KEY);
-  state = loadState();
-  render();
-});
-
-/* ---------- Global modal close ---------- */
-$("#modalClose").addEventListener("click", closeModal);
-
-/* ---------- Router ---------- */
-window.addEventListener("hashchange", ()=>{
-  render();
-});
-
-/* ---------- Initial render ---------- */
-(function init(){
-  // Viewer mode forces lock display (but doesn't mutate state)
-  if(VIEW_ONLY){
-    document.title = "OXeall Brackets — Viewer";
-  }
-  // Make sure default hash set
-  if(!location.hash) location.hash = "#/dashboard";
-  render();
-})();
+  setupFeatured();
+  setupCardToggles();
+  setupFilters();
 </script>
+
 </body>
 </html>
